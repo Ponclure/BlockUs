@@ -1,0 +1,3 @@
+execute if block -315 77 -247 redstone_lamp[lit=true] if block -315 77 -268 minecraft:redstone_lamp[lit=true] if score reactor sabotage matches 1.. run execute as @a at @s run playsound minecraft:task_completed master @s ~ ~ ~ 9999
+execute if block -315 77 -247 redstone_lamp[lit=true] if block -315 77 -268 minecraft:redstone_lamp[lit=true] if score reactor sabotage matches 1.. run scoreboard players set cd sabotage 340
+execute if block -315 77 -247 redstone_lamp[lit=true] if block -315 77 -268 minecraft:redstone_lamp[lit=true] run scoreboard players set reactor sabotage -1

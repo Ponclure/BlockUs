@@ -1,0 +1,1 @@
+setblock -237 202 -315 lever[face=wall,facing=south,powered=false]

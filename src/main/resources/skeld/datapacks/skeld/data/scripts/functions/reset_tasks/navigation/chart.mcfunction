@@ -1,0 +1,5 @@
+setblock -259 202 -358 lever[face=wall,facing=south,powered=false]
+setblock -258 203 -358 lever[face=wall,facing=south,powered=false]
+setblock -257 204 -358 lever[face=wall,facing=south,powered=false]
+setblock -256 203 -358 lever[face=wall,facing=south,powered=false]
+setblock -255 204 -358 lever[face=wall,facing=south,powered=false]

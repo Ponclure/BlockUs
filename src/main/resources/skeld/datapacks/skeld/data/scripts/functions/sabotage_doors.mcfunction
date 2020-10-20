@@ -1,0 +1,14 @@
+execute if score @s location matches 1 run scoreboard players set @e[tag=door,tag=cafeteria] close_door 200
+execute if score @s location matches 2 run scoreboard players set @e[tag=door,tag=upper_engine] close_door 200
+execute if score @s location matches 3 run scoreboard players set @e[tag=door,tag=reactor] close_door 200
+execute if score @s location matches 4 run scoreboard players set @e[tag=door,tag=lower_engine] close_door 200
+execute if score @s location matches 5 run scoreboard players set @e[tag=door,tag=security] close_door 200
+execute if score @s location matches 6 run scoreboard players set @e[tag=door,tag=med_bay] close_door 200
+execute if score @s location matches 7 run scoreboard players set @e[tag=door,tag=electrical] close_door 200
+execute if score @s location matches 8 run scoreboard players set @e[tag=door,tag=storage] close_door 200
+execute if score @s location matches 9 run scoreboard players set @e[tag=door,tag=communications] close_door 200
+execute if score @s location matches 10 run scoreboard players set @e[tag=door,tag=admin] close_door 200
+execute if score @s location matches 11 run scoreboard players set @e[tag=door,tag=shields] close_door 200
+execute if score @s location matches 12 run scoreboard players set @e[tag=door,tag=weapons] close_door 200
+execute if score @s location matches 13 run scoreboard players set @e[tag=door,tag=o2] close_door 200
+execute if score @s location matches 14 run scoreboard players set @e[tag=door,tag=navigation] close_door 200

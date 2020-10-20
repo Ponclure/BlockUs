@@ -1,0 +1,45 @@
+summon minecraft:armor_stand ~ ~ ~ {NoGravity:1b,Invulnerable:1b,Marker:1b,Invisible:1b,Tags:["body"],DisabledSlots:4144959,ArmorItems:[{},{},{},{id:"minecraft:carrot_on_a_stick",Count:1b,tag:{CustomModelData:4}}]}
+
+execute if entity @s[tag=cafeteria,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=cafeteria,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=cafeteria,tag=empty_garbage] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=upper_engine,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=upper_engine,tag=align_engine] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=upper_engine,tag=fuel] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-302,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=reactor,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-240,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=reactor,tag=unlock_manifolds] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=reactor,tag=start_reactor] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=lower_engine,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=lower_engine,tag=align_engine] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=lower_engine,tag=fuel] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=security,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=security,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-240,y=201,z=-313,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=storage,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=storage,tag=fuel1] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=storage,tag=fuel2] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=storage,tag=empty_garbage] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=storage,tag=empty_chute] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=electrical,tag=calibrate] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=electrical,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-240,y=201,z=-324,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=electrical,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=electrical,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=admin,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=admin,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=admin,tag=swipe_card] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=communications,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=communications,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-240,y=201,z=-335,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=shields,tag=prime_shields] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=shields,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=weapons,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=weapons,tag=clear_asteroids] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=weapons,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=o2,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=o2,tag=empty_chute] run execute as @a[tag=!ghost,tag=crewmate,x=-240,y=201,z=-346,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=o2,tag=clean] run execute as @a[tag=!ghost,tag=crewmate,x=-300,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=navigation,tag=fix_wiring] run execute as @a[tag=!ghost,tag=crewmate,x=-290,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=navigation,tag=divert_power] run execute as @a[tag=!ghost,tag=crewmate,x=-280,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=navigation,tag=upload_data] run execute as @a[tag=!ghost,tag=crewmate,x=-270,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=navigation,tag=chart] run execute as @a[tag=!ghost,tag=crewmate,x=-260,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+execute if entity @s[tag=navigation,tag=stabilise] run execute as @a[tag=!ghost,tag=crewmate,x=-250,y=201,z=-357,dx=6,dy=3,dz=1] run function scripts:death_anim
+
+execute if entity @s[tag=camera_marker] run execute as @a[tag=!ghost,tag=crewmate,tag=surveil] run function scripts:death_anim

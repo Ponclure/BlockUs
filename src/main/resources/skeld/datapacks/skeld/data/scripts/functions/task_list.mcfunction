@@ -1,0 +1,3 @@
+playsound minecraft:generic master @s
+tellraw @s[tag=crewmate] ["",{"text":"\n"},{"text":" You have some Task(s) in:\n ","color":"white"},{"selector":"@e[tag=incomplete,limit=4,sort=random]","color":"green"},{"text":"\n"}]
+tellraw @s[tag=impostor] ["",{"text":"\n"},{"text":" You have some Task(s) in:\n ","color":"white"},{"selector":"@e[tag=incomplete,limit=2,sort=random]","color":"green"},{"text":"\n"}]
