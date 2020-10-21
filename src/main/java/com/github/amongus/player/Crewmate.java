@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.github.amongus.game.tasks.Task;
 
-public class Crewmate extends GameParticipant {
+public class Crewmate extends Participant {
 
 	private Set<Task> tasks; 
 	private Set<Task> todo; // Todo tasks

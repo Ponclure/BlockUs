@@ -9,9 +9,10 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Stack;
 
+import com.github.amongus.AmongUs;
 import org.bukkit.WorldCreator;
 
-import com.github.amongus.AmongUs;
+import com.github.amongus.AmongUsPlugin;
 
 public class WorldManager {
 
@@ -22,11 +23,11 @@ public class WorldManager {
 		File world = new File(getClass().getClassLoader().getResource("skeld").toURI());
 		
 		if (!worldExists()) {
-			
-			AmongUs.getInstance().getLogger().info("World Folder Empty or Not Found, Generating New World");
+
+			AmongUs.logger().info("World Folder Empty or Not Found, Generating New World");
 			
 			File[] worldContents = world.listFiles();
-			File dir = new File(AmongUs.getInstance().getDataFolder(), "skeld");
+			File dir = new File(AmongUs.dataFolder(), "skeld");
 
 			Stack<File> files = new Stack<>();
 			for (int i = 0; i < worldContents.length; i++) {
@@ -55,17 +56,17 @@ public class WorldManager {
 
 		} else {
 			
-			AmongUs.getInstance().getLogger().info("World Folder Found");
+			AmongUs.logger().info("World Folder Found");
 			
 		}
 		
 		WorldCreator creator = new WorldCreator(world.getAbsolutePath());
-		AmongUs.setWorld(creator.createWorld());
+		AmongUsPlugin.setWorld(creator.createWorld());
 
 	}
 
 	public boolean worldExists() {
-		File dir = new File(AmongUs.getInstance().getDataFolder(), "skeld");
+		File dir = new File(AmongUs.dataFolder(), "skeld");
 		if (!dir.exists() || dir.listFiles().length == 0) {
 			return false;
 		}

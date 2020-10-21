@@ -4,28 +4,19 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
-public class GameParticipant {
-
-	private final UUID player;
+public class Participant {
 	
 	private String nick;
 	
 	private boolean dead;
 	
-	public GameParticipant(UUID p, String name) {
-		this.player = p;
+	public Participant(String name) {
 		this.nick = name;
 		this.dead = false;
 	}
 	
-	public GameParticipant(UUID p) {
-		this.player = p;
-		this.nick = Bukkit.getPlayer(p).getDisplayName();
-		this.dead = false;
-	}
-	
-	public UUID getPlayer() {
-		return player;
+	public Participant(UUID uuid) {
+		this(Bukkit.getPlayer(uuid).getDisplayName());
 	}
 
 	public String getNick() {

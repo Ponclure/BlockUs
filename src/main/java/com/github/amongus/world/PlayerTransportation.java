@@ -4,13 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.github.amongus.AmongUs;
+import com.github.amongus.AmongUsPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class PlayerTransportation {
 	
-	private Location LOCATION = AmongUs.getWorld().getSpawnLocation();
+	private Location LOCATION = AmongUsPlugin.getWorld().getSpawnLocation();
 	
 	public boolean sendPlayer(Player p) {
 		

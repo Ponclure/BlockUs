@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.github.amongus.game.tasks.Task;
 
-public class Imposter extends GameParticipant {
+public class Imposter extends Participant {
 	
 	private Set<Task> fakeTasks; 
 	private Set<Crewmate> killedCrewmates; 
