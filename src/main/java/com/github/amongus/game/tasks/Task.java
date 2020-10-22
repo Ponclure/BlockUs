@@ -14,6 +14,10 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import com.github.amongus.AmongUs;
 import com.github.amongus.AmongUsPlugin;
 import com.github.amongus.game.Game;
+import com.github.amongus.player.Crewmate;
+import com.github.amongus.player.Participant;
+
+import net.md_5.bungee.api.ChatColor;
 
 public abstract class Task implements Listener {
 
@@ -34,7 +38,6 @@ public abstract class Task implements Listener {
 		this.stand.setGravity(false);
 
 		this.setUuid(stand.getUniqueId());
-
 	}
 
 	@EventHandler
@@ -42,6 +45,19 @@ public abstract class Task implements Listener {
 		if (e.getRightClicked().getUniqueId() == uuid) {
 			e.setCancelled(true);
 			execute(e.getPlayer());
+		}
+	}
+
+	public void callComplete(Player player) {
+		player.closeInventory();
+		player.sendTitle(ChatColor.BOLD + "" + ChatColor.GREEN + ChatColor.GREEN + "Task Completed",
+				"Move on to Other Tasks", 1, 20, 1);
+		for (Participant p : game.getPlayers()) {
+			if (p.getUuid() == player.getUniqueId()) {
+				if (p instanceof Crewmate) {
+					((Crewmate)p).removeTask(this);
+				}
+			}
 		}
 	}
 
