@@ -12,38 +12,36 @@ import org.bukkit.Bukkit;
 import com.github.amongus.player.Participant;
 
 import net.md_5.bungee.api.ChatColor;
-//TODO not done, let me continue later //Conclure
+
 public class Game {
 
 	private final Toggler<State> state;
-
-	private final UUID host;
+		
 	private final Arena arena;
+	private final UUID host;
 
-	Game(Arena arena,
-		 UUID host) {
+	public Game(Arena arena, UUID host) {
+		
+		Pre pre = new Pre(arena.getFallBackSettings());
+		Running running = new Running(pre);
+		
 		this.arena = arena;
+		this.state = new Toggler<>(pre, running);
 		this.host = host;
-		Pre pre = new Pre(
-				arena.getFallBackSettings()
-		);
-		Running running = new Running(
-				pre
-		);
-		state = new Toggler<>(pre,running);
+		
 	}
 
 	public void ifPreState(Consumer<Pre> consumer) {
 		State state = this.state.get();
 		if (state instanceof Pre) {
-			consumer.accept((Pre)state);
+			consumer.accept((Pre) state);
 		}
 	}
 
 	public void ifRunningState(Consumer<Running> consumer) {
 		State state = this.state.get();
 		if (state instanceof Running) {
-			consumer.accept((Running)state);
+			consumer.accept((Running) state);
 		}
 	}
 
@@ -54,44 +52,32 @@ public class Game {
 	public boolean isStarted() {
 		return state.isToggled();
 	}
-	
+
 	public boolean start() {
-		if (2 * players.size() < (int)configuration.getValue("imposters") + 1) {
+		if (2 * players.size() < (int) configuration.getImpostorCount() + 1) {
 			for (Participant p : players) {
-				Bukkit.getPlayer(p.getPlayer()).sendMessage(ChatColor.RED + "Game not started, not enough players."); 
+				p.getPlayer().sendMessage(ChatColor.RED + "Game not started, not enough players.");
 			}
 		}
 		state.toggle();
-		
-		
+
 		return true;
 	}
 
 	public void stop() {
 
 	}
-	
-	public GameSettings getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(GameSettings configuration) {
-		this.configuration = configuration;
-	}
-
-	public Set<Participant> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(Set<Participant> players) {
-		this.players = players;
-	}
 
 	public UUID getHost() {
 		return host;
 	}
 
-	interface State { }
+	public Arena getArena() {
+		return arena;
+	}
+
+	interface State {
+	}
 
 	private static class Pre implements State {
 
@@ -107,7 +93,6 @@ public class Game {
 	private static class Running implements State {
 
 		private final Pre pre;
-
 		private GameSettings settings;
 
 		private Running(Pre pre) {
@@ -120,5 +105,8 @@ public class Game {
 
 	}
 
+	public Set<Participant> getPlayers() {
+		return players;
+	}
 
 }

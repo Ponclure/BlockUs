@@ -2,8 +2,14 @@ package com.github.amongus;
 
 import com.github.amongus.arena.ArenaManager;
 import com.github.amongus.game.GameManager;
-import com.sun.javafx.effect.EffectDirtyBits;
-import com.sun.org.apache.regexp.internal.RE;
+import com.github.amongus.packet.DummyPacketHandler;
+import com.github.amongus.packet.PacketHandler;
+import com.github.amongus.utility.ReflectionUtil;
+import com.github.amongus.utility.TinyProtocol;
+
+import io.netty.channel.Channel;
+
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -16,6 +22,9 @@ public final class AmongUs {
     private static final GameManager GAME_MANAGER;
     private static final Logger LOGGER;
     private static final File DATA_FOLDER;
+    
+    private static PacketHandler handler;
+    private static TinyProtocol protocol;
 
     static boolean isAvailable;
 
@@ -25,6 +34,22 @@ public final class AmongUs {
         GAME_MANAGER = new GameManager();
         LOGGER = PLUGIN.getLogger();
         DATA_FOLDER = PLUGIN.getDataFolder();
+        handler = ReflectionUtil.getNewPacketHandlerInstance();
+		if (handler == null) {
+			LOGGER.severe(ReflectionUtil.VERSION + " is not supported!");
+			handler = new DummyPacketHandler();
+		}
+		setProtocol((new TinyProtocol(AmongUs.plugin()) {
+			@Override
+			public Object onPacketOutAsync(Player player, Channel channel, Object packet) {
+				return handler.onPacketInterceptOut(player, packet);
+			}
+
+			@Override
+			public Object onPacketInAsync(Player player, Channel channel, Object packet) {
+				return handler.onPacketInterceptIn(player, packet);
+			}
+		}));
     }
 
     public static AmongUsPlugin plugin() {
@@ -46,11 +71,22 @@ public final class AmongUs {
     public static File dataFolder() {
         return checkAvailability(DATA_FOLDER);
     }
+    
+	public static TinyProtocol getProtocol() {
+		return protocol;
+	}
 
+	public static void setProtocol(TinyProtocol protocol) {
+		AmongUs.protocol = protocol;
+	}
 
     private static <T> T checkAvailability(T t) {
-        if (!isAvailable) throw new IllegalStateException("AmongUs hasn't been loaded yet.");
+        if (!isAvailable) throw new IllegalStateException("Among Us hasn't been loaded yet.");
         return t;
     }
+
+	public static PacketHandler getHandler() {
+		return handler;
+	}
 
 }

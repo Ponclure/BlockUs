@@ -1,7 +1,76 @@
 package com.github.amongus.game.tasks;
 
-public abstract class Task {
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
+import com.github.amongus.AmongUs;
+import com.github.amongus.AmongUsPlugin;
+import com.github.amongus.game.Game;
+
+public abstract class Task implements Listener {
+
+	private Game game;
+	private String name;
+	private ArmorStand stand;
+	private UUID uuid;
+
+	public abstract void execute(Player p);
+
+	public Task(Game game, String name, Location loc) {
+		this.game = game;
+		this.setName(name);
+		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
+
+		this.stand = (ArmorStand) AmongUsPlugin.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+		this.stand.setVisible(false);
+		this.stand.setGravity(false);
+
+		this.setUuid(stand.getUniqueId());
+
+	}
+
+	@EventHandler
+	public void manipulate(PlayerArmorStandManipulateEvent e) {
+		if (e.getRightClicked().getUniqueId() == uuid) {
+			e.setCancelled(true);
+			execute(e.getPlayer());
+		}
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public ArmorStand getStand() {
+		return stand;
+	}
+
+	public void setStand(ArmorStand stand) {
+		this.stand = stand;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }
