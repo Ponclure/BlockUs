@@ -97,8 +97,7 @@ public class Wiring extends Task implements Listener {
 
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
-		InventoryView view = event.getView();
-		if (view.getTopInventory() == gui) {
+		if (event.getInventory().equals(gui)) {
 			event.setCancelled(true);
 			Color nextColor = null;
 			switch (event.getCurrentItem().getType()) {
