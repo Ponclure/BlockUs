@@ -12,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -42,7 +41,6 @@ public class Wiring extends Task implements Listener {
 		gui.setItem(29, stacks.get(3));
 
 		Collections.shuffle(stacks);
-
 		gui.setItem(6, stacks.get(0));
 		gui.setItem(15, stacks.get(1));
 		gui.setItem(24, stacks.get(2));
@@ -53,11 +51,7 @@ public class Wiring extends Task implements Listener {
 		grayMeta.setDisplayName(ChatColor.GRAY + "");
 		gray.setItemMeta(grayMeta);
 
-		for (int i = 0; i < gui.getSize(); i++) {
-			if (gui.getItem(i) == null || gui.getItem(i).getType() == Material.AIR) {
-				gui.setItem(i, gray);
-			}
-		}
+		setEmpty(gui);
 
 	}
 
@@ -100,46 +94,48 @@ public class Wiring extends Task implements Listener {
 		if (event.getInventory().equals(gui)) {
 			event.setCancelled(true);
 			Color nextColor = null;
+			
 			switch (event.getCurrentItem().getType()) {
-			case RED_STAINED_GLASS_PANE:
-				nextColor = Color.RED;
-				break;
-			case BLUE_STAINED_GLASS_PANE:
-				nextColor = Color.BLUE;
-				break;
-			case YELLOW_STAINED_GLASS_PANE:
-				nextColor = Color.YELLOW;
-				break;
-			case PINK_STAINED_GLASS_PANE:
-				nextColor = Color.PINK;
-				break;
-			default:
-				break;
-			}
-			if (lastColor == null || lastColor != nextColor) {
-				switch (event.getCurrentItem().getType()) {
 				case RED_STAINED_GLASS_PANE:
-					lastColor = Color.RED;
-					lastSlot = event.getSlot();
-					dragWire(Color.RED);
+					nextColor = Color.RED;
 					break;
 				case BLUE_STAINED_GLASS_PANE:
-					lastColor = Color.BLUE;
-					lastSlot = event.getSlot();
-					dragWire(Color.BLUE);
+					nextColor = Color.BLUE;
 					break;
 				case YELLOW_STAINED_GLASS_PANE:
-					lastColor = Color.YELLOW;
-					lastSlot = event.getSlot();
-					dragWire(Color.YELLOW);
+					nextColor = Color.YELLOW;
 					break;
 				case PINK_STAINED_GLASS_PANE:
-					lastColor = Color.PINK;
-					lastSlot = event.getSlot();
-					dragWire(Color.PINK);
+					nextColor = Color.PINK;
 					break;
 				default:
 					break;
+			}
+			
+			if (lastColor == null || lastColor != nextColor) {
+				switch (event.getCurrentItem().getType()) {
+					case RED_STAINED_GLASS_PANE:
+						lastColor = Color.RED;
+						lastSlot = event.getSlot();
+						dragWire(Color.RED);
+						break;
+					case BLUE_STAINED_GLASS_PANE:
+						lastColor = Color.BLUE;
+						lastSlot = event.getSlot();
+						dragWire(Color.BLUE);
+						break;
+					case YELLOW_STAINED_GLASS_PANE:
+						lastColor = Color.YELLOW;
+						lastSlot = event.getSlot();
+						dragWire(Color.YELLOW);
+						break;
+					case PINK_STAINED_GLASS_PANE:
+						lastColor = Color.PINK;
+						lastSlot = event.getSlot();
+						dragWire(Color.PINK);
+						break;
+					default:
+						break;
 				}
 			} else if (lastColor == nextColor) {
 				ItemStack lime = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -150,7 +146,7 @@ public class Wiring extends Task implements Listener {
 				event.getInventory().setItem(lastSlot, lime);
 				lastColor = null;
 				lastSlot = event.getSlot();
-				if (allComplete(view.getTopInventory())) {
+				if (allComplete(event.getInventory())) {
 					callComplete(Bukkit.getPlayer(event.getWhoClicked().getName()));
 				}
 			}

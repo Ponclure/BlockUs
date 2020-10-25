@@ -22,8 +22,6 @@ import com.github.amongus.utility.SkullCreation;
 import net.md_5.bungee.api.ChatColor;
 
 public class UploadData extends Task implements Listener {
-
-	// Unfinished
 	
 	private final Inventory gui;
 	private final List<Integer> uncompletedIndex = Arrays.asList(20, 21, 22, 23, 24);
@@ -34,7 +32,7 @@ public class UploadData extends Task implements Listener {
 		super(game, "Upload Data", loc);
 		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
 		this.gui = Bukkit.createInventory(null, 54, "Upload Data");
-
+		
 		ItemStack border = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 		ItemMeta borderMeta = border.getItemMeta();
 		borderMeta.setDisplayName(ChatColor.GRAY + "");
@@ -52,30 +50,27 @@ public class UploadData extends Task implements Listener {
 
 		ItemStack uncompleted = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
 		ItemMeta uncompletedMeta = uncompleted.getItemMeta();
-		uncompletedMeta.setDisplayName(ChatColor.GRAY + "0% Completed");
+		uncompletedMeta.setDisplayName(ChatColor.GRAY + "");
 		uncompleted.setItemMeta(uncompletedMeta);
 		for (int index : uncompletedIndex) {
 			gui.setItem(index, uncompleted);
 		}
 		
-		ItemStack progress = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
-		ItemMeta progressMeta = progress.getItemMeta();
-		progressMeta.setDisplayName(ChatColor.GRAY + "0% Completed");
-		progress.setItemMeta(progressMeta);
-
-		ItemStack completed = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-		ItemMeta completedMeta = completed.getItemMeta();
-		completedMeta.setDisplayName(ChatColor.GREEN + "0% Completed");
-		completed.setItemMeta(completedMeta);
-
+		setEmpty(gui);
+		
 	}
 
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		if (event.getInventory().equals(gui)) {
 			if (event.getSlot() == 49) {
+				ItemStack completed = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+				ItemMeta completedMeta = completed.getItemMeta();
+				completedMeta.setDisplayName(ChatColor.GOLD + "0% Completed");
+				completed.setItemMeta(completedMeta);
+				gui.setItem(49, completed);
 				new BukkitRunnable() {
-					int counter = 0;
+					double counter = 0;
 					@Override
 					public void run() {
 						if (counter >= 100) {
@@ -85,6 +80,7 @@ public class UploadData extends Task implements Listener {
 						}
 						counter += 17/6;
 						changeMode(counter);
+						completedMeta.setDisplayName(ChatColor.GOLD + "" + counter + "% Completed");
 					}
 				}.runTaskTimer(AmongUs.plugin(), 1, 170);
 			}
@@ -94,9 +90,9 @@ public class UploadData extends Task implements Listener {
 	public void changeMode(double percent) {
 		int slots = (int)percent/20;
 		if (percent >= 0 && percent < 50) {
-			ItemStack uncompleted = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+			ItemStack uncompleted = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 			ItemMeta uncompletedMeta = uncompleted.getItemMeta();
-			uncompletedMeta.setDisplayName(ChatColor.GRAY + "" + percent + "% Completed");
+			uncompletedMeta.setDisplayName(ChatColor.GRAY + "");
 			uncompleted.setItemMeta(uncompletedMeta);
 			for (int i = 0; i < uncompletedIndex.size(); i++) {
 				if (i > slots - 1) {
@@ -107,7 +103,7 @@ public class UploadData extends Task implements Listener {
 		} else if (percent >= 50 && percent < 100) {
 			ItemStack progress = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
 			ItemMeta progressMeta = progress.getItemMeta();
-			progressMeta.setDisplayName(ChatColor.GRAY + "" + percent + "% Completed");
+			progressMeta.setDisplayName(ChatColor.GRAY + "");
 			progress.setItemMeta(progressMeta);
 			for (int i = 0; i < uncompletedIndex.size(); i++) {
 				if (i > slots - 1) {
@@ -118,15 +114,13 @@ public class UploadData extends Task implements Listener {
 		} else if (percent >= 100) {
 			ItemStack completed = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
 			ItemMeta completedMeta = completed.getItemMeta();
-			completedMeta.setDisplayName(ChatColor.GREEN + "100% Completed");
+			completedMeta.setDisplayName(ChatColor.GREEN + "");
 			completed.setItemMeta(completedMeta);
 			for (int i = 0; i < uncompletedIndex.size(); i++) {
 				gui.setItem(uncompletedIndex.get(i), completed);
 			}
 		}
 	}
-	
-	
 
 	public ItemStack getSkull(String skull) {
 		return SkullCreation.itemWithBase64(SkullCreation.createSkull(), skull);
@@ -134,7 +128,7 @@ public class UploadData extends Task implements Listener {
 
 	@Override
 	public void execute(Player p) {
-
+		p.openInventory(gui);
 	}
 
 }

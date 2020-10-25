@@ -4,12 +4,16 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.AmongUsPlugin;
@@ -56,11 +60,25 @@ public abstract class Task implements Listener {
 			if (p.getUuid() == player.getUniqueId()) {
 				if (p instanceof Crewmate) {
 					((Crewmate)p).removeTask(this);
+					break;
 				}
 			}
 		}
 	}
-
+	
+	public void setEmpty(Inventory inv) {
+		ItemStack gray = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+		ItemMeta grayMeta = gray.getItemMeta();
+		grayMeta.setDisplayName(ChatColor.GRAY + "");
+		gray.setItemMeta(grayMeta);
+		for (int i = 0; i < inv.getSize(); i++) {
+			ItemStack item = inv.getItem(i);
+			if (item == null || item.getType() == Material.AIR) {
+				inv.setItem(i, gray);
+			}
+		}
+	}
+	
 	public Game getGame() {
 		return game;
 	}
