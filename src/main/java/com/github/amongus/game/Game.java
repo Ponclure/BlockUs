@@ -5,9 +5,14 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+import com.github.amongus.AmongUs;
 import com.github.amongus.arena.Arena;
+import com.github.amongus.utility.Countdown;
 import com.github.amongus.utility.Toggler;
 import org.bukkit.Bukkit;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.amongus.player.Participant;
 
@@ -16,19 +21,21 @@ import net.md_5.bungee.api.ChatColor;
 public class Game {
 
 	private final Toggler<State> state;
-		
+
 	private final Arena arena;
+	private final Set<Participant> players;
 	private final UUID host;
 
 	public Game(Arena arena, UUID host) {
-		
+
 		Pre pre = new Pre(arena.getFallBackSettings());
 		Running running = new Running(pre);
-		
+
 		this.arena = arena;
 		this.state = new Toggler<>(pre, running);
+		this.players = new HashSet<>();
 		this.host = host;
-		
+
 	}
 
 	public void ifPreState(Consumer<Pre> consumer) {
@@ -55,12 +62,15 @@ public class Game {
 
 	public boolean start() {
 		if (2 * players.size() < (int) configuration.getImpostorCount() + 1) {
-			for (Participant p : players) {
-				p.getPlayer().sendMessage(ChatColor.RED + "Game not started, not enough players.");
-			}
+			players.forEach(p -> p.getPlayer().sendMessage(ChatColor.RED + "Game not started, not enough players."));
+			return false;
 		}
+		
+		Bukkit.getScheduler().runTaskTimer(AmongUs.plugin(), new Countdown(5, players), 20L, 20L);
 		state.toggle();
-
+		
+		players.forEach(p -> p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 4, 255, true, false)));
+		
 		return true;
 	}
 
@@ -76,12 +86,15 @@ public class Game {
 		return arena;
 	}
 
+	public Set<Participant> getPrePlayers() {
+		return players;
+	}
+
 	interface State {
 	}
 
 	private static class Pre implements State {
 
-		private final Set<UUID> prePlayers = new HashSet<>();
 		private final GameSettings.Builder builder;
 
 		private Pre(GameSettings defaultSettings) {
@@ -103,10 +116,6 @@ public class Game {
 			settings = pre.builder.build();
 		}
 
-	}
-
-	public Set<Participant> getPlayers() {
-		return players;
 	}
 
 }

@@ -21,7 +21,6 @@ public final class AmongUsPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		AmongUs.isAvailable = true;
-		
 		Logger logger = Bukkit.getLogger();
 		logger.info("Among Us is Loading Up");
 	}

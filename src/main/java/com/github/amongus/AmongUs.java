@@ -4,8 +4,8 @@ import com.github.amongus.arena.ArenaManager;
 import com.github.amongus.game.GameManager;
 import com.github.amongus.packet.DummyPacketHandler;
 import com.github.amongus.packet.PacketHandler;
-import com.github.amongus.utility.ReflectionUtil;
-import com.github.amongus.utility.TinyProtocol;
+import com.github.amongus.reflection.NMSVersionHandler;
+import com.github.amongus.reflection.TinyProtocol;
 
 import io.netty.channel.Channel;
 
@@ -34,9 +34,9 @@ public final class AmongUs {
         GAME_MANAGER = new GameManager();
         LOGGER = PLUGIN.getLogger();
         DATA_FOLDER = PLUGIN.getDataFolder();
-        handler = ReflectionUtil.getNewPacketHandlerInstance();
+        handler = NMSVersionHandler.getNewPacketHandlerInstance();
 		if (handler == null) {
-			LOGGER.severe(ReflectionUtil.VERSION + " is not supported!");
+			LOGGER.severe(NMSVersionHandler.VERSION + " is not supported!");
 			handler = new DummyPacketHandler();
 		}
 		setProtocol((new TinyProtocol(AmongUs.plugin()) {
