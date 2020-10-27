@@ -35,7 +35,7 @@ public class Admin extends Task {
 	public Map<Room, Integer> getCounts() {
 		Map<Room, Integer> counts = new HashMap<>();
 		Game game = this.getGame();
-		for (Participant p : game.getPlayers()) {
+		for (Participant p : game.getPrePlayers()) {
 			if (!p.isDead()) {
 				Location loc = p.getPlayer().getLocation();
 				for (Room r : game.getArena().getRooms()) {

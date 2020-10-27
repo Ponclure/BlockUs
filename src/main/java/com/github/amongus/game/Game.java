@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.github.amongus.game;
 
 import java.util.HashSet;
