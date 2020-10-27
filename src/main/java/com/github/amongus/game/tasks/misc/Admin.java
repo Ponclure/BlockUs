@@ -1,4 +1,3 @@
-
 package com.github.amongus.game.tasks.misc;
 
 import java.util.HashMap;
@@ -71,4 +70,3 @@ public class Admin extends Task {
 	}
 
 }
-
