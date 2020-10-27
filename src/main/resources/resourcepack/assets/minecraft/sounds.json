@@ -1,0 +1,153 @@
+{
+	"body": {
+		"sounds": [{
+			"name": "sfx/body",
+			"stream": "false"
+		}]
+	},
+	"door_close": {
+		"sounds": [{
+			"name": "sfx/door_close",
+			"stream": "false"
+		}]
+	},
+	"door_open": {
+		"sounds": [{
+			"name": "sfx/door_open",
+			"stream": "false"
+		}]
+	},
+	"eject": {
+		"sounds": [{
+			"name": "sfx/eject",
+			"stream": "false"
+		}]
+	},
+	"meeting": {
+		"sounds": [{
+			"name": "sfx/meeting",
+			"stream": "false"
+		}]
+	},
+	"notification": {
+		"sounds": [{
+			"name": "sfx/notification",
+			"stream": "false"
+		}]
+	},
+	"select": {
+		"sounds": [{
+			"name": "sfx/select",
+			"stream": "false"
+		}]
+	},
+	"shh": {
+		"sounds": [{
+			"name": "sfx/shh",
+			"stream": "false"
+		}]
+	},
+	"vote": {
+		"sounds": [{
+			"name": "sfx/vote",
+			"stream": "false"
+		}]
+	},
+	"vote_lock": {
+		"sounds": [{
+			"name": "sfx/vote_lock",
+			"stream": "false"
+		}]
+	},
+	"impostor_kill": {
+		"sounds": [{
+			"name": "sfx/imposter/impostor_kill",
+			"stream": "false"
+		}]
+	},
+	"kill_alien": {
+		"sounds": [{
+			"name": "sfx/imposter/kill_alien",
+			"stream": "false"
+		}]
+	},
+	"kill_gun": {
+		"sounds": [{
+			"name": "sfx/imposter/kill_gun",
+			"stream": "false"
+		}]
+	},
+	"kill_knife": {
+		"sounds": [{
+			"name": "sfx/imposter/kill_knife",
+			"stream": "false"
+		}]
+	},
+	"kill_neck": {
+		"sounds": [{
+			"name": "sfx/imposter/kill_neck",
+			"stream": "false"
+		}]
+	},
+	"sabatoge": {
+		"sounds": [{
+			"name": "sfx/imposter/sabatoge",
+			"stream": "false"
+		}]
+	},
+	"vent": {
+		"sounds": [{
+			"name": "sfx/imposter/vent",
+			"stream": "false"
+		}]
+	},
+	"victory_impostor": {
+		"sounds": [{
+			"name": "sfx/imposter/victory_impostor",
+			"stream": "false"
+		}]
+	},
+	"connect": {
+		"sounds": [{
+			"name": "sfx/hub/connect",
+			"stream": "false"
+		}]
+	},
+	"disconnect": {
+		"sounds": [{
+			"name": "sfx/hub/disconnect",
+			"stream": "false"
+		}]
+	},
+	"crewmate_killed": {
+		"sounds": [{
+			"name": "sfx/crewmate/crewmate_killed",
+			"stream": "false"
+		}]
+	},
+	"task_complete": {
+		"sounds": [{
+			"name": "sfx/crewmate/task_complete",
+			"stream": "false"
+		}]
+	},
+	"task_progress": {
+		"sounds": [{
+			"name": "sfx/crewmate/task_progress",
+			"stream": "false"
+		}]
+	},
+	"victory_crewmate": {
+		"sounds": [{
+			"name": "sfx/crewmate/victory_crewmate",
+			"stream": "false"
+		}]
+	},
+
+	"ambience": {
+		"sounds": [{
+			"name": "ambience",
+			"stream": "true"
+		}]
+	}
+}

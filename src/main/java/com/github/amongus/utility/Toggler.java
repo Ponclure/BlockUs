@@ -9,7 +9,7 @@ public final class Toggler<T> implements Supplier<T> {
 
     private boolean toggled;
 
-    public Toggler(T a,T b) {
+    public Toggler(T a, T b) {
         aObject = a;
         bObject = b;
     }

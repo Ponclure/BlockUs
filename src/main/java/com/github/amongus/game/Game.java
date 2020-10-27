@@ -5,45 +5,62 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+import com.github.amongus.AmongUs;
 import com.github.amongus.arena.Arena;
+import com.github.amongus.utility.Countdown;
 import com.github.amongus.utility.Toggler;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.amongus.player.Participant;
 
 import net.md_5.bungee.api.ChatColor;
-//TODO not done, let me continue later //Conclure
+
 public class Game {
 
 	private final Toggler<State> state;
 
-	private final UUID host;
 	private final Arena arena;
+	private final Set<Participant> players;
+	private final UUID host;
 
-	Game(Arena arena,
-		 UUID host) {
+	public Game(Arena arena, UUID host) {
+
+		Pre pre = new Pre(arena.getFallBackSettings());
+		Running running = new Running(pre);
+
 		this.arena = arena;
+		this.state = new Toggler<>(pre, running);
+		this.players = new HashSet<>();
 		this.host = host;
-		Pre pre = new Pre(
-				arena.getFallBackSettings()
-		);
-		Running running = new Running(
-				pre
-		);
-		state = new Toggler<>(pre,running);
+
+	}
+	
+	public void join(Player join, String nick) {
+		players.add(new Participant(join.getUniqueId(), nick));
+		players.forEach(player -> player.getPlayer().playSound(player.getPlayer().getLocation(), "connect", 1, 1));
+	}
+	
+	public void leave(Participant p) {
+		players.remove(p);
+		players.forEach(player -> player.getPlayer().sendMessage(ChatColor.RED + p.getNick() + " left the match"));
+		players.forEach(player -> player.getPlayer().playSound(player.getPlayer().getLocation(), "disconnect", 1, 1));
 	}
 
 	public void ifPreState(Consumer<Pre> consumer) {
 		State state = this.state.get();
 		if (state instanceof Pre) {
-			consumer.accept((Pre)state);
+			consumer.accept((Pre) state);
 		}
 	}
 
 	public void ifRunningState(Consumer<Running> consumer) {
 		State state = this.state.get();
 		if (state instanceof Running) {
-			consumer.accept((Running)state);
+			consumer.accept((Running) state);
 		}
 	}
 
@@ -54,15 +71,15 @@ public class Game {
 	public boolean isStarted() {
 		return state.isToggled();
 	}
-	
+
 	public boolean start() {
-		if (2 * players.size() < (int)configuration.getValue("imposters") + 1) {
-			for (Participant p : players) {
-				Bukkit.getPlayer(p.getPlayer()).sendMessage(ChatColor.RED + "Game not started, not enough players."); 
-			}
+		if (2 * players.size() < (int) configuration.getImpostorCount() + 1) {
+			players.forEach(p -> p.getPlayer().sendMessage(ChatColor.RED + "Game not started, not enough players."));
+			return false;
 		}
-		state.toggle();
 		
+		Bukkit.getScheduler().runTaskTimer(AmongUs.plugin(), new Countdown(5, players), 20L, 20L);
+		state.toggle();
 		
 		return true;
 	}
@@ -70,32 +87,24 @@ public class Game {
 	public void stop() {
 
 	}
-	
-	public GameSettings getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(GameSettings configuration) {
-		this.configuration = configuration;
-	}
-
-	public Set<Participant> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(Set<Participant> players) {
-		this.players = players;
-	}
 
 	public UUID getHost() {
 		return host;
 	}
 
-	interface State { }
+	public Arena getArena() {
+		return arena;
+	}
+
+	public Set<Participant> getPrePlayers() {
+		return players;
+	}
+
+	interface State {
+	}
 
 	private static class Pre implements State {
 
-		private final Set<UUID> prePlayers = new HashSet<>();
 		private final GameSettings.Builder builder;
 
 		private Pre(GameSettings defaultSettings) {
@@ -107,7 +116,6 @@ public class Game {
 	private static class Running implements State {
 
 		private final Pre pre;
-
 		private GameSettings settings;
 
 		private Running(Pre pre) {
@@ -119,6 +127,5 @@ public class Game {
 		}
 
 	}
-
 
 }

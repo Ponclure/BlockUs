@@ -2,7 +2,12 @@ package com.github.amongus.utility;
 
 public final class IllegalInstantiation extends Throwable {
 
-    private IllegalInstantiation(Class<?> clazz) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private IllegalInstantiation(Class<?> clazz) {
         super("Class " + clazz + " should not be instantiated.");
     }
 

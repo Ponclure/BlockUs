@@ -38,5 +38,9 @@ public class Crewmate extends Participant {
 	public void setTodo(Set<Task> todo) {
 		this.todo = todo;
 	}
+	
+	public void removeTask(Task t) {
+		todo.remove(t);
+	}
 
 }

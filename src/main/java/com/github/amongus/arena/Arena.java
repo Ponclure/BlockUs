@@ -20,6 +20,7 @@ public final class Arena {
     private final BoundingBox boundingBox;
     private final int hashCode;
     private final Vector[] spawns, lobbySpawns;
+    private final Room[] rooms;
 
     private Arena(Builder builder) {
         this.fallBackSettings = builder.fallBackSettings;
@@ -29,6 +30,7 @@ public final class Arena {
         this.hashCode = builder.hashCode;
         this.lobbySpawns = builder.lobbySpawns.toArray(new Vector[]{});
         this.spawns = builder.spawns.toArray(new Vector[]{});
+        this.rooms = builder.rooms;
     }
 
     public GameSettings getFallBackSettings() {
@@ -75,15 +77,20 @@ public final class Arena {
         return hashCode;
     }
 
-    static class Builder {
+    public Room[] getRooms() {
+		return rooms;
+	}
 
-        private GameSettings fallBackSettings;
+	static class Builder {
+		
+		private GameSettings fallBackSettings;
         private UUID world;
         private String name;
         private BoundingBox boundingBox;
         private int hashCode;
         private final List<Vector> lobbySpawns = new ArrayList<>();
         private final List<Vector> spawns = new ArrayList<>();
+        private Room[] rooms;
 
         public Builder setFallBackSettings(GameSettings fallBackSettings) {
             this.fallBackSettings = fallBackSettings;
@@ -124,6 +131,11 @@ public final class Arena {
                 spawns.add(vector.clone());
             }
             return this;
+        }
+        
+        public Builder setRooms(Room... room) {
+        	this.rooms = room;
+        	return this;
         }
 
         public Arena build() {
