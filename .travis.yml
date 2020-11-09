@@ -2,3 +2,8 @@ language: java
 jdk:
   - oraclejdk8
   - openjdk8
+jobs:
+  include:
+    - stage: package
+      script:
+        - mvn clean package
