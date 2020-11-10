@@ -1,5 +1,3 @@
-package com.github.amongus.sound;
-
 public enum SpecialSoundEffects {
 	
 	REPORT_BODY("body"),

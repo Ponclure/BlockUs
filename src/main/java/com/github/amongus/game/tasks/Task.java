@@ -56,7 +56,7 @@ public abstract class Task implements Listener {
 		player.closeInventory();
 		player.sendTitle(ChatColor.BOLD + "" + ChatColor.GREEN + ChatColor.GREEN + "Task Completed",
 				"Move on to Other Tasks", 1, 20, 1);
-		for (Participant p : game.getPlayers()) {
+		for (Participant p : game.getPrePlayers()) {
 			if (p.getUuid() == player.getUniqueId()) {
 				if (p instanceof Crewmate) {
 					((Crewmate)p).removeTask(this);
