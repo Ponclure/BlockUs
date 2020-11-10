@@ -1,3 +1,19 @@
-/target/
-/.idea/
-/bin/
+# Eclipse
+.classpath
+.project
+.settings
+
+# IntelliJ
+.idea
+*.iml
+*.iws
+out
+
+# Mac
+.DS_Store
+
+# Maven
+log
+target
+dependency-reduced-pom.xml
+jars
