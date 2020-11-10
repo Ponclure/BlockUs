@@ -7,25 +7,19 @@ public class Room {
 	// Used to store the exact coordinates of a Room (which may be an irregular shape)
 	
 	private final String name;
-	private final Vector bottom; // bottom left corner
-	private final Vector top; // top right corner
+	private final Vector middle;
 	
 	public Room(String name, Vector... vec) {
 		this.name = name;
-		this.bottom = vec[0];
-		this.top = vec[1];
+		this.middle = vec[0].getMidpoint(vec[1]);
 	}	
-	
-	public Vector getBottom() {
-		return bottom;
-	}
-
-	public Vector getTop() {
-		return top;
-	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Vector getMiddle() {
+		return middle;
 	}
 
 }

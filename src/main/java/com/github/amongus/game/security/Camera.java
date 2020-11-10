@@ -9,7 +9,9 @@ import com.github.amongus.map.ImageDither;
 import com.github.amongus.map.ItemFrameCallback;
 
 public class Camera {
+	
 	// In Progress -PulseBeat_02
+	
 	private ItemFrame frame;
 	
 	public Camera(ItemFrame f) {
