@@ -306,7 +306,6 @@ public class SkullCreation {
 
 	// suppress warning since PLAYER_HEAD doesn't exist in 1.12.2,
 	// but we expect this and catch the error at runtime.
-	@SuppressWarnings("JavaReflectionMemberAccess")
 	private static void checkLegacy() {
 		try {
 			// if both of these succeed, then we are running
