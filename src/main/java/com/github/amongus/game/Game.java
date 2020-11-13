@@ -1,131 +1,57 @@
 package com.github.amongus.game;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.github.amongus.player.Participant;
+import com.github.amongus.utility.GameUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BossBar;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import com.github.amongus.AmongUs;
-import com.github.amongus.arena.Arena;
-import com.github.amongus.utility.Countdown;
-import com.github.amongus.utility.Toggler;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
+public class Game extends ArenaHolder {
 
-import com.github.amongus.player.Participant;
+    final Map<UUID, Participant> crewmateData;
+    final GameSettings settings;
+    final List<Consumer<Game>> closeHandlerList;
+    //final BossBar bossBar;
 
-import net.md_5.bungee.api.ChatColor;
+    protected Game(Lobby lobby) {
+        super(lobby.arena);
+        settings = lobby.settingsBuilder.build();
+        crewmateData = GameUtils.chooseImpostors(lobby.set,settings.getImpostorCount());
+        closeHandlerList = new ArrayList<>();
+        //bossBar = Bukkit.createBossBar("") - Conclure will continue this
+    }
 
-public class Game {
+    @Override
+    protected void asyncTick() {
 
-	private final Toggler<State> state;
+    }
 
-	private final Arena arena;
-	private final Set<Participant> players;
-	private final UUID host;
+    public void onClose(Consumer<Game> action) {
+        closeHandlerList.add(action);
+    }
 
-	public Game(Arena arena, UUID host) {
+    @Override
+    public boolean contains(UUID uuid) {
+        return crewmateData.containsKey(uuid);
+    }
 
-		Pre pre = new Pre(arena.getFallBackSettings());
-		Running running = new Running(pre);
+    @Override
+    void terminate() {
+        closeHandlerList.forEach(it -> it.accept(this));
+        super.terminate();
+    }
 
-		this.arena = arena;
-		this.state = new Toggler<>(pre, running);
-		this.players = new HashSet<>();
-		this.host = host;
-
-	}
-	
-	public void join(Player join, String nick) {
-		players.add(new Participant(join.getUniqueId(), nick));
-		players.forEach(player -> player.getPlayer().playSound(player.getPlayer().getLocation(), "connect", 1, 1));
-	}
-	
-	public void leave(Participant p) {
-		players.remove(p);
-		players.forEach(player -> player.getPlayer().sendMessage(ChatColor.RED + p.getNick() + " left the match"));
-		players.forEach(player -> player.getPlayer().playSound(player.getPlayer().getLocation(), "disconnect", 1, 1));
-	}
-
-	public void ifPreState(Consumer<Pre> consumer) {
-		State state = this.state.get();
-		if (state instanceof Pre) {
-			consumer.accept((Pre) state);
-		}
-	}
-
-	public void ifRunningState(Consumer<Running> consumer) {
-		State state = this.state.get();
-		if (state instanceof Running) {
-			consumer.accept((Running) state);
-		}
-	}
-
-	public boolean canStart() {
-		return state.get() instanceof Pre;
-	}
-
-	public boolean isStarted() {
-		return state.isToggled();
-	}
-
-	public boolean start() {
-		if (2 * players.size() < (int) configuration.getImpostorCount() + 1) {
-			players.forEach(p -> p.getPlayer().sendMessage(ChatColor.RED + "Game not started, not enough players."));
-			return false;
-		}
-		
-		Bukkit.getScheduler().runTaskTimer(AmongUs.plugin(), new Countdown(5, players), 20L, 20L);
-		state.toggle();
-		
-		return true;
-	}
-
-	public void stop() {
-
-	}
-
-	public UUID getHost() {
-		return host;
-	}
-
-	public Arena getArena() {
-		return arena;
-	}
-
-	public Set<Participant> getPrePlayers() {
-		return players;
-	}
-
-	interface State {
-	}
-
-	private static class Pre implements State {
-
-		private final GameSettings.Builder builder;
-
-		private Pre(GameSettings defaultSettings) {
-			builder = GameSettings.Builder.of(defaultSettings);
-		}
-
-	}
-
-	private static class Running implements State {
-
-		private final Pre pre;
-		private GameSettings settings;
-
-		private Running(Pre pre) {
-			this.pre = pre;
-		}
-
-		private void start() {
-			settings = pre.builder.build();
-		}
-
-	}
-
+    @Override
+    void onPlayerQuit(PlayerQuitEvent event) {
+        UUID uuid = event.getPlayer().getUniqueId();
+        if (crewmateData.containsKey(uuid)) {
+            crewmateData.get(uuid).setDisconnected(true);
+        }
+    }
 }

@@ -17,12 +17,6 @@ public class Imposter extends Participant {
 		this.killedCrewmates = new HashSet<>();
 	}
 	
-	public Imposter(UUID p, String s) {
-		super(p, s);
-		this.fakeTasks = new HashSet<>();
-		this.killedCrewmates = new HashSet<>();
-	}
-	
 	public Set<Task> getFakeTasks() {
 		return fakeTasks;
 	}

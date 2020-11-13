@@ -22,8 +22,8 @@ public final class ArenaManager {
                            GameSettings defaultSettings,
                            BoundingBox boundingBox,
                            UUID world,
-                           Vector lobbySpawns,
-                           Vector... spawns) {
+                           Vector lobbySpawn,
+                           Vector gameSpawn) {
         String name = namespace.toString();
         if (arenaMap.get(name) != null) {
             throw new IllegalStateException("An arena with the name " + name + " is already registered.");
@@ -34,8 +34,8 @@ public final class ArenaManager {
                 .setName(displayName)
                 .setFallBackSettings(defaultSettings)
                 .setWorld(world)
-                .setSpawns(spawns)
-                .setLobbySpawns(lobbySpawns)
+                .setGameSpawn(gameSpawn)
+                .setLobbySpawn(lobbySpawn)
                 .build();
         arenaMap.put(name,arena);
         return arena;

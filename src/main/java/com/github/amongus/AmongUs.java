@@ -1,6 +1,8 @@
 package com.github.amongus;
 
 import com.github.amongus.arena.ArenaManager;
+import com.github.amongus.config.ConfigFactory;
+import com.github.amongus.config.ConfigManager;
 import com.github.amongus.game.GameManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,14 +17,18 @@ public final class AmongUs {
     private static final GameManager GAME_MANAGER;
     private static final Logger LOGGER;
     private static final File DATA_FOLDER;
+    private static final ConfigFactory CONFIG_FACTORY;
+    private static final ConfigManager CONFIG_MANAGER;
     static boolean isAvailable;
 
     static {
         PLUGIN = JavaPlugin.getPlugin(AmongUsPlugin.class);
-        ARENA_MANAGER = new ArenaManager();
-        GAME_MANAGER = new GameManager();
         LOGGER = PLUGIN.getLogger();
         DATA_FOLDER = PLUGIN.getDataFolder();
+        CONFIG_FACTORY = new ConfigFactory();
+        ARENA_MANAGER = new ArenaManager();
+        CONFIG_MANAGER = new ConfigManager();
+        GAME_MANAGER = new GameManager();
     }
 
     public static AmongUsPlugin plugin() {
@@ -43,6 +49,14 @@ public final class AmongUs {
 
     public static File dataFolder() {
         return checkAvailability(DATA_FOLDER);
+    }
+
+    public static ConfigFactory configFactory() {
+        return checkAvailability(CONFIG_FACTORY);
+    }
+
+    public static ConfigManager configManager() {
+        return checkAvailability(CONFIG_MANAGER);
     }
 
     private static <T> T checkAvailability(T t) {

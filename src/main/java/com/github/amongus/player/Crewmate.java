@@ -10,15 +10,9 @@ public class Crewmate extends Participant {
 
 	private Set<Task> tasks; 
 	private Set<Task> todo; // Todo tasks
-
+	
 	public Crewmate(UUID p) {
 		super(p);
-		this.tasks = new HashSet<>();
-		this.todo = new HashSet<>();
-	}
-	
-	public Crewmate(UUID p, String s) {
-		super(p, s);
 		this.tasks = new HashSet<>();
 		this.todo = new HashSet<>();
 	}

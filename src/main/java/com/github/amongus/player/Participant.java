@@ -2,39 +2,23 @@ package com.github.amongus.player;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 public class Participant {
-	
-	private String nick;
+
 	private UUID uuid;
 	
-	private boolean dead;
-	
-	public Participant(UUID player, String name) {
+	private boolean isDead;
+	private boolean isDisconnected;
+
+	public Participant(UUID player) {
 		this.uuid = player;
-		this.nick = name;
-	}
-	
-	public Participant(UUID uuid) {
-		this(uuid, Bukkit.getPlayer(uuid).getDisplayName());
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
 	}
 
 	public boolean isDead() {
-		return dead;
+		return isDead;
 	}
 
 	public void setDead(boolean dead) {
-		this.dead = dead;
+		isDead = dead;
 	}
 
 	public UUID getUuid() {
@@ -45,8 +29,11 @@ public class Participant {
 		this.uuid = uuid;
 	}
 
-	public Player getPlayer() {
-		return Bukkit.getPlayer(uuid);
+	public boolean isDisconnected() {
+		return isDisconnected;
 	}
 
+	public void setDisconnected(boolean disconnected) {
+		isDisconnected = disconnected;
+	}
 }

@@ -19,7 +19,7 @@ public final class Arena {
     private final String name;
     private final BoundingBox boundingBox;
     private final int hashCode;
-    private final Vector[] spawns, lobbySpawns;
+    private final Vector gamespawn, lobbySpawn;
     private final Room[] rooms;
 
     private Arena(Builder builder) {
@@ -28,8 +28,8 @@ public final class Arena {
         this.name = Utils.color(builder.name);
         this.boundingBox = builder.boundingBox;
         this.hashCode = builder.hashCode;
-        this.lobbySpawns = builder.lobbySpawns.toArray(new Vector[]{});
-        this.spawns = builder.spawns.toArray(new Vector[]{});
+        this.lobbySpawn = builder.lobbySpawn;
+        this.gamespawn = builder.gameSpawn;
         this.rooms = builder.rooms;
     }
 
@@ -49,20 +49,12 @@ public final class Arena {
         return boundingBox;
     }
 
-    public Location[] getLobbySpawn() {
-        Location[] array = new Location[lobbySpawns.length];
-        for (int i = 0; i < lobbySpawns.length; i++) {
-            array[i] = lobbySpawns[i].toLocation(getWorld());
-        }
-        return array;
+    public Vector getLobbySpawn() {
+        return lobbySpawn;
     }
 
-    public Location[] getSpawns() {
-        Location[] array = new Location[spawns.length];
-        for (int i = 0; i < spawns.length; i++) {
-            array[i] = spawns[i].toLocation(getWorld());
-        }
-        return array;
+    public Vector getGamespawn() {
+        return gamespawn;
     }
 
     @Override
@@ -88,8 +80,7 @@ public final class Arena {
         private String name;
         private BoundingBox boundingBox;
         private int hashCode;
-        private final List<Vector> lobbySpawns = new ArrayList<>();
-        private final List<Vector> spawns = new ArrayList<>();
+        private Vector gameSpawn, lobbySpawn;
         private Room[] rooms;
 
         public Builder setFallBackSettings(GameSettings fallBackSettings) {
@@ -117,19 +108,13 @@ public final class Arena {
             return this;
         }
 
-        public Builder setLobbySpawns(Vector... vectors) {
-            lobbySpawns.clear();
-            for (Vector vector : vectors) {
-                lobbySpawns.add(vector.clone());
-            }
+        public Builder setLobbySpawn(Vector vector) {
+            lobbySpawn = vector;
             return this;
         }
 
-        public Builder setSpawns(Vector... vectors) {
-            spawns.clear();
-            for (Vector vector : vectors) {
-                spawns.add(vector.clone());
-            }
+        public Builder setGameSpawn(Vector vector) {
+            gameSpawn = vector;
             return this;
         }
         

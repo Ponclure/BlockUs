@@ -1,10 +1,16 @@
 package com.github.amongus.utility;
 
+import com.github.amongus.config.Config;
+import com.github.amongus.game.GameSettings;
+import com.github.amongus.throwable.IllegalInstantiation;
 import org.apache.commons.lang.Validate;
+
+import java.io.File;
+import java.nio.file.Path;
 
 public final class Utils {
 
-	private Utils() throws IllegalInstantiation {
+	private Utils() {
 		IllegalInstantiation.deploy(Utils.class);
 	}
 
