@@ -21,6 +21,18 @@ install:
   - ls $HOME/.m2/repository/org/spigotmc/spigot/1.16.1-R0.1-SNAPSHOT >> /dev/null 2>&1 || java -jar BuildTools.jar --rev 1.16.1 >> /dev/null 2>&1
 script:
   - mvn clean install
+deploy:
+  provider: releases
+  api_key:
+    secure: [redacted]
+  file: "/home/travis/build/Minecraft-Among-Us/travis.test/build/libs/*"
+  skip_cleanup: true
+  file_glob: true
+  on:
+    repo: Minecraft-Among-Us/travis.test
+    branch: main
+  name: $YOUR_RELEASE_NAME
+  body: $YOUR_RELEASE_CONTENT  
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
