@@ -1,6 +1,7 @@
 package com.github.amongus.game.tasks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,21 +9,22 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.game.Game;
+import com.github.amongus.utility.ItemBuilder;
 
+import me.mattstudios.mfgui.gui.guis.GuiItem;
+import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
 
 public class Wiring extends Task implements Listener {
 
-	private final Inventory gui;
+	private final PersistentGui gui;
 
 	private Color lastColor;
 	private int lastSlot;
@@ -32,9 +34,9 @@ public class Wiring extends Task implements Listener {
 		super(game, "Fix Wiring", loc);
 		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
 
-		this.gui = Bukkit.createInventory(null, 54, "Fix Wiring");
+		this.gui = new PersistentGui(4, "Fix Wiring");
 
-		List<ItemStack> stacks = generateWiring();
+		List<GuiItem> stacks = generateWiring();
 		gui.setItem(2, stacks.get(0));
 		gui.setItem(11, stacks.get(1));
 		gui.setItem(20, stacks.get(2));
@@ -46,96 +48,49 @@ public class Wiring extends Task implements Listener {
 		gui.setItem(24, stacks.get(2));
 		gui.setItem(33, stacks.get(3));
 
-		ItemStack gray = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
-		ItemMeta grayMeta = gray.getItemMeta();
-		grayMeta.setDisplayName(ChatColor.GRAY + "");
-		gray.setItemMeta(grayMeta);
-
-		setEmpty(gui);
-
-	}
-
-	public List<ItemStack> generateWiring() {
-
-		List<ItemStack> stacks = new ArrayList<>();
-
-		ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-		ItemMeta redMeta = red.getItemMeta();
-		redMeta.setDisplayName(ChatColor.DARK_RED + "Red Wire");
-		red.setItemMeta(redMeta);
-		stacks.add(red);
-
-		ItemStack blue = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
-		ItemMeta blueMeta = blue.getItemMeta();
-		blueMeta.setDisplayName(ChatColor.DARK_BLUE + "Blue Wire");
-		blue.setItemMeta(blueMeta);
-		stacks.add(blue);
-
-		ItemStack yellow = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
-		ItemMeta yellowMeta = yellow.getItemMeta();
-		yellowMeta.setDisplayName(ChatColor.YELLOW + "Yellow Wire");
-		yellow.setItemMeta(yellowMeta);
-		stacks.add(yellow);
-
-		ItemStack pink = new ItemStack(Material.PINK_STAINED_GLASS_PANE);
-		ItemMeta pinkMeta = pink.getItemMeta();
-		pinkMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Pink Wire");
-		pink.setItemMeta(pinkMeta);
-		stacks.add(pink);
-
-		Collections.shuffle(stacks);
-
-		return stacks;
-
-	}
-
-	@EventHandler
-	public void onClick(InventoryClickEvent event) {
-		if (event.getInventory().equals(gui)) {
+		gui.setDefaultClickAction(event -> {
 			event.setCancelled(true);
 			Color nextColor = null;
-			
 			switch (event.getCurrentItem().getType()) {
+			case RED_STAINED_GLASS_PANE:
+				nextColor = Color.RED;
+				break;
+			case BLUE_STAINED_GLASS_PANE:
+				nextColor = Color.BLUE;
+				break;
+			case YELLOW_STAINED_GLASS_PANE:
+				nextColor = Color.YELLOW;
+				break;
+			case PINK_STAINED_GLASS_PANE:
+				nextColor = Color.PINK;
+				break;
+			default:
+				break;
+			}
+			if (lastColor == null || lastColor != nextColor) {
+				switch (event.getCurrentItem().getType()) {
 				case RED_STAINED_GLASS_PANE:
-					nextColor = Color.RED;
+					lastColor = Color.RED;
+					lastSlot = event.getSlot();
+					dragWire(Color.RED);
 					break;
 				case BLUE_STAINED_GLASS_PANE:
-					nextColor = Color.BLUE;
+					lastColor = Color.BLUE;
+					lastSlot = event.getSlot();
+					dragWire(Color.BLUE);
 					break;
 				case YELLOW_STAINED_GLASS_PANE:
-					nextColor = Color.YELLOW;
+					lastColor = Color.YELLOW;
+					lastSlot = event.getSlot();
+					dragWire(Color.YELLOW);
 					break;
 				case PINK_STAINED_GLASS_PANE:
-					nextColor = Color.PINK;
+					lastColor = Color.PINK;
+					lastSlot = event.getSlot();
+					dragWire(Color.PINK);
 					break;
 				default:
 					break;
-			}
-			
-			if (lastColor == null || lastColor != nextColor) {
-				switch (event.getCurrentItem().getType()) {
-					case RED_STAINED_GLASS_PANE:
-						lastColor = Color.RED;
-						lastSlot = event.getSlot();
-						dragWire(Color.RED);
-						break;
-					case BLUE_STAINED_GLASS_PANE:
-						lastColor = Color.BLUE;
-						lastSlot = event.getSlot();
-						dragWire(Color.BLUE);
-						break;
-					case YELLOW_STAINED_GLASS_PANE:
-						lastColor = Color.YELLOW;
-						lastSlot = event.getSlot();
-						dragWire(Color.YELLOW);
-						break;
-					case PINK_STAINED_GLASS_PANE:
-						lastColor = Color.PINK;
-						lastSlot = event.getSlot();
-						dragWire(Color.PINK);
-						break;
-					default:
-						break;
 				}
 			} else if (lastColor == nextColor) {
 				ItemStack lime = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -150,7 +105,27 @@ public class Wiring extends Task implements Listener {
 					callComplete(Bukkit.getPlayer(event.getWhoClicked().getName()));
 				}
 			}
-		}
+		});
+
+		setEmpty(gui);
+
+	}
+
+	public List<GuiItem> generateWiring() {
+
+		List<GuiItem> stacks = new ArrayList<>();
+		stacks.add(new GuiItem(
+				new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.DARK_RED + "Red Wire").get()));
+		stacks.add(new GuiItem(
+				new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).withName(ChatColor.DARK_BLUE + "Blue Wire").get()));
+		stacks.add(new GuiItem(
+				new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).withName(ChatColor.YELLOW + "Yellow Wire").get()));
+		stacks.add(new GuiItem(new ItemBuilder(Material.PINK_STAINED_GLASS_PANE)
+				.withName(ChatColor.LIGHT_PURPLE + "Pink Wire").get()));
+		Collections.shuffle(stacks);
+
+		return stacks;
+
 	}
 
 	public boolean allComplete(Inventory inv) {
@@ -162,50 +137,28 @@ public class Wiring extends Task implements Listener {
 
 	public void dragWire(Color c) {
 
+		List<Integer> index = Arrays.asList(4, 13, 22, 31);
+
 		switch (c) {
 
 		case RED:
-			ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-			ItemMeta redMeta = red.getItemMeta();
-			redMeta.setDisplayName(ChatColor.DARK_RED + "Select Second Slot");
-			red.setItemMeta(redMeta);
-			gui.setItem(4, new ItemStack(Material.RED_STAINED_GLASS_PANE));
-			gui.setItem(13, new ItemStack(Material.RED_STAINED_GLASS_PANE));
-			gui.setItem(22, new ItemStack(Material.RED_STAINED_GLASS_PANE));
-			gui.setItem(31, new ItemStack(Material.RED_STAINED_GLASS_PANE));
+			gui.setItem(index, new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE)
+					.withName(ChatColor.DARK_RED + "Select Second Slot").get()));
 			break;
 
 		case BLUE:
-			ItemStack blue = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
-			ItemMeta blueMeta = blue.getItemMeta();
-			blueMeta.setDisplayName(ChatColor.DARK_BLUE + "Select Second Slot");
-			blue.setItemMeta(blueMeta);
-			gui.setItem(4, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(13, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(22, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(31, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
+			gui.setItem(index, new GuiItem(new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE)
+					.withName(ChatColor.DARK_BLUE + "Select Second Slot").get()));
 			break;
 
 		case YELLOW:
-			ItemStack yellow = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
-			ItemMeta yellowMeta = yellow.getItemMeta();
-			yellowMeta.setDisplayName(ChatColor.YELLOW + "Select Second Slot");
-			yellow.setItemMeta(yellowMeta);
-			gui.setItem(4, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-			gui.setItem(13, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-			gui.setItem(22, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
-			gui.setItem(31, new ItemStack(Material.YELLOW_STAINED_GLASS_PANE));
+			gui.setItem(index, new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
+					.withName(ChatColor.YELLOW + "Select Second Slot").get()));
 			break;
 
 		case PINK:
-			ItemStack pink = new ItemStack(Material.PINK_STAINED_GLASS_PANE);
-			ItemMeta pinkMeta = pink.getItemMeta();
-			pinkMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Select Second Slot");
-			pink.setItemMeta(pinkMeta);
-			gui.setItem(4, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(13, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(22, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
-			gui.setItem(31, new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
+			gui.setItem(index, new GuiItem(new ItemBuilder(Material.PINK_STAINED_GLASS_PANE)
+					.withName(ChatColor.LIGHT_PURPLE + "Select Second Slot").get()));
 			break;
 
 		}
@@ -218,7 +171,7 @@ public class Wiring extends Task implements Listener {
 
 	@Override
 	public void execute(Player p) {
-		p.openInventory(gui);
+		gui.open(p);
 	}
 
 }

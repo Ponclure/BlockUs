@@ -1,16 +1,13 @@
 package com.github.amongus.config;
 
-import com.github.amongus.utility.Utils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.function.Supplier;
 
 public enum ConfigType {
+	
     YML(".yml",YamlConfiguration::new);
 
     private final String suffix;
@@ -39,4 +36,5 @@ public enum ConfigType {
     public FileConfiguration supplyConfig() {
         return supplier.get();
     }
+    
 }

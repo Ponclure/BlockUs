@@ -1,7 +1,6 @@
 package com.github.amongus.game;
 
 import com.github.amongus.arena.Arena;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;

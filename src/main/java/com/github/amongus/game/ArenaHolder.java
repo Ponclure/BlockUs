@@ -5,8 +5,9 @@ import com.github.amongus.AmongUsPlugin;
 import com.github.amongus.arena.Arena;
 import com.github.amongus.collection.IdentitySet;
 import com.github.amongus.collection.MapHashSet;
+
 import com.google.common.collect.ImmutableSet;
-import org.bukkit.Bukkit;
+
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitScheduler;

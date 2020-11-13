@@ -36,4 +36,9 @@ public class Participant {
 	public void setDisconnected(boolean disconnected) {
 		isDisconnected = disconnected;
 	}
+	
+	public boolean isImposter() {
+		return (this instanceof Imposter);
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.github.amongus.game.security;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -15,7 +16,7 @@ import com.github.amongus.player.Participant;
 import net.md_5.bungee.api.ChatColor;
 
 public class Admin extends Task {
-	
+
 	public Admin(Game game, Location loc) {
 		super(game, "Admin", loc);
 	}
@@ -35,13 +36,14 @@ public class Admin extends Task {
 	public Map<Room, Integer> getCounts() {
 		Map<Room, Integer> counts = new HashMap<>();
 		Game game = this.getGame();
-		for (Participant p : game.getPrePlayers()) {
+
+		for (Participant p : game.getParticipants().values()) {
 			if (!p.isDead()) {
-				Room r = getClosest(game.getArena().getRooms(), p.getPlayer().getLocation().toVector());
-				if (counts.get(r) == null) {
-					counts.put(r, 1);
-				} else {
+				Room r = getClosest(game.getArena().getRooms(), Bukkit.getPlayer(p.getUuid()).getLocation().toVector());
+				if (counts.containsKey(r)) {
 					counts.put(r, counts.get(r) + 1);
+				} else {
+					counts.put(r, 1);
 				}
 
 //              OLD METHOD
@@ -56,12 +58,12 @@ public class Admin extends Task {
 //						}
 //					}
 //				}
-				
+
 			}
 		}
 		return counts;
 	}
-	
+
 	private Room getClosest(Room[] rooms, Vector player) {
 		Room closest = null;
 		double current = 0;
@@ -74,21 +76,21 @@ public class Admin extends Task {
 		}
 		return closest;
 	}
-	
+
 	@Deprecated
 	@SuppressWarnings("unused")
 	private boolean matchesX(Location loc, Vector btm, Vector top) {
 		int coord = loc.getBlockX();
 		return coord >= btm.getBlockX() && coord <= top.getBlockX();
 	}
-	
+
 	@Deprecated
 	@SuppressWarnings("unused")
 	private boolean matchesY(Location loc, Vector btm, Vector top) {
 		int coord = loc.getBlockY();
 		return coord >= btm.getBlockY() && coord <= top.getBlockY();
 	}
-	
+
 	@Deprecated
 	@SuppressWarnings("unused")
 	private boolean matchesZ(Location loc, Vector btm, Vector top) {

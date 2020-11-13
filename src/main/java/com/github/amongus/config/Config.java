@@ -1,74 +1,62 @@
 package com.github.amongus.config;
 
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public interface Config {
 
-    void load();
+	public void load();
 
-    void load(Consumer<Exception> exceptionHandler);
+	public void load(Consumer<Exception> exceptionHandler);
 
-    void loadAsync();
+	public void loadAsync();
 
-    void loadAsync(Consumer<Config> handler);
+	public void loadAsync(Consumer<Config> handler);
 
-    void loadAsync(Consumer<Config> handler,
-                   Consumer<Exception> exceptionHandler);
+	public void loadAsync(Consumer<Config> handler, Consumer<Exception> exceptionHandler);
 
-    void save();
+	public void save();
 
-    void save(Consumer<IOException> exceptionHandler);
+	public void save(Consumer<IOException> exceptionHandler);
 
-    void saveAsync();
+	public void saveAsync();
 
-    void saveAsync(Consumer<IOException> exceptionHandler);
+	public void saveAsync(Consumer<IOException> exceptionHandler);
 
-    FileConfiguration getConfig();
+	public FileConfiguration getConfig();
 
-    Object get(String path);
+	public Object get(String path);
 
-    Object get(String path,
-               Object fallback);
+	public Object get(String path, Object fallback);
 
-    String getString(String path);
+	public String getString(String path);
 
-    String getString(String path,
-                     String fallback);
+	public String getString(String path, String fallback);
 
-    int getInt(String path);
+	public int getInt(String path);
 
-    int getInt(String path,
-               int fallback);
+	public int getInt(String path, int fallback);
 
-    double getDouble(String path);
+	public double getDouble(String path);
 
-    double getDouble(String path,
-                     double fallback);
+	public double getDouble(String path, double fallback);
 
-    boolean getBoolean(String path);
+	public boolean getBoolean(String path);
 
-    boolean getBoolean(String path,
-                       boolean fallback);
+	public boolean getBoolean(String path, boolean fallback);
 
-    List<?> getList(String path);
+	public List<?> getList(String path);
 
-    List<?> getList(String path,
-                    List<?> fallback);
+	public List<?> getList(String path, List<?> fallback);
 
-    <T extends ConfigurationSerializable> T getSerializable(String path,
-                                                            Class<T> type);
+	public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> type);
 
-    <T extends ConfigurationSerializable> T getSerializable(String path,
-                                                            Class<T> type,
-                                                            T fallback);
+	public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> type, T fallback);
 
-    boolean isSet(String path);
+	public boolean isSet(String path);
 
 }

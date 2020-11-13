@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.AmongUsPlugin;
@@ -21,7 +20,10 @@ import com.github.amongus.game.Game;
 import com.github.amongus.player.Crewmate;
 import com.github.amongus.player.Participant;
 import com.github.amongus.sound.SpecialSoundEffects;
+import com.github.amongus.utility.ItemBuilder;
 
+import me.mattstudios.mfgui.gui.guis.GuiItem;
+import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
 
 public abstract class Task implements Listener {
@@ -57,12 +59,13 @@ public abstract class Task implements Listener {
 		player.closeInventory();
 		player.sendTitle(ChatColor.BOLD + "" + ChatColor.GREEN + ChatColor.GREEN + "Task Completed",
 				"Move on to Other Tasks", 1, 20, 1);
-		for (Participant p : game.getPrePlayers()) {
-			if (p.getUuid() == player.getUniqueId()) {
-				if (p instanceof Crewmate) {
-					Crewmate c = ((Crewmate) p);
+		for (UUID uuid : game.getSet()) {
+			if (uuid == player.getUniqueId()) {
+				Participant participant = game.getParticipants().get(uuid);
+				if (!participant.isImposter()) {
+					Crewmate c = (Crewmate) participant;
 					c.removeTask(this);
-					Player pl = c.getPlayer();
+					Player pl = Bukkit.getPlayer(c.getUuid());
 					pl.playSound(pl.getLocation(), SpecialSoundEffects.TASK_PROGRESS.getName(), 1.0F, 1.0F);
 					break;
 				}
@@ -70,13 +73,11 @@ public abstract class Task implements Listener {
 		}
 	}
 
-	public void setEmpty(Inventory inv) {
-		ItemStack gray = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
-		ItemMeta grayMeta = gray.getItemMeta();
-		grayMeta.setDisplayName(ChatColor.GRAY + "");
-		gray.setItemMeta(grayMeta);
-		for (int i = 0; i < inv.getSize(); i++) {
-			ItemStack item = inv.getItem(i);
+	public void setEmpty(PersistentGui inv) {
+		GuiItem gray = new GuiItem(new ItemBuilder(Material.LIGHT_GRAY_STAINED_GLASS_PANE).withName(ChatColor.GRAY + "").get());
+		Inventory inventory = inv.getInventory();
+		for (int i = 0; i < inventory.getSize(); i++) {
+			ItemStack item = inventory.getItem(i);
 			if (item == null || item.getType() == Material.AIR) {
 				inv.setItem(i, gray);
 			}

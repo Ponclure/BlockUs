@@ -3,13 +3,10 @@ package com.github.amongus.arena;
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public final class Arena {

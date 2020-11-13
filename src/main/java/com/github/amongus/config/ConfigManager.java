@@ -4,16 +4,12 @@ import com.github.amongus.AmongUs;
 import com.github.amongus.arena.ArenaManager;
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Namespace;
-import com.github.amongus.utility.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import java.io.File;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
