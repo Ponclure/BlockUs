@@ -21,25 +21,56 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<relocations>
+						<relocation>
+							<pattern>me.mattstudios.mfgui</pattern>
+							<shadedPattern>com.github.amongus.mfgui</shadedPattern>
+						</relocation>
+					</relocations>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
-			<version>1.16.1-R0.1-SNAPSHOT</version>
+			<version>1.16.3-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
 			<version>20.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>me.mattstudios.utils</groupId>
+			<artifactId>matt-framework-gui</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ponclure</groupId>
+			<artifactId>SecurityCams</artifactId>
+			<version>RELEASE-1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ponclure</groupId>
+			<artifactId>SimpleNPCFramework-NMS-v1_16_R3</artifactId>
+			<version>RELEASE-1.0.0</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<repositories>

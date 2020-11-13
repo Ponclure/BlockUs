@@ -20,6 +20,7 @@ import com.github.amongus.AmongUsPlugin;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Crewmate;
 import com.github.amongus.player.Participant;
+import com.github.amongus.sound.SpecialSoundEffects;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -59,13 +60,16 @@ public abstract class Task implements Listener {
 		for (Participant p : game.getPrePlayers()) {
 			if (p.getUuid() == player.getUniqueId()) {
 				if (p instanceof Crewmate) {
-					((Crewmate)p).removeTask(this);
+					Crewmate c = ((Crewmate) p);
+					c.removeTask(this);
+					Player pl = c.getPlayer();
+					pl.playSound(pl.getLocation(), SpecialSoundEffects.TASK_PROGRESS.getName(), 1.0F, 1.0F);
 					break;
 				}
 			}
 		}
 	}
-	
+
 	public void setEmpty(Inventory inv) {
 		ItemStack gray = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
 		ItemMeta grayMeta = gray.getItemMeta();
@@ -78,7 +82,7 @@ public abstract class Task implements Listener {
 			}
 		}
 	}
-	
+
 	public Game getGame() {
 		return game;
 	}

@@ -28,11 +28,8 @@ public class StartReactor extends Task implements Listener {
 	private Inventory gui;
 
 	private final List<Integer> copyGrid = Arrays.asList(19, 20, 21, 28, 29, 39, 37, 38, 39);
-
 	private final List<Integer> pressGrid = Arrays.asList(23, 24, 25, 32, 33, 34, 41, 42, 43);
-
 	private final List<Integer> status = Arrays.asList(2, 3, 4, 5, 6, 7);
-
 	private final List<List<Integer>> sequence = genSequence();
 
 	private List<Integer> currentSequence = new ArrayList<>(); // Current sequence that the user has pressed
