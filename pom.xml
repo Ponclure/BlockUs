@@ -7,6 +7,7 @@
 	<version>RELEASE 1.0.0</version>
 	<name>Among Us</name>
 	<description>An Among Us recreation from the original game into Minecraft using the Spigot API.</description>
+	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -61,13 +62,8 @@
 			<artifactId>matt-framework-gui</artifactId>
 			<version>2.0.2</version>
 		</dependency>
-		<!-- Doesn't work for Mr Conclure
-		<dependency>
-			<groupId>com.github.ponclure</groupId>
-			<artifactId>SecurityCams</artifactId>
-			<version>RELEASE-1.0.0</version>
-		</dependency>
-		-->
+		<!-- Doesn't work for Mr Conclure <dependency> <groupId>com.github.ponclure</groupId> 
+			<artifactId>SecurityCams</artifactId> <version>RELEASE-1.0.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.github.ponclure</groupId>
 			<artifactId>SimpleNPCFramework-NMS-v1_16_R3</artifactId>
