@@ -7,14 +7,12 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.game.Game;
 import com.github.amongus.utility.ItemBuilder;
-import com.github.amongus.utility.SkullCreation;
+import com.github.amongus.utility.Utils;
 
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -35,7 +33,7 @@ public class UploadData extends Task implements Listener {
 				new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.DARK_GRAY + "").get());
 		gui.setItem(borderIndex, border);
 
-		GuiItem start = new GuiItem(getSkull(
+		GuiItem start = new GuiItem(Utils.getSkull(
 				"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGZlYjM5ZDcxZWY4ZTZhNDI2NDY1OTMzOTNhNTc1M2NlMjZhMWJlZTI3YTBjYThhMzJjYjYzN2IxZmZhZSJ9fX0=",
 				ChatColor.GOLD + "Start Upload"), event -> {
 					new BukkitRunnable() {
@@ -88,14 +86,6 @@ public class UploadData extends Task implements Listener {
 				gui.setItem(uncompletedIndex.get(i), finished);
 			}
 		}
-	}
-
-	public ItemStack getSkull(String skull, String name) {
-		ItemStack stack = SkullCreation.itemWithBase64(SkullCreation.createSkull(), skull);
-		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName(name);
-		stack.setItemMeta(meta);
-		return stack;
 	}
 
 	@Override

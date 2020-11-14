@@ -46,7 +46,7 @@ public abstract class Task implements Listener {
 
 		this.setUuid(stand.getUniqueId());
 	}
-
+	
 	@EventHandler
 	public void manipulate(PlayerArmorStandManipulateEvent e) {
 		if (e.getRightClicked().getUniqueId() == uuid) {
