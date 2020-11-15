@@ -56,4 +56,9 @@ public class Game extends ArenaHolder {
         	participants.get(uuid).setDisconnected(true);
         }
     }
+
+    public GameSettings getSettings() {
+        return settings;
+    }
+
 }

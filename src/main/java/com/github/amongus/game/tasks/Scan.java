@@ -1,6 +1,7 @@
 package com.github.amongus.game.tasks;
 
 import com.github.amongus.AmongUs;
+import com.github.amongus.AmongUsPlugin;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -17,6 +18,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 
 import java.util.Map;
@@ -73,8 +75,15 @@ public class Scan extends Task implements Listener {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 8, 1000, true, false));
         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 8, 1000, true, false));
         p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 8, 1000, true, false));
+        BukkitRunnable runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                p.getWorld().spawnParticle(Particle.WHITE_ASH, scanArea, 10);
+            }
+        };
+        runnable.runTaskTimer(AmongUs.plugin(), 20, 160);
+        p.sendMessage();
 
-        p.getWorld().spawnParticle(Particle.WHITE_ASH, scanArea, 10);
     }
 
     @Deprecated
