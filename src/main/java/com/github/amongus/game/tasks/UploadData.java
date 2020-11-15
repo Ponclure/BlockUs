@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.amongus.AmongUs;
@@ -90,7 +91,7 @@ public class UploadData extends Task implements Listener {
     }
 
     @Override
-    public void execute(Player p) {
+    public void execute(Player p, PlayerArmorStandManipulateEvent e) {
         gui.open(p);
     }
 

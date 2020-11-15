@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -170,7 +171,7 @@ public class Wiring extends Task implements Listener {
 	}
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		gui.open(p);
 	}
 

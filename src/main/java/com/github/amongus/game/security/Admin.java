@@ -6,6 +6,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.util.Vector;
 
 import com.github.amongus.arena.Room;
@@ -22,7 +23,7 @@ public class Admin extends Task {
 	}
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		Map<Room, Integer> counts = getCounts();
 		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
 		p.sendMessage(ChatColor.RED + "Crewmates in Rooms:");

@@ -11,6 +11,7 @@ import com.github.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 public class SwipeCard extends Task {
 
@@ -62,7 +63,7 @@ public class SwipeCard extends Task {
 	}
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		gui.open(p);
 	}
 

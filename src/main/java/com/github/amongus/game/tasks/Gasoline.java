@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.amongus.game.Game;
@@ -101,7 +102,7 @@ public class Gasoline extends Task implements Listener {
 	}
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		this.player = p;
 		gui.open(p);
 	}

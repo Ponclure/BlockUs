@@ -16,6 +16,7 @@ import com.github.amongus.utility.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 public class Shields extends Task {
 
@@ -114,7 +115,7 @@ public class Shields extends Task {
 	}
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		gui.open(p);
 	}
 

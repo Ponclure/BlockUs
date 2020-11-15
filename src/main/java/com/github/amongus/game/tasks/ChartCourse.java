@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import com.github.amongus.game.Game;
 
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ChartCourse extends Task {
 	
 
 	@Override
-	public void execute(Player p) {
+	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
 		gui.open(p);
 	}
 	

@@ -45,6 +45,8 @@ public class Participant {
 		return (this instanceof Imposter);
 	}
 
+	public PlayerColor getColor() { return color; }
+
 	public enum PlayerColor {
 		RED, BLUE, GREEN, YELLOW, ORANGE, BLACK, WHITE, PURPLE, CYAN, BROWN, LIME, FORTEGREEN;
 	}
