@@ -42,6 +42,27 @@
                </execution>
             </executions>
          </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+               <relocations>
+                  <relocation>
+                     <pattern>com.github.ponclure</pattern>
+                     <shadedPattern>com.github.amongus.simplenpcframework</shadedPattern>
+                  </relocation>
+               </relocations>
+            </configuration>
+            <executions>
+               <execution>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>shade</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
       </plugins>
    </build>
    <dependencies>
@@ -66,14 +87,9 @@
          <artifactId>SecurityCams-API</artifactId>
          <version>1.3.0-SNAPSHOT</version>
       </dependency>
-<!--      <dependency>-->
-<!--         <groupId>com.github.Ponclure</groupId>-->
-<!--         <artifactId>SimpleNPCFramework-NMS-v1_16_R3</artifactId>-->
-<!--         <version>2.11-SNAPSHOT</version>-->
-<!--      </dependency>-->
       <dependency>
          <groupId>com.github.ponclure</groupId>
-         <artifactId>SimpleNPCFramework-NMS-v1_16_R3</artifactId>
+         <artifactId>SimpleNPCFramework-API</artifactId>
          <version>RELEASE-1.0.0</version>
          <scope>compile</scope>
       </dependency>
