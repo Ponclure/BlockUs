@@ -18,7 +18,6 @@ import java.util.List;
 public class ChartCourse extends Task {
 	
 	private final PersistentGui gui;
-	private final List<Integer> course = Arrays.asList(28, 20, 12, 22, 32, 24, 16);
 	private int currentPos = 0;
 
 	public ChartCourse(Game game, Location loc) {
@@ -26,15 +25,19 @@ public class ChartCourse extends Task {
 		
 		this.gui = new PersistentGui(5, "Chart Course");
 
+		List<Integer> course = Arrays.asList(28, 20, 12, 22, 32, 24, 16);
+
 		GuiItem clicked = new GuiItem(new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).withName(ChatColor.BLUE + "").get());
 		GuiItem path = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "").get(), event -> {
 			int slot = event.getSlot();
-			if (slot == course.get(currentPos)) {
+			if (course.contains(slot) && slot == course.get(currentPos)) {
 				if (slot == 16) {
 					callComplete((Player)event.getWhoClicked());
 				}
 				gui.setItem(course.get(currentPos), clicked);
 				currentPos++;
+			} else {
+				event.setCancelled(true);
 			}
 		});
 		gui.setItem(course, path);

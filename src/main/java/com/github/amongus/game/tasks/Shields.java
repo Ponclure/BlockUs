@@ -34,10 +34,15 @@ public class Shields extends Task {
 		GuiItem broken = new GuiItem(
 				new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.DARK_RED + "Click Me!").get(),
 				event -> {
-					gui.setItem(event.getSlot(), fine);
+					int slot = event.getSlot();
+					if (all.contains(slot)) {
+						gui.setItem(event.getSlot(), fine);
+					} else {
+						event.setCancelled(true);
+					}
 					if (allEnabled()) {
 						Player p = (Player)event.getWhoClicked();
-						p.playSound(p.getLocation(), SpecialSoundEffects.TASK_PROGRESS.getName(), 1.0F, 1.0F);
+						p.playSound(p.getLocation(), SpecialSoundEffects.TASK_COMPLETE.getName(), 1.0F, 1.0F);
 						callComplete(p);
 					}
 				});

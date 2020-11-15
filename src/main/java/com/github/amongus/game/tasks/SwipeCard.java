@@ -55,6 +55,8 @@ public class SwipeCard extends Task {
 							ChatColor.GREEN + "Try Again (1 - 1.5 Seconds)"));
 					gui.setItem(31, wrong);
 				}
+			} else {
+				event.setCancelled(true);
 			}
 		});
 

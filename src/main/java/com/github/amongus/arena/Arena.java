@@ -18,6 +18,7 @@ public final class Arena {
     private final int hashCode;
     private final Vector gamespawn, lobbySpawn;
     private final Room[] rooms;
+    private final Door[] doors;
 
     private Arena(Builder builder) {
         this.fallBackSettings = builder.fallBackSettings;
@@ -28,6 +29,7 @@ public final class Arena {
         this.lobbySpawn = builder.lobbySpawn;
         this.gamespawn = builder.gameSpawn;
         this.rooms = builder.rooms;
+        this.doors = builder.doors;
     }
 
     public GameSettings getFallBackSettings() {
@@ -79,6 +81,7 @@ public final class Arena {
         private int hashCode;
         private Vector gameSpawn, lobbySpawn;
         private Room[] rooms;
+        private Door[] doors;
 
         public Builder setFallBackSettings(GameSettings fallBackSettings) {
             this.fallBackSettings = fallBackSettings;
@@ -118,6 +121,11 @@ public final class Arena {
         public Builder setRooms(Room... room) {
         	this.rooms = room;
         	return this;
+        }
+
+        public Builder setDoors(Door... door) {
+            this.doors = door;
+            return this;
         }
 
         public Arena build() {

@@ -37,6 +37,7 @@ public class Gasoline extends Task implements Listener {
 		List<Integer> middle = Arrays.asList(27, 28, 29, 30, 31, 32, 33, 34, 35);
 		List<Integer> almost = Arrays.asList(18, 19, 20, 21, 22, 23, 24, 25, 26);
 		List<Integer> full = Arrays.asList(9, 10, 11, 12, 13, 14, 15, 16, 17);
+		List<Integer> startSlots = Arrays.asList(12, 13, 14, 21, 22, 23, 30, 31, 32);
 
 		Levelled cauldronData = (Levelled) tank.getBlockData(); // 1 is highest, 7 is lowest
 		cauldronData.setLevel(1);
@@ -45,48 +46,52 @@ public class Gasoline extends Task implements Listener {
 		GuiItem empty = new GuiItem(new ItemStack(Material.AIR));
 		GuiItem fill = new GuiItem(new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE)
 				.withName(ChatColor.GOLD + "Click a Lot to Pour Fuel").get(), event -> {
-					clicks++;
-					int rows = clicks / 5;
-					String percent = (25 * rows) + "% Filled";
-					if (clicks % 5 == 0) {
-						GuiItem fuel = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
-								.withName(ChatColor.YELLOW + percent).get());
-						switch (rows) {
-						case 1:
-							gui.setItem(small, fuel);
-							break;
-						case 2:
-							gui.setItem(middle, fuel);
-							cauldronData.setLevel(3);
-							tank.setBlockData(cauldronData);
-							break;
-						case 3:
-							gui.setItem(almost, fuel);
-							cauldronData.setLevel(5);
-							tank.setBlockData(cauldronData);
-							break;
-						case 4:
-							gui.setItem(full, fuel);
-							cauldronData.setLevel(7);
-							tank.setBlockData(cauldronData);
-							callComplete((Player)event.getWhoClicked());
-							break;
+					if (startSlots.contains(event.getSlot())) {
+						clicks++;
+						int rows = clicks / 5;
+						String percent = (25 * rows) + "% Filled";
+						if (clicks % 5 == 0) {
+							GuiItem fuel = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
+									.withName(ChatColor.YELLOW + percent).get());
+							switch (rows) {
+								case 1:
+									gui.setItem(small, fuel);
+									break;
+								case 2:
+									gui.setItem(middle, fuel);
+									cauldronData.setLevel(3);
+									tank.setBlockData(cauldronData);
+									break;
+								case 3:
+									gui.setItem(almost, fuel);
+									cauldronData.setLevel(5);
+									tank.setBlockData(cauldronData);
+									break;
+								case 4:
+									gui.setItem(full, fuel);
+									cauldronData.setLevel(7);
+									tank.setBlockData(cauldronData);
+									callComplete((Player)event.getWhoClicked());
+									break;
+							}
+						} else {
+							switch (rows) {
+								case 0:
+									gui.setItem(small, empty);
+									break;
+								case 1:
+									gui.setItem(middle, empty);
+									break;
+								case 2:
+									gui.setItem(almost, empty);
+									break;
+								case 3:
+									gui.setItem(full, empty);
+									break;
+							}
 						}
 					} else {
-						switch (rows) {
-							case 0:
-							gui.setItem(small, empty);
-							break;
-						case 1:
-							gui.setItem(middle, empty);
-							break;
-						case 2:
-							gui.setItem(almost, empty);
-							break;
-						case 3:
-							gui.setItem(full, empty);
-							break;
-						}
+						event.setCancelled(true);
 					}
 				});
 		GuiItem start = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
@@ -94,7 +99,7 @@ public class Gasoline extends Task implements Listener {
 					gui.setItem(Arrays.asList(12, 13, 14, 21, 22, 23, 30, 31, 32), empty);
 					gui.setItem(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8), fill);
 				});
-		gui.setItem(Arrays.asList(12, 13, 14, 21, 22, 23, 30, 31, 32), start);
+		gui.setItem(startSlots, start);
 
 		setEmpty(gui);
 

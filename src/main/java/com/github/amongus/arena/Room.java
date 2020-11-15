@@ -9,9 +9,9 @@ public class Room {
 	private final String name;
 	private final Vector middle;
 	
-	public Room(String name, Vector... vec) {
+	public Room(String name, Vector vec) {
 		this.name = name;
-		this.middle = vec[0].getMidpoint(vec[1]);
+		this.middle = vec;
 	}	
 
 	public String getName() {

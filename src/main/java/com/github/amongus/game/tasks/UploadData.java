@@ -37,6 +37,7 @@ public class UploadData extends Task implements Listener {
         GuiItem start = new GuiItem(Utils.getSkull(
                 "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGZlYjM5ZDcxZWY4ZTZhNDI2NDY1OTMzOTNhNTc1M2NlMjZhMWJlZTI3YTBjYThhMzJjYjYzN2IxZmZhZSJ9fX0=",
                 ChatColor.GOLD + "Start Upload"), event -> {
+            event.setCancelled(true);
             new BukkitRunnable() {
                 double counter = 0;
 
