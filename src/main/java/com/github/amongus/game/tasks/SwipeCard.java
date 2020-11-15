@@ -57,6 +57,8 @@ public class SwipeCard extends Task {
 			}
 		});
 
+		setEmpty(gui);
+
 	}
 
 	@Override

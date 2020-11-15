@@ -49,6 +49,8 @@ public class Shields extends Task {
 			}
 		}
 
+		setEmpty(gui);
+
 	}
 
 	public boolean allEnabled() {

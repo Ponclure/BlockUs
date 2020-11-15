@@ -1,16 +1,22 @@
 package com.github.amongus.player;
 
+import org.bukkit.Bukkit;
+
 import java.util.UUID;
 
 public class Participant {
 
-	private UUID uuid;
+	private final UUID uuid;
+	private final String nick;
+	private final PlayerColor color;
 	
 	private boolean isDead;
 	private boolean isDisconnected;
 
-	public Participant(UUID player) {
+	public Participant(UUID player, PlayerColor color) {
 		this.uuid = player;
+		this.nick = Bukkit.getPlayer(uuid).getName();
+		this.color = color;
 	}
 
 	public boolean isDead() {
@@ -25,9 +31,7 @@ public class Participant {
 		return uuid;
 	}
 
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
-	}
+	public String getNick() { return nick; }
 
 	public boolean isDisconnected() {
 		return isDisconnected;
@@ -40,5 +44,9 @@ public class Participant {
 	public boolean isImposter() {
 		return (this instanceof Imposter);
 	}
-	
+
+	public enum PlayerColor {
+		RED, BLUE, GREEN, YELLOW, ORANGE, BLACK, WHITE, PURPLE, CYAN, BROWN, LIME, FORTEGREEN;
+	}
+
 }

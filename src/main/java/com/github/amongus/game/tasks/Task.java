@@ -28,28 +28,26 @@ import net.md_5.bungee.api.ChatColor;
 
 public abstract class Task implements Listener {
 
-	private Game game;
-	private String name;
-	private ArmorStand stand;
-	private UUID uuid;
+	private final Game game;
+	private final String name;
+	private final ArmorStand stand;
 
 	public abstract void execute(Player p);
 
 	public Task(Game game, String name, Location loc) {
 		this.game = game;
-		this.setName(name);
+		this.name = name;
 		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
 
 		this.stand = (ArmorStand) AmongUsPlugin.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 		this.stand.setVisible(false);
 		this.stand.setGravity(false);
 
-		this.setUuid(stand.getUniqueId());
 	}
 	
 	@EventHandler
 	public void manipulate(PlayerArmorStandManipulateEvent e) {
-		if (e.getRightClicked().getUniqueId() == uuid) {
+		if (e.getRightClicked().getUniqueId() == stand.getUniqueId()) {
 			e.setCancelled(true);
 			execute(e.getPlayer());
 		}
@@ -92,24 +90,8 @@ public abstract class Task implements Listener {
 		return stand;
 	}
 
-	public void setStand(ArmorStand stand) {
-		this.stand = stand;
-	}
-
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

@@ -96,6 +96,8 @@ public class Gasoline extends Task implements Listener {
 				});
 		gui.setItem(Arrays.asList(12, 13, 14, 21, 22, 23, 30, 31, 32), start);
 
+		setEmpty(gui);
+
 	}
 
 	@Override
