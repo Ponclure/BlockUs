@@ -32,7 +32,7 @@ public abstract class Task implements Listener {
 	private final String name;
 	private final ArmorStand stand;
 
-	public abstract void execute(Player p, PlayerArmorStandManipulateEvent e);
+	public abstract void execute(PlayerArmorStandManipulateEvent e);
 
 	public Task(Game game, String name, Location loc) {
 		this.game = game;
@@ -49,7 +49,7 @@ public abstract class Task implements Listener {
 	public void manipulate(PlayerArmorStandManipulateEvent e) {
 		if (e.getRightClicked().getUniqueId() == stand.getUniqueId()) {
 			e.setCancelled(true);
-			execute(e.getPlayer(), e);
+			execute(e);
 		}
 	}
 

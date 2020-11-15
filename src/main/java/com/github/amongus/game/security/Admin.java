@@ -22,18 +22,6 @@ public class Admin extends Task {
 		super(game, "Admin", loc);
 	}
 
-	@Override
-	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
-		Map<Room, Integer> counts = getCounts();
-		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
-		p.sendMessage(ChatColor.RED + "Crewmates in Rooms:");
-		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
-		for (Room room : counts.keySet()) {
-			p.sendMessage(ChatColor.AQUA + room.getName() + ": " + counts.get(room));
-		}
-		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
-	}
-
 	public Map<Room, Integer> getCounts() {
 		Map<Room, Integer> counts = new HashMap<>();
 		Game game = this.getGame();
@@ -97,6 +85,19 @@ public class Admin extends Task {
 	private boolean matchesZ(Location loc, Vector btm, Vector top) {
 		int coord = loc.getBlockZ();
 		return coord >= btm.getBlockZ() && coord <= top.getBlockZ();
+	}
+
+	@Override
+	public void execute(PlayerArmorStandManipulateEvent e) {
+		Player p = e.getPlayer();
+		Map<Room, Integer> counts = getCounts();
+		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
+		p.sendMessage(ChatColor.RED + "Crewmates in Rooms:");
+		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
+		for (Room room : counts.keySet()) {
+			p.sendMessage(ChatColor.AQUA + room.getName() + ": " + counts.get(room));
+		}
+		p.sendMessage(ChatColor.GOLD + "---------------------------------------------");
 	}
 
 }

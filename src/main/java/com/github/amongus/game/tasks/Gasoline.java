@@ -24,7 +24,6 @@ public class Gasoline extends Task implements Listener {
 	private final PersistentGui gui;
 	private final Block tank;
 
-	private Player player;
 	private int clicks = 0;
 
 	public Gasoline(Game game, Location loc, Block b) {
@@ -70,12 +69,12 @@ public class Gasoline extends Task implements Listener {
 							gui.setItem(full, fuel);
 							cauldronData.setLevel(7);
 							tank.setBlockData(cauldronData);
-							callComplete(player);
+							callComplete((Player)event.getWhoClicked());
 							break;
 						}
 					} else {
 						switch (rows) {
-						case 0:
+							case 0:
 							gui.setItem(small, empty);
 							break;
 						case 1:
@@ -102,9 +101,8 @@ public class Gasoline extends Task implements Listener {
 	}
 
 	@Override
-	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
-		this.player = p;
-		gui.open(p);
+	public void execute(PlayerArmorStandManipulateEvent e) {
+		gui.open(e.getPlayer());
 	}
 
 	public Block getTank() {

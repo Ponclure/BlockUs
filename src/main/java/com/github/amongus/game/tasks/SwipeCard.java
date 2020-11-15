@@ -63,8 +63,8 @@ public class SwipeCard extends Task {
 	}
 
 	@Override
-	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
-		gui.open(p);
+	public void execute(PlayerArmorStandManipulateEvent e) {
+		gui.open(e.getPlayer());
 	}
 
 }

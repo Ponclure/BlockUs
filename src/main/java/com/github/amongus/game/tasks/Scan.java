@@ -136,7 +136,7 @@ public class Scan extends Task implements Listener {
     }
 
     @Override
-    public void execute(Player p, PlayerArmorStandManipulateEvent event) {
+    public void execute(PlayerArmorStandManipulateEvent event) {
         if (state == ScanState.NOT_STARTED) {
             if (event.getPlayer().getUniqueId() == player.getUuid()) {
                 state = ScanState.STARTED;

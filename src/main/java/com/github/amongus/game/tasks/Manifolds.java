@@ -76,8 +76,8 @@ public class Manifolds extends Task {
     }
 
     @Override
-    public void execute(Player p, PlayerArmorStandManipulateEvent e) {
-        gui.open((Player)p);
+    public void execute(PlayerArmorStandManipulateEvent e) {
+        gui.open(e.getPlayer());
     }
 
 

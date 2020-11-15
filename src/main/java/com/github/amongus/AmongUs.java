@@ -5,13 +5,18 @@ import com.github.amongus.config.ConfigFactory;
 import com.github.amongus.config.ConfigManager;
 import com.github.amongus.game.GameManager;
 
+import com.github.ponclure.securitycams.CameraManager;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.util.logging.Logger;
 
 public final class AmongUs {
 
+    public static boolean isAvailable;
     private static final AmongUsPlugin PLUGIN;
     private static final ArenaManager ARENA_MANAGER;
     private static final GameManager GAME_MANAGER;
@@ -19,7 +24,8 @@ public final class AmongUs {
     private static final File DATA_FOLDER;
     private static final ConfigFactory CONFIG_FACTORY;
     private static final ConfigManager CONFIG_MANAGER;
-    static boolean isAvailable;
+
+    private static CameraManager CAMERA_MANAGER;
 
     static {
         PLUGIN = JavaPlugin.getPlugin(AmongUsPlugin.class);
@@ -29,6 +35,13 @@ public final class AmongUs {
         ARENA_MANAGER = new ArenaManager();
         CONFIG_MANAGER = new ConfigManager();
         GAME_MANAGER = new GameManager();
+        try {
+            CAMERA_MANAGER = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     public static AmongUsPlugin plugin() {
@@ -57,6 +70,10 @@ public final class AmongUs {
 
     public static ConfigManager configManager() {
         return checkAvailability(CONFIG_MANAGER);
+    }
+
+    public static CameraManager getCameraManager() {
+        return checkAvailability(CAMERA_MANAGER);
     }
 
     private static <T> T checkAvailability(T t) {

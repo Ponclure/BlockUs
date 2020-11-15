@@ -171,8 +171,8 @@ public class Wiring extends Task implements Listener {
 	}
 
 	@Override
-	public void execute(Player p, PlayerArmorStandManipulateEvent e) {
-		gui.open(p);
+	public void execute(PlayerArmorStandManipulateEvent e) {
+		gui.open(e.getPlayer());
 	}
 
 }
