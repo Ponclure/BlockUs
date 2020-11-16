@@ -5,7 +5,7 @@
 [![Discord](https://img.shields.io/discord/775376080546693120.svg?label=discord&logo=discord)](https://discord.gg/d7qfcUwhex)
 [![Repository Size](https://img.shields.io/github/languages/code-size/Ponclure/Minecraft-Among-Us)](https://github.com/Ponclure/Minecraft-Among-Us)
 [![Lines of Code](https://img.shields.io/tokei/lines/github/Ponclure/Minecraft-Among-Us)](https://github.com/Ponclure/Minecraft-Among-Us)
-[![Libraries.io](https://img.shields.io/librariesio/release/)]
+[![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/Minecraft-Among-Us)](https://github.com/Ponclure/Minecraft-Among-Us)
 
 
 A recreation of Among Us but in Minecraft using the Spigot API. More details coming soon.
