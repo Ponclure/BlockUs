@@ -10,4 +10,7 @@
 
 A recreation of Among Us but in Minecraft using the Spigot API. More details coming soon.
 
-Developers: Conclure, Fefo, PulseBeat_02
+#### Developers:
+* Conclure
+* Fefo
+* PulseBeat_02
