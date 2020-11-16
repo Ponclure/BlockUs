@@ -14,3 +14,5 @@ A recreation of Among Us but in Minecraft using the Spigot API. More details com
 * Conclure
 * Fefo
 * PulseBeat_02
+
+If you are going to fork, we ask to make it open source instead of private. This allows it so we can keep the open source community thriving :)
