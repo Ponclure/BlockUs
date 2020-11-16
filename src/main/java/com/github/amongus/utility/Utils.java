@@ -4,10 +4,13 @@ import com.github.amongus.AmongUs;
 import com.github.amongus.throwable.IllegalInstantiation;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.BoundingBox;
 
 public final class Utils {
 
@@ -59,6 +62,16 @@ public final class Utils {
         @Override
         public void run() {
             player.sendTitle(str, "", 1, 20, 1);
+        }
+    }
+
+    public static void setBlock(BoundingBox box, Material mat) {
+        for (int x = (int)box.getMinX(); x <= box.getMaxX(); x++) {
+            for (int y = (int)box.getMinY(); y <= box.getMaxY(); y++) {
+                for (int z = (int)box.getMinZ(); z <= box.getMaxZ(); z++) {
+                    new Location(Bukkit.getWorld("skeld"),x, y, z).getBlock().setType(mat);
+                }
+            }
         }
     }
 
