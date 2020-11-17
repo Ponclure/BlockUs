@@ -5,12 +5,10 @@ import com.github.amongus.arena.Doors;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Imposter;
 import com.github.amongus.utility.ItemBuilder;
-import com.github.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.util.BoundingBox;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,60 +30,104 @@ public class SabatogeMenu {
         this.imposter = imp;
         this.canCloseDoor = new HashMap<>();
         this.canSabatogeMain = false;
+        for (Doors doors : game.getArena().getDoors()) {
+            canCloseDoor.put(doors, true);
+        }
     }
 
     private Doors get = null;
+
     public void initDoors() {
-        List<Integer> doorSlots = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15, 16);
+        List<Integer> doorSlots = Arrays.asList(3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17); // Added extra door slots for later support
+        GuiItem sabatogeDoors = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Sabatoge Doors:").get());
+        gui.setItem(1, sabatogeDoors);
         Doors[] doors = game.getArena().getDoors();
         int index = 0;
         for (Doors door : doors) {
             GuiItem item = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + door.getDoorName()).get(), event -> {
-                Doors[] allDoors = game.getArena().getDoors();
-                for (Doors d : allDoors) {
-                    if (gui.getGuiItem(event.getSlot()).getItemStack().getItemMeta().getDisplayName().contains(d.getDoorName())) {
-                        get = d;
-                    }
-                }
-                if (canCloseDoor.get(get)) {
-                    get.shutDoors();
-                    canCloseDoor.put(get, false);
-                    AmongUs.plugin().getServer().getScheduler().scheduleSyncDelayedTask(AmongUs.plugin(), new Runnable() {
-                        public void run() {
-                            canCloseDoor.put(get, true);
+                if (doorSlots.contains(event.getSlot())) {
+                    Doors[] allDoors = game.getArena().getDoors();
+                    for (Doors d : allDoors) {
+                        if (gui.getGuiItem(event.getSlot()).getItemStack().getItemMeta().getDisplayName().contains(d.getDoorName())) {
+                            get = d;
                         }
-                    }, 100);
+                    }
+                    if (canCloseDoor.get(get)) {
+                        get.shutDoors();
+                        canCloseDoor.put(get, false);
+                        AmongUs.plugin().getServer().getScheduler().scheduleSyncDelayedTask(AmongUs.plugin(), new Runnable() {
+                            public void run() {
+                                canCloseDoor.put(get, true);
+                            }
+                        }, 100);
+                    }
+                } else {
+                    event.setCancelled(true);
                 }
             });
             gui.setItem(doorSlots.get(index), item);
+            index++;
         }
     }
 
     public void initMain() {
-        // TODO: Finish Sabatoge GUI
-        List<Integer> doorSlots = Arrays.asList(18, 19, 20, 21, 22, 23);
+        List<Integer> mainSlots = Arrays.asList(21, 22, 23, 24, 25, 26);
+        GuiItem mainSabatoge = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Main Sabatoges:").get());
+        gui.setItem(19, mainSabatoge);
+        int index = 0;
+        for (SabatogeType type : SabatogeType.values()) {
+            GuiItem item = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Sabatoge " + type.getName()).get(), event -> {
+                int slot = event.getSlot();
+                if (mainSlots.contains(slot)) {
+                    String displayName = gui.getGuiItem(slot).getItemStack().getItemMeta().getDisplayName();
+                    if (displayName.contains("Oxygen")) {
+
+                    } else if (displayName.contains("Reactors")) {
+
+                    } else if (displayName.contains("Communications")) {
+
+                    } else if (displayName.contains("Lights")) {
+
+                    }
+                } else {
+                    event.setCancelled(true);
+                }
+            });
+            gui.setItem(mainSlots.get(index), item);
+            index++;
+        }
+    }
+
+    private void sabatogeOxygen() {
+
+    }
+
+    private void sabatogeReactors() {
+
+    }
+
+    private void sabatogeCommunications() {
+
+    }
+
+    private void sabatogeLights() {
+
     }
 
     private enum SabatogeType {
 
-        OXYGEN(30, false), REACTOR_MELTDOWN(30, false),
-        COMMUNICATIONS(30, false), LIGHTS(30, false),
-        DOORS(10, true);
+        OXYGEN("Oxygen"), REACTOR_MELTDOWN("Reactors"),
+        COMMUNICATIONS("Communications"), LIGHTS("Lights"),
+        DOORS("Doors");
 
-        private final int cooldown;
-        private final boolean canUseOther;
+        private final String name;
 
-        private SabatogeType(int seconds, boolean canUseOther) {
-            this.cooldown = seconds * 20;
-            this.canUseOther = canUseOther;
+        private SabatogeType(String name) {
+            this.name = name;
         }
 
-        public int getCooldown() {
-            return cooldown;
-        }
-
-        public boolean isCanUseOther() {
-            return canUseOther;
+        public String getName() {
+            return name;
         }
 
     }
