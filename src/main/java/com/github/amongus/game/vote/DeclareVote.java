@@ -1,6 +1,7 @@
-package com.github.amongus.game;
+package com.github.amongus.game.vote;
 
 import com.github.amongus.AmongUs;
+import com.github.amongus.game.Game;
 import com.github.amongus.player.Participant;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

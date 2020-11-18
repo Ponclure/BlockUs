@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.util.Vector;
 
-import com.github.amongus.arena.Room;
+import com.github.amongus.arena.components.Room;
 import com.github.amongus.game.Game;
 import com.github.amongus.game.tasks.Task;
 import com.github.amongus.player.Participant;

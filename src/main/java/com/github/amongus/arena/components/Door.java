@@ -1,4 +1,4 @@
-package com.github.amongus.arena;
+package com.github.amongus.arena.components;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.utility.Utils;
@@ -8,14 +8,14 @@ import org.bukkit.Material;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
-public class Doors {
+public class Door {
 
     // Used to store the location of a door
 
     private final BoundingBox[] entry;
     private final String doorName;
 
-    public Doors(String name, BoundingBox[] entries) {
+    public Door(String name, BoundingBox[] entries) {
         this.entry = entries;
         this.doorName = name;
     }
