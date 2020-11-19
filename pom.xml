@@ -5,7 +5,7 @@
    <modelVersion>4.0.0</modelVersion>
    <packaging>jar</packaging>
 
-   <groupId>com.github.amongus</groupId>
+   <groupId>com.github.ponclure</groupId>
    <artifactId>among-us</artifactId>
    <version>RELEASE 1.0.0</version>
 
