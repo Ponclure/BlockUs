@@ -3,11 +3,11 @@ package com.github.amongus.game.security;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.amongus.utility.container.Vec3;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
-import org.bukkit.util.Vector;
 
 import com.github.amongus.arena.components.Room;
 import com.github.amongus.game.Game;
@@ -28,7 +28,7 @@ public class Admin extends Task {
 
 		for (Participant p : game.getParticipants().values()) {
 			if (!p.isDead()) {
-				Room r = getClosest(game.getArena().getRooms(), Bukkit.getPlayer(p.getUuid()).getLocation().toVector());
+				Room r = getClosest(game.getArena().getRooms(), Vec3.from(Bukkit.getPlayer(p.getUuid()).getLocation()));
 				if (counts.containsKey(r)) {
 					counts.put(r, counts.get(r) + 1);
 				} else {
@@ -53,7 +53,7 @@ public class Admin extends Task {
 		return counts;
 	}
 
-	private Room getClosest(Room[] rooms, Vector player) {
+	private Room getClosest(Room[] rooms, Vec3 player) {
 		Room closest = null;
 		double current = 0;
 		for (Room r : rooms) {
@@ -68,21 +68,21 @@ public class Admin extends Task {
 
 	@Deprecated
 	@SuppressWarnings("unused")
-	private boolean matchesX(Location loc, Vector btm, Vector top) {
+	private boolean matchesX(Location loc, Vec3 btm, Vec3 top) {
 		int coord = loc.getBlockX();
 		return coord >= btm.getBlockX() && coord <= top.getBlockX();
 	}
 
 	@Deprecated
 	@SuppressWarnings("unused")
-	private boolean matchesY(Location loc, Vector btm, Vector top) {
+	private boolean matchesY(Location loc, Vec3 btm, Vec3 top) {
 		int coord = loc.getBlockY();
 		return coord >= btm.getBlockY() && coord <= top.getBlockY();
 	}
 
 	@Deprecated
 	@SuppressWarnings("unused")
-	private boolean matchesZ(Location loc, Vector btm, Vector top) {
+	private boolean matchesZ(Location loc, Vec3 btm, Vec3 top) {
 		int coord = loc.getBlockZ();
 		return coord >= btm.getBlockZ() && coord <= top.getBlockZ();
 	}

@@ -3,6 +3,7 @@ package com.github.amongus.game.tasks;
 import java.util.Arrays;
 import java.util.List;
 
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,7 +14,6 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.amongus.game.Game;
-import com.github.amongus.utility.ItemBuilder;
 
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -44,15 +44,13 @@ public class Gasoline extends Task implements Listener {
 		tank.setBlockData(cauldronData);
 
 		GuiItem empty = new GuiItem(new ItemStack(Material.AIR));
-		GuiItem fill = new GuiItem(new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE)
-				.withName(ChatColor.GOLD + "Click a Lot to Pour Fuel").get(), event -> {
+		GuiItem fill = ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "Click a Lot to Pour Fuel").asGuiItem(event -> {
 					if (startSlots.contains(event.getSlot())) {
 						clicks++;
 						int rows = clicks / 5;
 						String percent = (25 * rows) + "% Filled";
 						if (clicks % 5 == 0) {
-							GuiItem fuel = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
-									.withName(ChatColor.YELLOW + percent).get());
+							GuiItem fuel = ItemBuilder.from(Material.YELLOW_STAINED_GLASS_PANE).setName(ChatColor.YELLOW + percent).asGuiItem();
 							switch (rows) {
 								case 1:
 									gui.setItem(small, fuel);
@@ -71,7 +69,7 @@ public class Gasoline extends Task implements Listener {
 									gui.setItem(full, fuel);
 									cauldronData.setLevel(7);
 									tank.setBlockData(cauldronData);
-									callComplete((Player)event.getWhoClicked());
+									callComplete((Player)event.getWhoClicked(), gui);
 									break;
 							}
 						} else {
@@ -94,8 +92,7 @@ public class Gasoline extends Task implements Listener {
 						event.setCancelled(true);
 					}
 				});
-		GuiItem start = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE)
-				.withName(ChatColor.GOLD + "Click to Start Pouring Fuel").get(), event -> {
+		GuiItem start = ItemBuilder.from(Material.YELLOW_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "Click to Start Pouring Fuel").asGuiItem(event -> {
 					gui.setItem(Arrays.asList(12, 13, 14, 21, 22, 23, 30, 31, 32), empty);
 					gui.setItem(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8), fill);
 				});

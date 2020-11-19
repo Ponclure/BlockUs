@@ -4,9 +4,9 @@ import com.github.amongus.AmongUs;
 import com.github.amongus.arena.ArenaManager;
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Namespace;
+import com.github.amongus.utility.container.AABB;
+import com.github.amongus.utility.container.Vec3;
 import org.bukkit.Bukkit;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Vector;
 
 import java.io.File;
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public final class ConfigManager {
 
-    private static final Pattern PATTERN = Pattern.compile("[.yml]+$",Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN = Pattern.compile("\\w+\\.yml$",Pattern.CASE_INSENSITIVE);
 
     private final File dataFolder = AmongUs.dataFolder();
     private final ConfigFactory configFactory = AmongUs.configFactory();
@@ -48,15 +48,15 @@ public final class ConfigManager {
                 String displayName = cfg.getString("DisplayName");
                 GameSettings defaultSettings = getSettings(cfg);
                 UUID worldUuid = Bukkit.getWorld(cfg.getString("World")).getUID();
-                Vector min = getVector(config,"Arena.Min.");
-                Vector max = getVector(config,"Arena.Max.");
-                Vector lobbySpawn = getVector(config,"Spawn.Game.");
-                Vector gameSpawn = getVector(config,"Spawn.Lobby.");
+                Vec3 min = getVector(config, "Arena.Min.");
+                Vec3 max = getVector(config,"Arena.Max.");
+                Vec3 lobbySpawn = getVector(config,"Spawn.Game.");
+                Vec3 gameSpawn = getVector(config,"Spawn.Lobby.");
                 manager.loadArena(
                         namespace,
                         displayName,
                         defaultSettings,
-                        BoundingBox.of(min,max),
+                        new AABB(min, max),
                         worldUuid,
                         lobbySpawn,
                         gameSpawn
@@ -65,12 +65,12 @@ public final class ConfigManager {
         }
     }
 
-    private Vector getVector(Config config,String basePath) {
-        double x,y,z;
-        x = config.getDouble(basePath+".X");
-        y = config.getDouble(basePath+".Y");
-        z = config.getDouble(basePath+".Z");
-        return new Vector(x,y,z);
+    private Vec3 getVector(Config config,String basePath) {
+        try {
+            return Vec3.deserialize((byte[]) config.get(basePath));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private GameSettings getSettings(Config config) {

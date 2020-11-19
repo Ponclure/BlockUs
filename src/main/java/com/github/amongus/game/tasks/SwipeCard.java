@@ -40,13 +40,13 @@ public class SwipeCard extends Task {
 		gui.setDefaultClickAction(event -> {
 			if (event.getSlot() == 34) {
 				endTime = System.currentTimeMillis();
-				double seconds = (endTime - startTime) / 1000;
+				double seconds = (endTime - startTime) / 1000.0;
 				if (seconds >= 1 && seconds <= 1.5) {
 					GuiItem finished = new GuiItem(Utils.getSkull(
 							"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTkyZTMxZmZiNTljOTBhYjA4ZmM5ZGMxZmUyNjgwMjAzNWEzYTQ3YzQyZmVlNjM0MjNiY2RiNDI2MmVjYjliNiJ9fX0=",
 							ChatColor.GREEN + "Great Swipe!"));
 					gui.setItem(31, finished);
-					callComplete((Player) event.getWhoClicked());
+					callComplete((Player) event.getWhoClicked(), gui);
 				} else {
 					gui.setItem(28, start);
 					gui.setItem(34, null);

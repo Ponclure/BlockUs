@@ -5,7 +5,6 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.util.UUIDTypeAdapter;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;

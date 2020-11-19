@@ -4,13 +4,9 @@ import com.github.amongus.AmongUs;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Participant;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 // Unfinished -Pulse

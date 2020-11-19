@@ -3,16 +3,15 @@ package com.github.amongus.game.tasks;
 import java.util.Arrays;
 import java.util.List;
 
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.amongus.AmongUs;
 import com.github.amongus.game.Game;
-import com.github.amongus.utility.ItemBuilder;
 import com.github.amongus.utility.Utils;
 
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -30,8 +29,7 @@ public class UploadData extends Task implements Listener {
         super(game, "Upload Data", loc);
         this.gui = new PersistentGui(6, "Upload Data");
 
-        GuiItem border = new GuiItem(
-                new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.DARK_GRAY + "").get());
+        GuiItem border = ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.DARK_GRAY + "").asGuiItem();
         gui.setItem(borderIndex, border);
 
         GuiItem start = new GuiItem(Utils.getSkull(
@@ -43,7 +41,7 @@ public class UploadData extends Task implements Listener {
 
                 @Override
                 public void run() {
-                    gui.setItem(49, new GuiItem(new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.GOLD + "" + counter + "% Completed").get()));
+                    gui.setItem(49, ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "" + counter + "% Completed").asGuiItem());
                     if (counter >= 100) {
                         counter = 100;
                         changeMode(counter);
@@ -56,8 +54,7 @@ public class UploadData extends Task implements Listener {
         });
         gui.setItem(49, start);
 
-        GuiItem uncompleted = new GuiItem(
-                new ItemBuilder(Material.LIGHT_GRAY_STAINED_GLASS_PANE).withName(ChatColor.GRAY + "").get());
+        GuiItem uncompleted = ItemBuilder.from(Material.LIGHT_GRAY_STAINED_GLASS_PANE).setName(ChatColor.GRAY + "").asGuiItem();
         gui.setItem(uncompletedIndex, uncompleted);
 
         setEmpty(gui);
@@ -67,7 +64,7 @@ public class UploadData extends Task implements Listener {
     public void changeMode(double percent) {
         int slots = (int) percent / 20;
         if (percent >= 0 && percent < 50) {
-            GuiItem uncompleted = new GuiItem(new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).withName(ChatColor.GRAY + "").get());
+            GuiItem uncompleted = ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.GRAY + "").asGuiItem();
             gui.setItem(uncompletedIndex, uncompleted);
             for (int i = 0; i < uncompletedIndex.size(); i++) {
                 if (i > slots - 1) {
@@ -76,7 +73,7 @@ public class UploadData extends Task implements Listener {
                 gui.setItem(uncompletedIndex.get(i), uncompleted);
             }
         } else if (percent >= 50 && percent < 100) {
-            GuiItem progress = new GuiItem(new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).withName(ChatColor.YELLOW + "").get());
+            GuiItem progress = ItemBuilder.from(Material.YELLOW_STAINED_GLASS_PANE).setName(ChatColor.YELLOW + "").asGuiItem();
             for (int i = 0; i < uncompletedIndex.size(); i++) {
                 if (i > slots - 1) {
                     break;
@@ -84,7 +81,7 @@ public class UploadData extends Task implements Listener {
                 gui.setItem(uncompletedIndex.get(i), progress);
             }
         } else if (percent >= 100) {
-            GuiItem finished = new GuiItem(new ItemBuilder(Material.GREEN_STAINED_GLASS_PANE).withName(ChatColor.GREEN + "").get());
+            GuiItem finished = ItemBuilder.from(Material.GREEN_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "").asGuiItem();
             for (int i = 0; i < uncompletedIndex.size(); i++) {
                 gui.setItem(uncompletedIndex.get(i), finished);
             }

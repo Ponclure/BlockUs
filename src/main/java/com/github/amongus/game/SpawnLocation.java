@@ -1,26 +1,26 @@
 package com.github.amongus.game;
 
-import org.bukkit.util.Vector;
+import com.github.amongus.utility.container.Vec3;
 
 public class SpawnLocation {
 
-	public Vector[] getSpawnLocations(MapType type) {
+	public Vec3[] getSpawnLocations(MapType type) {
 		switch (type) {
 			case Skeld:
-				return initSpawns(new Vector(-255.5, 76.5, -271), new Vector(-255.5, 76.5, -273),
-						new Vector(-255.5, 76.5, -274), new Vector(-257.5, 76.5, -271), new Vector(-258.5, 76.5, -271),
-						new Vector(-260.5, 76.5, -273), new Vector(-260.5, 76.5, -274), new Vector(-250.5, 76.5, -276),
-						new Vector(-258.5, 76.5, -276), new Vector(-257.5, 76.5, -276));
+				return initSpawns(Vec3.at(-255.5, 76.5, -271), Vec3.at(-255.5, 76.5, -273),
+						Vec3.at(-255.5, 76.5, -274), Vec3.at(-257.5, 76.5, -271), Vec3.at(-258.5, 76.5, -271),
+						Vec3.at(-260.5, 76.5, -273), Vec3.at(-260.5, 76.5, -274), Vec3.at(-250.5, 76.5, -276),
+						Vec3.at(-258.5, 76.5, -276), Vec3.at(-257.5, 76.5, -276));
 			case Mirahq:
-				return initSpawns(new Vector(0, 0, 0));
+				return initSpawns(Vec3.ZERO);
 			case Polus:
-				return initSpawns(new Vector(0, 0, 0));
+				return initSpawns(Vec3.ZERO);
 			default:
 				return null;
 		}
 	}
 
-	public Vector[] initSpawns(Vector... array) {
+	public Vec3[] initSpawns(Vec3... array) {
 		return array;
 	}
 

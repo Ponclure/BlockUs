@@ -1,7 +1,7 @@
 package com.github.amongus.game.tasks;
 
 import com.github.amongus.game.Game;
-import com.github.amongus.utility.ItemBuilder;
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
@@ -25,13 +25,13 @@ public class Manifolds extends Task {
         List<Integer> seq = genRandomSequence();
         int index = 0;
         List<Integer> slots = Arrays.asList(11, 12, 13, 14, 15, 20, 21, 22, 23, 24);
-        GuiItem correct = new GuiItem(new ItemBuilder(Material.GREEN_STAINED_GLASS_PANE).withName(ChatColor.GREEN + "✔").get());
-        GuiItem wrong = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "❌").get());
-        GuiItem unclicked = new GuiItem(new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).withName(ChatColor.GOLD + "" + getSlot(seq.get(index))).get(), event -> {
+        GuiItem correct = ItemBuilder.from(Material.GREEN_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "✔").asGuiItem();
+        GuiItem wrong = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "❌").asGuiItem();
+        GuiItem unclicked = ItemBuilder.from(Material.BLUE_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "" + getSlot(seq.get(index))).asGuiItem(event -> {
             int slot = event.getSlot();
             if (gui.getGuiItem(slot).getItemStack().getItemMeta().getDisplayName().contains(String.valueOf(current + 1))) {
                 if (current == 9) {
-                    callComplete((Player)event.getWhoClicked());
+                    callComplete((Player)event.getWhoClicked(), gui);
                 } else {
                     gui.setItem(slot, correct);
                 }

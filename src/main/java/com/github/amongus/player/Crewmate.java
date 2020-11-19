@@ -1,16 +1,12 @@
 package com.github.amongus.player;
 
-import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import com.github.amongus.game.Game;
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 
 import com.github.amongus.game.tasks.Task;
-
-import net.minecraft.server.v1_16_R2.PacketPlayOutEntityMetadata;
 
 public class Crewmate extends Participant {
 
