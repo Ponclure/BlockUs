@@ -1,5 +1,7 @@
 package com.github.amongus.arena;
 
+import com.github.amongus.arena.components.Door;
+import com.github.amongus.arena.components.Room;
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Utils;
 import org.bukkit.Bukkit;
@@ -18,7 +20,7 @@ public final class Arena {
     private final int hashCode;
     private final Vector gamespawn, lobbySpawn;
     private final Room[] rooms;
-    private final Doors[] doors;
+    private final Door[] doors;
 
     private Arena(Builder builder) {
         this.fallBackSettings = builder.fallBackSettings;
@@ -72,7 +74,7 @@ public final class Arena {
 		return rooms;
 	}
 
-    public Doors[] getDoors() {
+    public Door[] getDoors() {
         return doors;
     }
 
@@ -85,7 +87,7 @@ public final class Arena {
         private int hashCode;
         private Vector gameSpawn, lobbySpawn;
         private Room[] rooms;
-        private Doors[] doors;
+        private Door[] doors;
 
         public Builder setFallBackSettings(GameSettings fallBackSettings) {
             this.fallBackSettings = fallBackSettings;
@@ -127,7 +129,7 @@ public final class Arena {
         	return this;
         }
 
-        public Builder setDoors(Doors... door) {
+        public Builder setDoors(Door... door) {
             this.doors = door;
             return this;
         }

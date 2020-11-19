@@ -1,7 +1,7 @@
 package com.github.amongus.game.sabatoge;
 
 import com.github.amongus.AmongUs;
-import com.github.amongus.arena.Doors;
+import com.github.amongus.arena.components.Door;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Imposter;
 import com.github.amongus.utility.ItemBuilder;
@@ -21,7 +21,7 @@ public class SabatogeMenu {
     private final PersistentGui gui;
     private final Imposter imposter;
 
-    private Map<Doors, Boolean> canCloseDoor;
+    private Map<Door, Boolean> canCloseDoor;
     private boolean canSabatogeMain;
 
     public SabatogeMenu(Game game, Imposter imp) {
@@ -30,24 +30,24 @@ public class SabatogeMenu {
         this.imposter = imp;
         this.canCloseDoor = new HashMap<>();
         this.canSabatogeMain = false;
-        for (Doors doors : game.getArena().getDoors()) {
+        for (Door doors : game.getArena().getDoors()) {
             canCloseDoor.put(doors, true);
         }
     }
 
-    private Doors get = null;
+    private Door get = null;
 
     public void initDoors() {
         List<Integer> doorSlots = Arrays.asList(3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17); // Added extra door slots for later support
         GuiItem sabatogeDoors = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Sabatoge Doors:").get());
         gui.setItem(1, sabatogeDoors);
-        Doors[] doors = game.getArena().getDoors();
+        Door[] doors = game.getArena().getDoors();
         int index = 0;
-        for (Doors door : doors) {
+        for (Door door : doors) {
             GuiItem item = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + door.getDoorName()).get(), event -> {
                 if (doorSlots.contains(event.getSlot())) {
-                    Doors[] allDoors = game.getArena().getDoors();
-                    for (Doors d : allDoors) {
+                    Door[] allDoors = game.getArena().getDoors();
+                    for (Door d : allDoors) {
                         if (gui.getGuiItem(event.getSlot()).getItemStack().getItemMeta().getDisplayName().contains(d.getDoorName())) {
                             get = d;
                         }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.github.amongus.game.Game;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 
 import com.github.amongus.game.tasks.Task;
@@ -16,8 +17,8 @@ public class Crewmate extends Participant {
 	private Set<Task> tasks;
 	private Set<Task> todo; // Todo tasks
 
-	public Crewmate(UUID p) {
-		super(p);
+	public Crewmate(Game game, UUID p, PlayerColor color) {
+		super(game, p, color);
 		this.tasks = new HashSet<>();
 		this.todo = new HashSet<>();
 	}

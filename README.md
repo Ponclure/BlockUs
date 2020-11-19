@@ -14,4 +14,18 @@ A recreation of Among Us but in Minecraft using the Spigot API. More details com
 * Fefo
 * PulseBeat_02
 
-If you are going to fork, we ask to make it open source instead of private. This allows it so we can keep the open source community thriving :)
+#### Terms of Service: (Plugin will be Premium)
+
+**What you can NOT do:**
+  - You may not redistribute the resource after buying it
+  - You may not charge back or give a refund after purchasing.
+  - You may not claim any of the code written here as yours. 
+  - You may not use any of the code for your own public projects unless given consent from all members of Ponclure.
+
+**What you CAN do:**
+  - Fork the plugin code and develop it for only private uses and not commerical uses. (No selling allowed unless permission given)
+  - Compile the plugin
+  - Report bugs and glitches
+  - Develop new features to add to the plugin or to your own private plugin
+
+- By buying or developing with this plugin you agree to the Terms of Service.

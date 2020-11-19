@@ -1,5 +1,6 @@
 package com.github.amongus.player;
 
+import com.github.amongus.game.Game;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.util.UUIDTypeAdapter;
@@ -15,6 +16,8 @@ import java.util.UUID;
 
 public class Participant {
 
+    private final Game game;
+
     private final UUID uuid;
     private final String nick;
     private final PlayerColor color;
@@ -22,7 +25,8 @@ public class Participant {
     private boolean isDead;
     private boolean isDisconnected;
 
-    public Participant(UUID player, PlayerColor color) {
+    public Participant(Game game, UUID player, PlayerColor color) {
+        this.game = game;
         this.uuid = player;
         this.nick = Bukkit.getPlayer(uuid).getName();
         this.color = color;
