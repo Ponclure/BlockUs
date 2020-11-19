@@ -1,9 +1,10 @@
 package com.github.amongus.utility.container;
 
 import com.github.amongus.utility.ByteSerializable;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 
 public final class Vec3 implements ByteSerializable {
 
@@ -26,6 +27,14 @@ public final class Vec3 implements ByteSerializable {
 		return new Vec3(x, y, z);
 	}
 
+	public static @NotNull Vec3 from(@NotNull final Vector that) {
+		return Vec3.at(that.getX(), that.getY(), that.getZ());
+	}
+
+	public static @NotNull Vec3 from(@NotNull final Location location) {
+		return Vec3.at(location.getX(), location.getY(), location.getZ());
+	}
+
 	private final double x;
 	private final double y;
 	private final double z;
@@ -38,6 +47,10 @@ public final class Vec3 implements ByteSerializable {
 		this.bakedHashCode = hashCodeBakery();
 	}
 
+	public Location toLocation(@NotNull final World world) {
+		return new Location(world, this.x, this.y, this.z);
+	}
+
 	public double getX() {
 		return this.x;
 	}
@@ -48,6 +61,18 @@ public final class Vec3 implements ByteSerializable {
 
 	public double getZ() {
 		return this.z;
+	}
+
+	public int getBlockX() {
+		return (int) Math.floor(this.x);
+	}
+
+	public int getBlockY() {
+		return (int) Math.floor(this.y);
+	}
+
+	public int getBlockZ() {
+		return (int) Math.floor(this.z);
 	}
 
 	public double length() {
@@ -118,33 +143,25 @@ public final class Vec3 implements ByteSerializable {
 	}
 
 	public Vec3 cross(final Vec3 that) {
-		return Vec3.at(this.y * that.z - this.z * that.y,
-		               this.z * that.x - this.x * that.z,
+		return Vec3.at(this.y * that.z - this.z * that.y, this.z * that.x - this.x * that.z,
 		               this.x * that.y - this.y * that.x);
 	}
 
 	public Vec3 abs() {
-		return Vec3.at(Math.abs(this.x),
-		               Math.abs(this.y),
-		               Math.abs(this.z));
+		return Vec3.at(Math.abs(this.x), Math.abs(this.y), Math.abs(this.z));
 	}
 
 	public Vec3 min(final Vec3 that) {
-		return Vec3.at(Math.min(this.x, that.x),
-		               Math.min(this.y, that.y),
-		               Math.min(this.z, that.z));
+		return Vec3.at(Math.min(this.x, that.x), Math.min(this.y, that.y), Math.min(this.z, that.z));
 	}
 
 	public Vec3 max(final Vec3 that) {
-		return Vec3.at(Math.max(this.x, that.x),
-		               Math.max(this.y, that.y),
-		               Math.max(this.z, that.z));
+		return Vec3.at(Math.max(this.x, that.x), Math.max(this.y, that.y), Math.max(this.z, that.z));
 	}
 
 	public boolean isInAABB(final AABB aabb) {
-		return this.x >= aabb.getOrigin().x && this.x <= aabb.getOposite().x &&
-		       this.y >= aabb.getOrigin().y && this.y <= aabb.getOposite().y &&
-		       this.z >= aabb.getOrigin().z && this.z <= aabb.getOposite().z;
+		return this.x >= aabb.getOffset().x && this.x <= aabb.getOposite().x && this.y >= aabb.getOffset().y &&
+		       this.y <= aabb.getOposite().y && this.z >= aabb.getOffset().z && this.z <= aabb.getOposite().z;
 	}
 
 	@Override
@@ -182,7 +199,7 @@ public final class Vec3 implements ByteSerializable {
 		return result;
 	}
 
-	public static Vec3 deserialize(final byte[] bytes) throws IOException, ClassNotFoundException {
+	public static Vec3 deserialize(final byte[] bytes) throws Exception {
 		return ByteSerializable.deserialize(bytes, Vec3.class);
 	}
 }

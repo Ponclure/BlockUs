@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import com.github.amongus.game.Game;
 import com.github.amongus.sound.SpecialSoundEffects;
-import com.github.amongus.utility.ItemBuilder;
 
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -29,10 +29,8 @@ public class Shields extends Task {
 
 		this.gui = new PersistentGui(5, "Shields");
 
-		GuiItem fine = new GuiItem(
-				new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).withName(ChatColor.GREEN + "I'm Good").get());
-		GuiItem broken = new GuiItem(
-				new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.DARK_RED + "Click Me!").get(),
+		GuiItem fine = ItemBuilder.from(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "I'm Good").asGuiItem();
+		GuiItem broken = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.DARK_RED + "Click Me!").asGuiItem(
 				event -> {
 					int slot = event.getSlot();
 					if (all.contains(slot)) {
@@ -43,7 +41,7 @@ public class Shields extends Task {
 					if (allEnabled()) {
 						Player p = (Player)event.getWhoClicked();
 						p.playSound(p.getLocation(), SpecialSoundEffects.TASK_COMPLETE.getName(), 1.0F, 1.0F);
-						callComplete(p);
+						callComplete(p, gui);
 					}
 				});
 		for (int index : random) {

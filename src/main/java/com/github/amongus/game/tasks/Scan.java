@@ -1,27 +1,20 @@
 package com.github.amongus.game.tasks;
 
 import com.github.amongus.AmongUs;
-import com.github.amongus.AmongUsPlugin;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Participant;
 import com.github.amongus.utility.Utils;
-import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.BoundingBox;
 
 import java.util.Map;
 import java.util.Random;
@@ -101,7 +94,7 @@ public class Scan extends Task implements Listener {
                         break;
                     case 5:
                         state = ScanState.FINISHED;
-                        callComplete(p);
+                        callComplete(p, null);
                         break;
                 }
                 p.getWorld().spawnParticle(Particle.WHITE_ASH, scanArea, 10);

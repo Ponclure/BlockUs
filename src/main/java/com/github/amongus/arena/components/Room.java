@@ -1,15 +1,15 @@
 package com.github.amongus.arena.components;
 
-import org.bukkit.util.Vector;
+import com.github.amongus.utility.container.Vec3;
 
 public class Room {
 	
 	// Used to store the exact coordinates of a Room (which may be an irregular shape)
 	
 	private final String name;
-	private final Vector middle;
+	private final Vec3 middle;
 	
-	public Room(String name, Vector vec) {
+	public Room(String name, Vec3 vec) {
 		this.name = name;
 		this.middle = vec;
 	}	
@@ -18,7 +18,7 @@ public class Room {
 		return name;
 	}
 
-	public Vector getMiddle() {
+	public Vec3 getMiddle() {
 		return middle;
 	}
 

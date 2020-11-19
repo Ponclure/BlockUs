@@ -4,7 +4,7 @@ import com.github.amongus.AmongUs;
 import com.github.amongus.arena.components.Door;
 import com.github.amongus.game.Game;
 import com.github.amongus.player.Imposter;
-import com.github.amongus.utility.ItemBuilder;
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
@@ -39,12 +39,12 @@ public class SabatogeMenu {
 
     public void initDoors() {
         List<Integer> doorSlots = Arrays.asList(3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17); // Added extra door slots for later support
-        GuiItem sabatogeDoors = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Sabatoge Doors:").get());
+        GuiItem sabatogeDoors = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "Sabatoge Doors:").asGuiItem();
         gui.setItem(1, sabatogeDoors);
         Door[] doors = game.getArena().getDoors();
         int index = 0;
         for (Door door : doors) {
-            GuiItem item = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + door.getDoorName()).get(), event -> {
+            GuiItem item = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + door.getDoorName()).asGuiItem(event -> {
                 if (doorSlots.contains(event.getSlot())) {
                     Door[] allDoors = game.getArena().getDoors();
                     for (Door d : allDoors) {
@@ -72,11 +72,11 @@ public class SabatogeMenu {
 
     public void initMain() {
         List<Integer> mainSlots = Arrays.asList(21, 22, 23, 24, 25, 26);
-        GuiItem mainSabatoge = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Main Sabatoges:").get());
+        GuiItem mainSabatoge = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "Main Sabatoges:").asGuiItem();
         gui.setItem(19, mainSabatoge);
         int index = 0;
         for (SabatogeType type : SabatogeType.values()) {
-            GuiItem item = new GuiItem(new ItemBuilder(Material.RED_STAINED_GLASS_PANE).withName(ChatColor.RED + "Sabatoge " + type.getName()).get(), event -> {
+            GuiItem item = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "Sabatoge " + type.getName()).asGuiItem(event -> {
                 int slot = event.getSlot();
                 if (mainSlots.contains(slot)) {
                     String displayName = gui.getGuiItem(slot).getItemStack().getItemMeta().getDisplayName();

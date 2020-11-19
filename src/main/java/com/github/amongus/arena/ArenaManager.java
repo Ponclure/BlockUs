@@ -2,8 +2,8 @@ package com.github.amongus.arena;
 
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Namespace;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Vector;
+import com.github.amongus.utility.container.AABB;
+import com.github.amongus.utility.container.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,10 +20,10 @@ public final class ArenaManager {
     public Arena loadArena(Namespace namespace,
                            String displayName,
                            GameSettings defaultSettings,
-                           BoundingBox boundingBox,
+                           AABB boundingBox,
                            UUID world,
-                           Vector lobbySpawn,
-                           Vector gameSpawn) {
+                           Vec3 lobbySpawn,
+                           Vec3 gameSpawn) {
         String name = namespace.toString();
         if (arenaMap.get(name) != null) {
             throw new IllegalStateException("An arena with the name " + name + " is already registered.");
