@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 // TOOD: Finish Venting
-public class Imposter extends Participant implements Listener {
+public class Imposter extends Participant {
 	
 	private Set<Task> fakeTasks; 
 	private Set<Crewmate> killedCrewmates; 
@@ -21,17 +21,6 @@ public class Imposter extends Participant implements Listener {
 		super(game, p, color);
 		this.fakeTasks = new HashSet<>();
 		this.killedCrewmates = new HashSet<>();
-	}
-
-	@EventHandler
-	public void onMove(PlayerMoveEvent event) {
-		Player player = event.getPlayer();
-		if (player.getUniqueId() != getUuid()) {
-			return;
-		}
-
-
-		if (player.getLocation().distance())
 	}
 	
 	public Set<Task> getFakeTasks() {

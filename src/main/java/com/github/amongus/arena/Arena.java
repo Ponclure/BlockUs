@@ -2,6 +2,7 @@ package com.github.amongus.arena;
 
 import com.github.amongus.arena.components.Door;
 import com.github.amongus.arena.components.Room;
+import com.github.amongus.arena.components.Vent;
 import com.github.amongus.game.GameSettings;
 import com.github.amongus.utility.Utils;
 import com.github.amongus.utility.container.AABB;
@@ -21,6 +22,7 @@ public final class Arena {
     private final Vec3 gamespawn, lobbySpawn;
     private final Room[] rooms;
     private final Door[] doors;
+    private final Vent[] vents;
 
     private Arena(Builder builder) {
         this.fallBackSettings = builder.fallBackSettings;
@@ -32,6 +34,7 @@ public final class Arena {
         this.gamespawn = builder.gameSpawn;
         this.rooms = builder.rooms;
         this.doors = builder.doors;
+        this.vents = builder.vents;
     }
 
     public GameSettings getFallBackSettings() {
@@ -78,6 +81,10 @@ public final class Arena {
         return doors;
     }
 
+    public Vent[] getVents() {
+        return vents;
+    }
+
 	static class Builder {
 		
 		private GameSettings fallBackSettings;
@@ -88,6 +95,7 @@ public final class Arena {
         private Vec3 gameSpawn, lobbySpawn;
         private Room[] rooms;
         private Door[] doors;
+        private Vent[] vents;
 
         public Builder setFallBackSettings(GameSettings fallBackSettings) {
             this.fallBackSettings = fallBackSettings;
@@ -131,6 +139,11 @@ public final class Arena {
 
         public Builder setDoors(Door... door) {
             this.doors = door;
+            return this;
+        }
+
+        public Builder setVents(Vent... vent) {
+            this.vents = vents;
             return this;
         }
 

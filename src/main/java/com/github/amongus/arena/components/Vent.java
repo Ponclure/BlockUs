@@ -10,4 +10,8 @@ public class Vent {
         this.vent = b;
     }
 
+    public Block getVent() {
+        return vent;
+    }
+
 }
