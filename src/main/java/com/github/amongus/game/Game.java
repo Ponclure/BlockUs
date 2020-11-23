@@ -1,14 +1,13 @@
 package com.github.amongus.game;
 
+import com.github.amongus.player.Imposter;
 import com.github.amongus.player.Participant;
 import com.github.amongus.utility.GameUtils;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Game extends ArenaHolder {
 
@@ -59,6 +58,10 @@ public class Game extends ArenaHolder {
 
     public GameSettings getSettings() {
         return settings;
+    }
+
+    public Set<Imposter> getImposters() {
+        return participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter)p).collect(Collectors.toSet());
     }
 
 }

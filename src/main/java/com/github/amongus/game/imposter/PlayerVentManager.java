@@ -29,20 +29,9 @@ public class PlayerVentManager implements Listener {
     private final Game game;
     private final Set<Imposter> venting;
 
-    // In Progress -Pulse
     public PlayerVentManager(Game game) {
         this.game = game;
-        this.venting = getImposters();
-        AmongUs.plugin().getServer().getPluginManager().registerEvent(AmongUs.plugin(), this);
-    }
-
-    public HashSet<Imposter> getImposters() {
-        Set<Imposter> imposters = new HashSet<>();
-        for (Participant participant : game.getParticipants().values()) {
-            if (participant.isImposter()) {
-                imposters.add((Imposter)participant);
-            }
-        }
+        this.venting = new HashSet<>();
     }
 
     @EventHandler

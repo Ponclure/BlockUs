@@ -9,7 +9,9 @@ import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +114,21 @@ public class SabatogeMenu {
 
     private void sabatogeLights() {
 
+    }
+
+    private void makeScreenRed(Player player, int warningBlocks) {
+//        EntityPlayer nmsPlayer = ((CraftPlayer) player).getHandle();
+//        WorldBorder playerWorldBorder = nmsPlayer.world.getWorldBorder();
+//        PacketPlayOutWorldBorder worldBorder = new PacketPlayOutWorldBorder(playerWorldBorder, PacketPlayOutWorldBorder.EnumWorldBorderAction.SET_WARNING_BLOCKS);
+//        try {
+//            Field field = worldBorder.getClass().getDeclaredField("i");
+//            field.setAccessible(true);
+//            field.setInt(worldBorder, warningBlocks);
+//            field.setAccessible(!field.isAccessible());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        nmsPlayer.playerConnection.sendPacket(worldBorder);
     }
 
     private enum SabatogeType {
