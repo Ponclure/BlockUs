@@ -14,7 +14,7 @@ A recreation of Among Us but in Minecraft using the Spigot API. More details com
 * Fefo
 * PulseBeat_02
 
-#### Terms of Service: (Plugin will be Premium)
+#### Terms of Service:
 
 **What you can NOT do:**
   - You may not redistribute the resource after buying it
