@@ -1,6 +1,6 @@
 name: AmongUs
-main: com.github.amongus
+main: com.github.ponclure.amongus.AmongUs
 version: 1.0.0
 description: Among Us in Minecraft
-author: PulseBeat_02, Conclure
+author: PulseBeat_02, Conclure, Fefo6644
 api-version: 1.16

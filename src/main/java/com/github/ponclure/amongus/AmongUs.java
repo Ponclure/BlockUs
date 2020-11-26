@@ -15,27 +15,27 @@ import java.util.logging.Logger;
 
 public final class AmongUs {
 
-    public static boolean isAvailable;
-    private static final AmongUsPlugin PLUGIN;
-    private static final ArenaManager ARENA_MANAGER;
-    private static final GameManager GAME_MANAGER;
-    private static final Logger LOGGER;
-    private static final File DATA_FOLDER;
-    private static final ConfigFactory CONFIG_FACTORY;
-    private static final ConfigManager CONFIG_MANAGER;
+    public boolean isAvailable;
+    private final AmongUsPlugin PLUGIN;
+    private final ArenaManager ARENA_MANAGER;
+    private final GameManager GAME_MANAGER;
+    private final Logger LOGGER;
+    private final File DATA_FOLDER;
+    private final ConfigFactory CONFIG_FACTORY;
+    private final ConfigManager CONFIG_MANAGER;
 
-    private static CameraManager CAMERA_MANAGER;
+    private CameraManager CAMERA_MANAGER;
 
-    static {
-        PLUGIN = JavaPlugin.getPlugin(AmongUsPlugin.class);
-        LOGGER = PLUGIN.getLogger();
-        DATA_FOLDER = PLUGIN.getDataFolder();
-        CONFIG_FACTORY = new ConfigFactory();
-        ARENA_MANAGER = new ArenaManager();
-        CONFIG_MANAGER = new ConfigManager();
-        GAME_MANAGER = new GameManager();
+    public AmongUs(AmongUsPlugin plugin) {
+        this.PLUGIN = plugin;
+        this.LOGGER = PLUGIN.getLogger();
+        this.DATA_FOLDER = PLUGIN.getDataFolder();
+        this.CONFIG_FACTORY = new ConfigFactory();
+        this.ARENA_MANAGER = new ArenaManager();
+        this.CONFIG_MANAGER = new ConfigManager();
+        this.GAME_MANAGER = new GameManager();
         try {
-            CAMERA_MANAGER = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
+            this.CAMERA_MANAGER = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidConfigurationException e) {
@@ -43,40 +43,44 @@ public final class AmongUs {
         }
     }
 
-    public static AmongUsPlugin plugin() {
+    public AmongUsPlugin plugin() {
         return checkAvailability(PLUGIN);
     }
 
-    public static ArenaManager arenaManager() {
+    public ArenaManager arenaManager() {
         return checkAvailability(ARENA_MANAGER);
     }
 
-    public static GameManager gameManager() {
+    public GameManager gameManager() {
         return checkAvailability(GAME_MANAGER);
     }
 
-    public static Logger logger() {
+    public Logger logger() {
         return checkAvailability(LOGGER);
     }
 
-    public static File dataFolder() {
+    public File dataFolder() {
         return checkAvailability(DATA_FOLDER);
     }
 
-    public static ConfigFactory configFactory() {
+    public ConfigFactory configFactory() {
         return checkAvailability(CONFIG_FACTORY);
     }
 
-    public static ConfigManager configManager() {
+    public ConfigManager configManager() {
         return checkAvailability(CONFIG_MANAGER);
     }
 
-    public static CameraManager getCameraManager() {
+    public CameraManager getCameraManager() {
         return checkAvailability(CAMERA_MANAGER);
     }
 
-    private static <T> T checkAvailability(T t) {
-        if (!isAvailable) throw new IllegalStateException("Among Us hasn't been loaded yet.");
+    public boolean getAvailability() { return isAvailable; }
+
+    public void setAvailability(boolean b) { this.isAvailable = b; }
+
+    private <T> T checkAvailability(T t) {
+        if (!getAvailability()) throw new IllegalStateException("Among Us hasn't been loaded yet.");
         return t;
     }
 

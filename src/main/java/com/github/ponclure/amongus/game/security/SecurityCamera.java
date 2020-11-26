@@ -22,16 +22,17 @@ public class SecurityCamera implements Listener {
     private final String name;
 
     public SecurityCamera(Location cameraLoc, Location viewLoc, String name) {
+        AmongUs au = AmongUsPlugin.getAmongUs();
         this.cameraLoc = cameraLoc;
         this.viewLoc = viewLoc;
-        this.stand = (ArmorStand) AmongUsPlugin.getWorld().spawnEntity(viewLoc, EntityType.ARMOR_STAND);
+        this.stand = (ArmorStand) cameraLoc.getWorld().spawnEntity(viewLoc, EntityType.ARMOR_STAND);
         this.stand.setVisible(false);
         this.stand.setGravity(false);
         this.stand.setCustomName(name);
         this.name = name;
-        this.manager = AmongUs.getCameraManager();
+        this.manager = au.getCameraManager();
         this.manager.addCamera(cameraLoc, name);
-        AmongUs.plugin().getServer().getPluginManager().registerEvents(this, AmongUs.plugin());
+        au.plugin().getServer().getPluginManager().registerEvents(this, au.plugin());
     }
 
     @EventHandler

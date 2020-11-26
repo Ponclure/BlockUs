@@ -37,9 +37,9 @@ public abstract class Task implements Listener {
 	public Task(final Game game, final String name, final Location loc) {
 		this.game = game;
 		this.name = name;
-		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
+		Bukkit.getPluginManager().registerEvents(this, AmongUsPlugin.getAmongUs().plugin());
 
-		this.stand = (ArmorStand) AmongUsPlugin.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+		this.stand = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 		this.stand.setVisible(false);
 		this.stand.setGravity(false);
 

@@ -10,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PlayerTransportation {
 	
-	private Location LOCATION = AmongUsPlugin.getWorld().getSpawnLocation();
+	private Location LOCATION = Bukkit.getWorld("skeld").getSpawnLocation();
 	
 	public boolean sendPlayer(Player p) {
 		

@@ -7,29 +7,32 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AmongUsPlugin extends JavaPlugin {
 
-	private static World WORLD;
-	
-	public static World getWorld() {
-		return WORLD;
-	}
-	
-	public static void setWorld(World w) {
-		WORLD = w;
-	}
+	private static AmongUs init;
 
 	@Override
 	public void onEnable() {
-		AmongUs.isAvailable = true;
+
 		Logger logger = getLogger();
+
 		long startTime = System.nanoTime();
 		logger.info("Loading...");
-		AmongUs.configManager().load();
+
+		init = new AmongUs(this);
+		init.setAvailability(true);
+		init.configManager().load();
+
 		long totalTime = System.nanoTime() - startTime;
 		logger.info("Loading complete. Took " + totalTime + " (ns)");
+
 	}
 
 	@Override
 	public void onDisable() {
-		AmongUs.isAvailable = false;
+		init.setAvailability(false);
 	}
+
+	public static AmongUs getAmongUs() {
+		return init;
+	}
+
 }

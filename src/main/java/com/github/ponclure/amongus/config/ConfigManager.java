@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.config;
 
 import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.arena.ArenaManager;
 import com.github.ponclure.amongus.game.GameSettings;
 import com.github.ponclure.amongus.utility.Namespace;
@@ -17,8 +18,9 @@ public final class ConfigManager {
 
     private static final Pattern PATTERN = Pattern.compile("\\w+\\.yml$", Pattern.CASE_INSENSITIVE);
 
-    private final File dataFolder = AmongUs.dataFolder();
-    private final ConfigFactory configFactory = AmongUs.configFactory();
+    private final AmongUs au = AmongUsPlugin.getAmongUs();
+    private final File dataFolder = au.dataFolder();
+    private final ConfigFactory configFactory = au.configFactory();
     private final Config defaultConfig;
 
     public ConfigManager() {
@@ -26,13 +28,13 @@ public final class ConfigManager {
     }
 
     public void load() {
-        Logger logger = AmongUs.logger();
+        Logger logger = au.logger();
         defaultConfig.loadAsync(cfg -> {},exc -> logger.info("Couldn't load config: " + exc.toString()));
         loadArenas();
     }
 
     private void loadArenas() {
-        ArenaManager manager = AmongUs.arenaManager();
+        ArenaManager manager = au.arenaManager();
         for (File file : dataFolder.listFiles()) {
             if (file.isDirectory()) {
                 continue;

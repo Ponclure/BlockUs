@@ -16,18 +16,20 @@ import com.github.ponclure.amongus.AmongUsPlugin;
 
 public class WorldManager {
 
+	private final AmongUs au = AmongUsPlugin.getAmongUs();
 	public void worldIntialization() throws URISyntaxException, IOException {
 
 		// Among Us world and texture pack by PheonixSC
 		
 		File world = new File(getClass().getClassLoader().getResource("skeld").toURI());
-		
+
+
 		if (!worldExists()) {
 
-			AmongUs.logger().info("World Folder Empty or Not Found, Generating New World");
+			au.logger().info("World Folder Empty or Not Found, Generating New World");
 			
 			File[] worldContents = world.listFiles();
-			File dir = new File(AmongUs.dataFolder(), "skeld");
+			File dir = new File(au.dataFolder(), "skeld");
 
 			Stack<File> files = new Stack<>();
 			for (int i = 0; i < worldContents.length; i++) {
@@ -55,18 +57,18 @@ public class WorldManager {
 			}
 
 		} else {
-			
-			AmongUs.logger().info("World Folder Found");
+
+			au.logger().info("World Folder Found");
 			
 		}
 		
 		WorldCreator creator = new WorldCreator(world.getAbsolutePath());
-		AmongUsPlugin.setWorld(creator.createWorld());
+		creator.createWorld();
 
 	}
 
 	public boolean worldExists() {
-		File dir = new File(AmongUs.dataFolder(), "skeld");
+		File dir = new File(au.dataFolder(), "skeld");
 		if (!dir.exists() || dir.listFiles().length == 0) {
 			return false;
 		}
