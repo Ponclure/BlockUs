@@ -35,6 +35,7 @@ public class CalibrateDistributor extends Task {
         click.add(28);
         click.add(31);
         click.add(34);
+        init();
     }
 
     private void init() {
@@ -62,7 +63,7 @@ public class CalibrateDistributor extends Task {
                     slot++;
                 }
             }
-        }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 10l, 10l);
+        }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 10l, Long.MAX_VALUE);
         setEmpty(gui);
     }
 
