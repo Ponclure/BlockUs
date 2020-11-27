@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.game.tasks;
 
 import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.utility.Utils;
@@ -22,6 +23,7 @@ import java.util.UUID;
 
 public class Scan extends Task implements Listener {
 
+    private final AmongUs au = AmongUsPlugin.getAmongUs();
     private final Location scanArea;
     private final Participant player;
     private ScanState state;
@@ -35,7 +37,7 @@ public class Scan extends Task implements Listener {
         this.scanArea = scanArea;
         this.player = p;
         this.state = ScanState.NOT_STARTED;
-        AmongUs.plugin().getServer().getPluginManager().registerEvents(this, AmongUs.plugin());
+        au.plugin().getServer().getPluginManager().registerEvents(this, au.plugin());
     }
 
 /*    @EventHandler
@@ -101,7 +103,7 @@ public class Scan extends Task implements Listener {
                 sec++;
             }
         };
-        runnable.runTaskTimer(AmongUs.plugin(), 20, 220);
+        runnable.runTaskTimer(au.plugin(), 20, 220);
     }
 
     public String getRandomHealth() {

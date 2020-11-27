@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.github.ponclure.amongus.AmongUsPlugin;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -32,7 +33,7 @@ public class Wiring extends Task implements Listener {
 	public Wiring(Game game, Location loc) {
 
 		super(game, "Fix Wiring", loc);
-		Bukkit.getPluginManager().registerEvents(this, AmongUs.plugin());
+		Bukkit.getPluginManager().registerEvents(this, AmongUsPlugin.getAmongUs().plugin());
 
 		this.gui = new PersistentGui(4, "Fix Wiring");
 

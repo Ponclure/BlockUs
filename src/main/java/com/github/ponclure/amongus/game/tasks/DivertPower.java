@@ -17,13 +17,11 @@ import java.util.Random;
 
 public class DivertPower extends Task {
 
-    private final Game game;
     private final PersistentGui gui;
     private final int index;
 
     public DivertPower(Game game, Location loc) {
         super(game, "Divert Power", loc);
-        this.game = game;
         this.gui = new PersistentGui(5, "Divert Power");
         this.index = new Random().nextInt(6);
 

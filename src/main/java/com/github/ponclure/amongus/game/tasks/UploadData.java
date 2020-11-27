@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
@@ -50,7 +51,7 @@ public class UploadData extends Task implements Listener {
                     counter += 17 / 6;
                     changeMode(counter);
                 }
-            }.runTaskTimer(AmongUs.plugin(), 1, 170);
+            }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 1, 170);
         });
         gui.setItem(49, start);
 
