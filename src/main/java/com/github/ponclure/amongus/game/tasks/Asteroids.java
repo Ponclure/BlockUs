@@ -25,14 +25,12 @@ import java.util.*;
 
 public class Asteroids extends Task {
 
-    private final Player participant;
     private final ItemStack tool;
     private int count;
     private Set<Location> locations;
 
-    public Asteroids(Game game, Location loc, Player p) {
-        super(game, "Asteroids", loc);
-        this.participant = p;
+    public Asteroids(Game game, Location loc, Participant p) {
+        super(game, "Asteroids", loc, p);
         this.locations = new HashSet<>();
         this.tool = getDestroyer();
         createBox();
@@ -40,7 +38,7 @@ public class Asteroids extends Task {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (event.getPlayer().getUniqueId() != participant.getUniqueId()) {
+        if (event.getPlayer().getUniqueId() != getHolder().getUuid()) {
             return;
         }
         if (event.getBlock().getType() != Material.COBBLESTONE) {
@@ -51,6 +49,8 @@ public class Asteroids extends Task {
     }
 
     public void startAsteroids() {
+
+        Player participant = Bukkit.getPlayer(getHolder().getUuid());
 
         PlayerInventory inv = participant.getInventory();
         inv.addItem(tool);
@@ -133,6 +133,7 @@ public class Asteroids extends Task {
     }
 
     public void teleport() {
+        Player participant = Bukkit.getPlayer(getHolder().getUuid());
         participant.teleport(new Location(participant.getWorld(), 505, participant.getLocation().getY(), 505));
     }
 
@@ -147,6 +148,7 @@ public class Asteroids extends Task {
 
     public void setSide(Facement face) {
         BoundingBox box = face.getRegion();
+        Player participant = Bukkit.getPlayer(getHolder().getUuid());
         for (int x = (int) box.getMinX(); x < box.getMaxX(); x++) {
             for (int y = (int) box.getMinY(); y < box.getMaxY(); y++) {
                 for (int z = (int) box.getMinZ(); z < box.getMaxZ(); z++) {

@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.game.tasks;
 
 import com.github.ponclure.amongus.game.Game;
+import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -20,8 +21,8 @@ public class DivertPower extends Task {
     private final PersistentGui gui;
     private final int index;
 
-    public DivertPower(Game game, Location loc) {
-        super(game, "Divert Power", loc);
+    public DivertPower(Game game, Location loc, Participant p) {
+        super(game, "Divert Power", loc, p);
         this.gui = new PersistentGui(5, "Divert Power");
         this.index = new Random().nextInt(6);
 

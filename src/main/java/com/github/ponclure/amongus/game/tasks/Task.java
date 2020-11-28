@@ -14,6 +14,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -31,18 +32,18 @@ public abstract class Task implements Listener {
 	private final Game game;
 	private final String name;
 	private final ArmorStand stand;
+	private final Participant holder;
 
 	public abstract void execute(PlayerArmorStandManipulateEvent e);
 
-	public Task(final Game game, final String name, final Location loc) {
+	public Task(final Game game, final String name, final Location loc, final Participant holder) {
 		this.game = game;
 		this.name = name;
-		Bukkit.getPluginManager().registerEvents(this, AmongUsPlugin.getAmongUs().plugin());
-
 		this.stand = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
-		this.stand.setVisible(false);
-		this.stand.setGravity(false);
-
+		stand.setVisible(false);
+		stand.setGravity(false);
+		this.holder = holder;
+		Bukkit.getPluginManager().registerEvents(this, AmongUsPlugin.getAmongUs().plugin());
 	}
 
 	@EventHandler
@@ -93,5 +94,9 @@ public abstract class Task implements Listener {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public Participant getHolder() {
+		return this.holder;
 	}
 }

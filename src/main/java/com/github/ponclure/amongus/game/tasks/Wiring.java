@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.github.ponclure.amongus.AmongUsPlugin;
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -30,9 +31,9 @@ public class Wiring extends Task implements Listener {
 	private Color lastColor;
 	private int lastSlot;
 
-	public Wiring(Game game, Location loc) {
+	public Wiring(Game game, Location loc, Participant p) {
 
-		super(game, "Fix Wiring", loc);
+		super(game, "Fix Wiring", loc, p);
 		Bukkit.getPluginManager().registerEvents(this, AmongUsPlugin.getAmongUs().plugin());
 
 		this.gui = new PersistentGui(4, "Fix Wiring");

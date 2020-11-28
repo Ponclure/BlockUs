@@ -3,6 +3,7 @@ package com.github.ponclure.amongus.game.tasks;
 import java.util.Arrays;
 import java.util.List;
 
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,9 +27,9 @@ public class Gasoline extends Task implements Listener {
 
 	private int clicks = 0;
 
-	public Gasoline(Game game, Location loc, Block b) {
+	public Gasoline(Game game, Location loc, Block b, Participant p) {
 
-		super(game, "Gasoline", loc);
+		super(game, "Gasoline", loc, p);
 
 		this.tank = b;
 		this.gui = new PersistentGui(3, "Fill Gasoline");

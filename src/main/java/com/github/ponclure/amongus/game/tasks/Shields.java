@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.sound.SpecialSoundEffects;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
@@ -24,8 +25,8 @@ public class Shields extends Task {
 	private final List<Integer> all = Arrays.asList(12, 13, 14, 21, 22, 23, 32, 33, 34);
 	private final List<Integer> random = genRandomCells();
 
-	public Shields(Game game, Location loc) {
-		super(game, "Shields", loc);
+	public Shields(Game game, Location loc, Participant p) {
+		super(game, "Shields", loc, p);
 
 		this.gui = new PersistentGui(5, "Shields");
 
@@ -39,9 +40,9 @@ public class Shields extends Task {
 						event.setCancelled(true);
 					}
 					if (allEnabled()) {
-						Player p = (Player)event.getWhoClicked();
-						p.playSound(p.getLocation(), SpecialSoundEffects.TASK_COMPLETE.getName(), 1.0F, 1.0F);
-						callComplete(p, gui);
+						Player player = (Player)event.getWhoClicked();
+						player.playSound(player.getLocation(), SpecialSoundEffects.TASK_COMPLETE.getName(), 1.0F, 1.0F);
+						callComplete(player, gui);
 					}
 				});
 		for (int index : random) {

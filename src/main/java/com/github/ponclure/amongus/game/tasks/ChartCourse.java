@@ -1,5 +1,6 @@
 package com.github.ponclure.amongus.game.tasks;
 
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import net.md_5.bungee.api.ChatColor;
@@ -20,8 +21,8 @@ public class ChartCourse extends Task {
 	private final PersistentGui gui;
 	private int currentPos = 0;
 
-	public ChartCourse(Game game, Location loc) {
-		super(game, "Chart Course", loc);
+	public ChartCourse(Game game, Location loc, Participant p) {
+		super(game, "Chart Course", loc, p);
 		
 		this.gui = new PersistentGui(5, "Chart Course");
 

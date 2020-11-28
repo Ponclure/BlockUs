@@ -2,6 +2,7 @@ package com.github.ponclure.amongus.game.tasks;
 
 import java.util.Arrays;
 
+import com.github.ponclure.amongus.player.Participant;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -20,8 +21,8 @@ public class SwipeCard extends Task {
 	private long startTime;
 	private long endTime;
 
-	public SwipeCard(Game game, Location loc) {
-		super(game, "Swipe Card", loc);
+	public SwipeCard(Game game, Location loc, Participant p) {
+		super(game, "Swipe Card", loc, p);
 
 		this.gui = new PersistentGui(5, "Swipe Card");
 

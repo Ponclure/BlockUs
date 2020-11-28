@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.game.tasks;
 
 import com.github.ponclure.amongus.game.Game;
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -19,8 +20,8 @@ public class Manifolds extends Task {
     private final PersistentGui gui;
     private int current = 1;
 
-    public Manifolds(Game game, Location loc) {
-        super(game, "Manifolds", loc);
+    public Manifolds(Game game, Location loc, Participant p) {
+        super(game, "Manifolds", loc, p);
         this.gui = new PersistentGui(5, "Manifolds");
         List<Integer> seq = genRandomSequence();
         int index = 0;

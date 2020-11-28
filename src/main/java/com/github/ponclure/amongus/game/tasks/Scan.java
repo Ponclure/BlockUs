@@ -33,7 +33,7 @@ public class Scan extends Task implements Listener {
     }
 
     public Scan(Game game, Location loc, Location scanArea, Participant p) {
-        super(game, "Medical Scan", loc);
+        super(game, "Medical Scan", loc, p);
         this.scanArea = scanArea;
         this.player = p;
         this.state = ScanState.NOT_STARTED;

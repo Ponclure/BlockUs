@@ -22,7 +22,7 @@ public class Garbage extends Task {
     private int internal;
 
     public Garbage(Game game, Location loc, Participant p) {
-        super(game, "", loc);
+        super(game, "", loc, p);
         this.participant = p;
     }
 

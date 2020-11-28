@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.ponclure.amongus.AmongUs;
 import com.github.ponclure.amongus.AmongUsPlugin;
+import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import org.bukkit.Location;
@@ -25,9 +26,9 @@ public class UploadData extends Task implements Listener {
     private final List<Integer> uncompletedIndex = Arrays.asList(20, 21, 22, 23, 24);
     private final List<Integer> borderIndex = Arrays.asList(10, 11, 12, 13, 14, 15, 16, 19, 25, 28, 29, 30, 31, 32, 33, 34);
 
-    public UploadData(Game game, Location loc) {
+    public UploadData(Game game, Location loc, Participant p) {
 
-        super(game, "Upload Data", loc);
+        super(game, "Upload Data", loc, p);
         this.gui = new PersistentGui(6, "Upload Data");
 
         GuiItem border = ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.DARK_GRAY + "").asGuiItem();

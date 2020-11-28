@@ -2,6 +2,7 @@ package com.github.ponclure.amongus.game.tasks;
 
 import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.game.Game;
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -24,8 +25,8 @@ public class CalibrateDistributor extends Task {
     private Player player;
     private int dial;
 
-    public CalibrateDistributor(Game game, Location loc) {
-        super(game, "Callibrate Distrubutor", loc);
+    public CalibrateDistributor(Game game, Location loc, Participant p) {
+        super(game, "Callibrate Distrubutor", loc, p);
         this.gui = new PersistentGui(5, "Callibrate Distrubutor");
         this.slots = new ArrayList<>();
         slots.add(Arrays.asList(1, 11, 19, 9));

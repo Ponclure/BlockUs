@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.game.tasks;
 
 import com.github.ponclure.amongus.game.Game;
+import com.github.ponclure.amongus.player.Participant;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PersistentGui;
@@ -16,8 +17,8 @@ public class StabilizeSteering extends Task {
 
     private final PersistentGui gui;
 
-    public StabilizeSteering(Game game, Location loc) {
-        super(game, "Stabilize Steering", loc);
+    public StabilizeSteering(Game game, Location loc, Participant p) {
+        super(game, "Stabilize Steering", loc, p);
         this.gui = new PersistentGui(5, "Stabilize Steering");
         init();
     }
