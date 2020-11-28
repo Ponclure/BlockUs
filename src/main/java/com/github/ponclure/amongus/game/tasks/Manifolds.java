@@ -23,6 +23,11 @@ public class Manifolds extends Task {
     public Manifolds(Game game, Location loc, Participant p) {
         super(game, "Manifolds", loc, p);
         this.gui = new PersistentGui(5, "Manifolds");
+        init();
+        setEmpty(gui);
+    }
+
+    private void init() {
         List<Integer> seq = genRandomSequence();
         int index = 0;
         List<Integer> slots = Arrays.asList(11, 12, 13, 14, 15, 20, 21, 22, 23, 24);
@@ -43,17 +48,15 @@ public class Manifolds extends Task {
             }
         });
         gui.setItem(slots, unclicked);
-
-        setEmpty(gui);
     }
 
-    public List<Integer> genRandomSequence() {
+    private List<Integer> genRandomSequence() {
         List<Integer> sequence = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Collections.shuffle(sequence);
         return sequence;
     }
 
-    public int getSlot(int index) {
+    private int getSlot(int index) {
         switch (index) {
             case 1:
                 return 11;

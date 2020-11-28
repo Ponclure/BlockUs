@@ -23,11 +23,13 @@ public class ChartCourse extends Task {
 
 	public ChartCourse(Game game, Location loc, Participant p) {
 		super(game, "Chart Course", loc, p);
-		
 		this.gui = new PersistentGui(5, "Chart Course");
+		init();
+		setEmpty(gui);
+	}
 
+	private void init() {
 		List<Integer> course = Arrays.asList(28, 20, 12, 22, 32, 24, 16);
-
 		GuiItem clicked = ItemBuilder.from(Material.BLUE_STAINED_GLASS_PANE).setName(ChatColor.BLUE + "").asGuiItem();
 		GuiItem path = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "").asGuiItem(event -> {
 			int slot = event.getSlot();
@@ -42,9 +44,6 @@ public class ChartCourse extends Task {
 			}
 		});
 		gui.setItem(course, path);
-
-		setEmpty(gui);
-
 	}
 
 	

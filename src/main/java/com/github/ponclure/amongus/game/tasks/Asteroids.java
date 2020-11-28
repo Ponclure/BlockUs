@@ -48,7 +48,7 @@ public class Asteroids extends Task {
         count++;
     }
 
-    public void startAsteroids() {
+    private void startAsteroids() {
 
         Player participant = Bukkit.getPlayer(getHolder().getUuid());
 
@@ -116,7 +116,7 @@ public class Asteroids extends Task {
 
     }
 
-    public ItemStack getDestroyer() {
+    private ItemStack getDestroyer() {
 
         ItemStack tool = new ItemStack(Material.NETHERITE_PICKAXE);
 
@@ -132,12 +132,12 @@ public class Asteroids extends Task {
 
     }
 
-    public void teleport() {
+    private void teleport() {
         Player participant = Bukkit.getPlayer(getHolder().getUuid());
         participant.teleport(new Location(participant.getWorld(), 505, participant.getLocation().getY(), 505));
     }
 
-    public void createBox() {
+    private void createBox() {
         setSide(Facement.UP);
         setSide(Facement.DOWN);
         setSide(Facement.FORWARD);
@@ -146,7 +146,7 @@ public class Asteroids extends Task {
         setSide(Facement.RIGHT);
     }
 
-    public void setSide(Facement face) {
+    private void setSide(Facement face) {
         BoundingBox box = face.getRegion();
         Player participant = Bukkit.getPlayer(getHolder().getUuid());
         for (int x = (int) box.getMinX(); x < box.getMaxX(); x++) {

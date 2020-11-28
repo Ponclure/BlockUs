@@ -27,9 +27,12 @@ public class Shields extends Task {
 
 	public Shields(Game game, Location loc, Participant p) {
 		super(game, "Shields", loc, p);
-
 		this.gui = new PersistentGui(5, "Shields");
+		init();
+		setEmpty(gui);
+	}
 
+	private void init() {
 		GuiItem fine = ItemBuilder.from(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "I'm Good").asGuiItem();
 		GuiItem broken = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.DARK_RED + "Click Me!").asGuiItem(
 				event -> {
@@ -53,12 +56,9 @@ public class Shields extends Task {
 				gui.setItem(getSlot(slot), fine);
 			}
 		}
-
-		setEmpty(gui);
-
 	}
 
-	public boolean allEnabled() {
+	private boolean allEnabled() {
 		for (int index : all) {
 			if (gui.getGuiItem(index).getItemStack().getType() == Material.RED_STAINED_GLASS_PANE) {
 				return false;
@@ -67,10 +67,8 @@ public class Shields extends Task {
 		return true;
 	}
 
-	public int getSlot(int index) {
-
+	private int getSlot(int index) {
 		switch (index) {
-
 		case 0:
 			return 12;
 
@@ -104,7 +102,7 @@ public class Shields extends Task {
 		}
 	}
 
-	public List<Integer> genRandomCells() {
+	private List<Integer> genRandomCells() {
 		Random rand = new Random();
 		List<Integer> slots = new ArrayList<>();
 		int index = rand.nextInt(8) + 1;

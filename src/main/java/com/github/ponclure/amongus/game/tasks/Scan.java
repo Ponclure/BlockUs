@@ -28,7 +28,7 @@ public class Scan extends Task implements Listener {
     private final Participant player;
     private ScanState state;
 
-    public enum ScanState {
+    private enum ScanState {
         NOT_STARTED, STARTED, FINISHED;
     }
 
@@ -69,7 +69,7 @@ public class Scan extends Task implements Listener {
 
     private int sec = 0;
 
-    public void performRitual(Player p) { // kekw
+    private void performRitual(Player p) { // kekw
         p.teleport(scanArea);
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1000, true, false));
         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10, 1000, true, false));
@@ -106,7 +106,7 @@ public class Scan extends Task implements Listener {
         runnable.runTaskTimer(au.plugin(), 20, 220);
     }
 
-    public String getRandomHealth() {
+    private String getRandomHealth() {
         Health[] values = Health.values();
         return values[new Random().nextInt(values.length)].name();
     }
@@ -116,7 +116,7 @@ public class Scan extends Task implements Listener {
     }
 
     @Deprecated
-    public Participant getClosestPlayer() {
+    private Participant getClosestPlayer() {
         double minDistance = 1000000;
         Participant participant = null;
         Map<UUID, Participant> players = getGame().getParticipants();

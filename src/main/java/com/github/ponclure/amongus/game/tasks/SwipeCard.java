@@ -23,21 +23,22 @@ public class SwipeCard extends Task {
 
 	public SwipeCard(Game game, Location loc, Participant p) {
 		super(game, "Swipe Card", loc, p);
-
 		this.gui = new PersistentGui(5, "Swipe Card");
+		init();
+		setEmpty(gui);
+	}
 
+	private void init() {
 		GuiItem start = new GuiItem(Utils.getSkull(
 				"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTMwZWRiZDBjOTZkNmEwZWZlMzQ4YzFiMjcwMTc5YzMwMzFhODRiZjYyNjdiODU5N2FiOWZjZDNkZjZlMjFjMiJ9fX0=",
 				ChatColor.GOLD + "Drag Card to Other Slot"), event -> {
-					startTime = System.currentTimeMillis();
-				});
+			startTime = System.currentTimeMillis();
+		});
 		gui.setItem(28, start);
-
 		GuiItem arrows = new GuiItem(Utils.getSkull(
 				"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE5MmFkNDU2Zjc2ZWM3Y2FhMzU5NTkyMmQ1ZmNjMzhkY2E5MjhkYzY3MTVmNzUyZTc0YzhkZGRlMzQ0ZSJ9fX0=",
 				ChatColor.AQUA + "Keep Dragging"));
 		gui.setItem(Arrays.asList(20, 21, 22, 23, 24), arrows);
-
 		gui.setDefaultClickAction(event -> {
 			if (event.getSlot() == 34) {
 				endTime = System.currentTimeMillis();
@@ -60,9 +61,6 @@ public class SwipeCard extends Task {
 				event.setCancelled(true);
 			}
 		});
-
-		setEmpty(gui);
-
 	}
 
 	@Override

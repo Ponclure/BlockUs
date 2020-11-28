@@ -26,7 +26,7 @@ public class Garbage extends Task {
         this.participant = p;
     }
 
-    public void generateRandomItems() {
+    private void generateRandomItems() {
         PlayerInventory inv = Bukkit.getPlayer(participant.getUuid()).getInventory();
         Material[] all = Material.values();
         Set<Material> notInclude = EnumSet.of(Material.BARRIER,
@@ -45,7 +45,7 @@ public class Garbage extends Task {
     }
 
     // Just in case
-    public void clearInventory() {
+    private void clearInventory() {
         PlayerInventory inv = Bukkit.getPlayer(participant.getUuid()).getInventory();
         for (int i = 0; i < 27; i++) {
             inv.setItem(i, new ItemStack(Material.AIR));
