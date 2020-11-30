@@ -1,6 +1,5 @@
 # Minecraft Among Us [![CircleCI](https://circleci.com/gh/Ponclure/Minecraft-Among-Us.svg?style=svg)](https://circleci.com/gh/Ponclure/Minecraft-Among-Us)
 [![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 [![Repository Size](https://img.shields.io/github/languages/code-size/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us)
 [![Lines of Code](https://img.shields.io/tokei/lines/github/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us)
 [![Issues](https://img.shields.io/github/issues/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us/issues)
