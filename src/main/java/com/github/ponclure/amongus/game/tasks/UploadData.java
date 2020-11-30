@@ -1,24 +1,21 @@
 package com.github.ponclure.amongus.game.tasks;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.github.ponclure.amongus.AmongUs;
 import com.github.ponclure.amongus.AmongUsPlugin;
+import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.utility.Utils;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
+import me.mattstudios.mfgui.gui.guis.GuiItem;
+import me.mattstudios.mfgui.gui.guis.PersistentGui;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.github.ponclure.amongus.game.Game;
-
-import me.mattstudios.mfgui.gui.guis.GuiItem;
-import me.mattstudios.mfgui.gui.guis.PersistentGui;
-import net.md_5.bungee.api.ChatColor;
+import java.util.Arrays;
+import java.util.List;
 
 public class UploadData extends Task implements Listener {
 
@@ -31,7 +28,6 @@ public class UploadData extends Task implements Listener {
         this.gui = new PersistentGui(6, "Upload Data");
         init();
         setEmpty(gui);
-
     }
 
     private void init() {
@@ -43,6 +39,7 @@ public class UploadData extends Task implements Listener {
             event.setCancelled(true);
             new BukkitRunnable() {
                 double counter = 0;
+
                 @Override
                 public void run() {
                     gui.setItem(49, ItemBuilder.from(Material.GRAY_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "" + counter + "% Completed").asGuiItem());

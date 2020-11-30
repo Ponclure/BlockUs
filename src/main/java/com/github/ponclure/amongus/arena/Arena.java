@@ -65,7 +65,7 @@ public final class Arena {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        return hashCode == ((Arena)o).hashCode;
+        return hashCode == ((Arena) o).hashCode;
     }
 
     @Override
@@ -74,8 +74,8 @@ public final class Arena {
     }
 
     public Room[] getRooms() {
-		return rooms;
-	}
+        return rooms;
+    }
 
     public Door[] getDoors() {
         return doors;
@@ -85,9 +85,9 @@ public final class Arena {
         return vents;
     }
 
-	static class Builder {
-		
-		private GameSettings fallBackSettings;
+    static class Builder {
+
+        private GameSettings fallBackSettings;
         private UUID world;
         private String name;
         private AABB boundingBox;
@@ -131,10 +131,10 @@ public final class Arena {
             gameSpawn = vector;
             return this;
         }
-        
+
         public Builder setRooms(Room... room) {
-        	this.rooms = room;
-        	return this;
+            this.rooms = room;
+            return this;
         }
 
         public Builder setDoors(Door... door) {

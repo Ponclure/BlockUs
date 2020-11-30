@@ -1,13 +1,10 @@
 package com.github.ponclure.amongus.game;
 
-import com.github.ponclure.amongus.AmongUs;
 import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.arena.Arena;
 import com.github.ponclure.amongus.collection.IdentitySet;
 import com.github.ponclure.amongus.collection.MapHashSet;
-
 import com.google.common.collect.ImmutableSet;
-
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -19,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 public abstract class ArenaHolder {
 
-    final AmongUsPlugin pluginInstance = AmongUs.plugin();
+    final AmongUsPlugin pluginInstance = AmongUsPlugin.getAmongUs().plugin();
     final BukkitScheduler scheduler = pluginInstance.getServer().getScheduler();
     final IdentitySet<UUID> set = new MapHashSet<>();
     final Arena arena;
@@ -27,7 +24,7 @@ public abstract class ArenaHolder {
 
     protected ArenaHolder(Arena arena) {
         this.arena = arena;
-        task = scheduler.runTaskTimerAsynchronously(pluginInstance,this::asyncTick,0L,0L);
+        task = scheduler.runTaskTimerAsynchronously(pluginInstance, this::asyncTick, 0L, 0L);
     }
 
     public Set<UUID> getSet() {
@@ -40,7 +37,7 @@ public abstract class ArenaHolder {
 
     public boolean isValid() {
         try {
-            return !scheduler.callSyncMethod(pluginInstance,task::isCancelled).get();
+            return !scheduler.callSyncMethod(pluginInstance, task::isCancelled).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public final class MapHashSet<T> implements IdentitySet<T> {
 
-    private final Map<T,T> map;
+    private final Map<T, T> map;
 
     public MapHashSet() {
         map = new HashMap<>();
@@ -50,7 +50,7 @@ public final class MapHashSet<T> implements IdentitySet<T> {
 
     @Override
     public boolean add(T t) {
-        map.put(t,t);
+        map.put(t, t);
         return true;
     }
 

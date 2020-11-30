@@ -24,6 +24,7 @@ public class StabilizeSteering extends Task {
     }
 
     private int slot;
+
     private void init() {
         Random rand = new Random();
         slot = rand.nextInt(45);
@@ -33,7 +34,7 @@ public class StabilizeSteering extends Task {
         GuiItem item = new GuiItem(ItemBuilder.from(Material.YELLOW_STAINED_GLASS_PANE).setName(ChatColor.GOLD + "Drag me to the Middle").build(), event -> {
             int clickedSlot = event.getSlot();
             if (clickedSlot == 22) {
-                callComplete((Player)event.getWhoClicked(), gui);
+                callComplete((Player) event.getWhoClicked(), gui);
             } else if (clickedSlot != slot) {
                 event.setCancelled(true);
             }

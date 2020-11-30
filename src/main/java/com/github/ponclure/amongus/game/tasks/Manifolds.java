@@ -18,7 +18,7 @@ import java.util.List;
 public class Manifolds extends Task {
 
     private final PersistentGui gui;
-    private int current = 1;
+    private final int current = 1;
 
     public Manifolds(Game game, Location loc, Participant p) {
         super(game, "Manifolds", loc, p);
@@ -37,7 +37,7 @@ public class Manifolds extends Task {
             int slot = event.getSlot();
             if (gui.getGuiItem(slot).getItemStack().getItemMeta().getDisplayName().contains(String.valueOf(current + 1))) {
                 if (current == 9) {
-                    callComplete((Player)event.getWhoClicked(), gui);
+                    callComplete((Player) event.getWhoClicked(), gui);
                 } else {
                     gui.setItem(slot, correct);
                 }

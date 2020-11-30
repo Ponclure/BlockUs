@@ -3,11 +3,11 @@ package com.github.ponclure.amongus.throwable;
 public final class IllegalInstantiation extends Error {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private IllegalInstantiation(Class<?> clazz) {
+    private IllegalInstantiation(Class<?> clazz) {
         super("Class " + clazz + " should not be instantiated.");
     }
 

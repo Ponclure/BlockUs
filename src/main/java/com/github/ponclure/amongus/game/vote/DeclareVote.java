@@ -1,20 +1,24 @@
 package com.github.ponclure.amongus.game.vote;
 
-import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Participant;
+import com.github.ponclure.simplenpcframework.api.NPC;
+import com.github.ponclure.simplenpcframework.api.skin.AsyncSkinFetcher;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
 import java.util.UUID;
 
-// Unfinished -Pulse
 public class DeclareVote {
 
-    private Game game;
+    private final Game game;
 
-    private StringBuilder sb;
+    private final StringBuilder sb;
     private String str;
     private String declaration;
     private int index;
@@ -25,19 +29,15 @@ public class DeclareVote {
         this.str = sb.toString();
     }
 
-    /*
-    TODO: Set the time of the world to be night, teleport the players
-     to a place which is dark. Then create an NPC using the Simple
-     NPC Framework which moves from left to right, along with the
-     declareVote() method being called for the ejection. Store the
-     values of the spawn regions for the players, then teleport them
-     back there.
-     */
-    public void prepareEjection() {
+    public void prepareEjection(Participant thrown) {
+        World w = Bukkit.getPlayer(thrown.getUuid()).getWorld();
+        w.setTime(18000);
         for (UUID uuid : game.getParticipants().keySet()) {
             Player player = Bukkit.getPlayer(uuid);
-            // player.teleport(new Location(0, 0, 0, 180, 180));
+            player.teleport(new Location(w, 600, 600, 600, 180, 180));
         }
+        declareVote(thrown);
+        moveNPC(thrown, w);
     }
 
     public void declareVote(Participant thrown) {
@@ -56,8 +56,33 @@ public class DeclareVote {
                     sb.append(declaration.charAt(index));
                     index++;
                 }
-            }.runTaskLater(AmongUs.plugin(), 5);
+            }.runTaskLater(AmongUsPlugin.getAmongUs().plugin(), 5);
         }
+    }
+
+    private NPC ejected;
+
+    public void moveNPC(Participant thrown, World w) {
+        AsyncSkinFetcher.fetchSkinFromUuidAsync(thrown.getUuid(), skin -> {
+            ejected = AmongUsPlugin.getAmongUs().getNpcFramework().createNPC(Arrays.asList(thrown.getNick()));
+            ejected.setLocation(new Location(w, 595, 600, 600));
+            ejected.create();
+        });
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Location loc = ejected.getLocation();
+                double x = loc.getX();
+                if (x == 605) {
+                    for (Participant p : game.getParticipants().values()) {
+                        Bukkit.getPlayer(p.getUuid()).teleport(p.getSpawnLocation().toLocation(w));
+                    }
+                    cancel();
+                }
+                loc.setX(x + 1);
+                ejected.setLocation(loc);
+            }
+        }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 5L, 100L);
     }
 
 }

@@ -1,38 +1,37 @@
 package com.github.ponclure.amongus;
 
-import java.util.logging.Logger;
-
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Logger;
 
 public final class AmongUsPlugin extends JavaPlugin {
 
-	private static AmongUs init;
+    private static AmongUs init;
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		Logger logger = getLogger();
+        Logger logger = getLogger();
 
-		long startTime = System.nanoTime();
-		logger.info("Loading...");
+        long startTime = System.nanoTime();
+        logger.info("Loading...");
 
-		init = new AmongUs(this);
-		init.setAvailability(true);
-		init.configManager().load();
+        init = new AmongUs(this);
+        init.setAvailability(true);
+        init.configManager().load();
 
-		long totalTime = System.nanoTime() - startTime;
-		logger.info("Loading complete. Took " + totalTime + " (ns)");
+        long totalTime = System.nanoTime() - startTime;
+        logger.info("Loading complete. Took " + totalTime + " (ns)");
 
-	}
+    }
 
-	@Override
-	public void onDisable() {
-		init.setAvailability(false);
-	}
+    @Override
+    public void onDisable() {
+        init.setAvailability(false);
+    }
 
-	public static AmongUs getAmongUs() {
-		return init;
-	}
+    public static AmongUs getAmongUs() {
+        return init;
+    }
 
 }

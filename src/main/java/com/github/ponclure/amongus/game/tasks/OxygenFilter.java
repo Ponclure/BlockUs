@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -21,6 +20,7 @@ import java.util.Random;
 public class OxygenFilter extends Task {
 
     private final PersistentGui gui;
+
     public OxygenFilter(Game game, Location loc, Participant p) {
         super(game, "Oxygen Filter", loc, p);
         this.gui = new PersistentGui(6, "Oxygen Filter");
@@ -35,7 +35,7 @@ public class OxygenFilter extends Task {
             event.setCancelled(true);
             event.getWhoClicked().setItemOnCursor(null);
             if (allEmpty()) {
-                callComplete((Player)event.getWhoClicked(), gui);
+                callComplete((Player) event.getWhoClicked(), gui);
             }
         });
         Random rand = new Random();

@@ -1,6 +1,5 @@
 package com.github.ponclure.amongus.config;
 
-import com.github.ponclure.amongus.AmongUs;
 import com.github.ponclure.amongus.AmongUsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -15,7 +14,7 @@ import java.util.function.Consumer;
 
 public class ConfigBase implements Config {
 
-    protected final AmongUsPlugin pluginInstance = AmongUs.plugin();
+    protected final AmongUsPlugin pluginInstance = AmongUsPlugin.getAmongUs().plugin();
     protected final BukkitScheduler scheduler = Bukkit.getScheduler();
     protected final FileConfiguration configuration;
     protected final File file;
@@ -26,7 +25,7 @@ public class ConfigBase implements Config {
     }
 
     @Override
-    public void load()  {
+    public void load() {
         try {
             configuration.load(file);
         } catch (IOException | InvalidConfigurationException e) {
@@ -45,7 +44,7 @@ public class ConfigBase implements Config {
 
     @Override
     public void loadAsync() {
-        scheduler.runTaskAsynchronously(pluginInstance,() -> {
+        scheduler.runTaskAsynchronously(pluginInstance, () -> {
             try {
                 configuration.load(file);
             } catch (IOException | InvalidConfigurationException e) {
@@ -56,7 +55,7 @@ public class ConfigBase implements Config {
 
     @Override
     public void loadAsync(Consumer<? super Config> handler) {
-        scheduler.runTaskAsynchronously(pluginInstance,() -> {
+        scheduler.runTaskAsynchronously(pluginInstance, () -> {
             try {
                 configuration.load(file);
             } catch (IOException | InvalidConfigurationException e) {
@@ -69,7 +68,7 @@ public class ConfigBase implements Config {
 
     @Override
     public void loadAsync(Consumer<? super Config> handler, Consumer<? super Exception> exceptionHandler) {
-        scheduler.runTaskAsynchronously(pluginInstance,() -> {
+        scheduler.runTaskAsynchronously(pluginInstance, () -> {
             try {
                 configuration.load(file);
             } catch (IOException | InvalidConfigurationException e) {
@@ -100,7 +99,7 @@ public class ConfigBase implements Config {
 
     @Override
     public void saveAsync() {
-        scheduler.runTaskAsynchronously(pluginInstance,() -> {
+        scheduler.runTaskAsynchronously(pluginInstance, () -> {
             try {
                 configuration.save(file);
             } catch (IOException e) {
@@ -111,7 +110,7 @@ public class ConfigBase implements Config {
 
     @Override
     public void saveAsync(Consumer<? super IOException> exceptionHandler) {
-        scheduler.runTaskAsynchronously(pluginInstance,() -> {
+        scheduler.runTaskAsynchronously(pluginInstance, () -> {
             try {
                 configuration.save(file);
             } catch (IOException e) {
@@ -143,7 +142,7 @@ public class ConfigBase implements Config {
     @Override
     public String getString(String path,
                             String fallback) {
-        return configuration.getString(path,fallback);
+        return configuration.getString(path, fallback);
     }
 
     @Override
@@ -163,7 +162,7 @@ public class ConfigBase implements Config {
 
     @Override
     public double getDouble(String path, double fallback) {
-        return configuration.getDouble(path,fallback);
+        return configuration.getDouble(path, fallback);
     }
 
     @Override
@@ -188,12 +187,12 @@ public class ConfigBase implements Config {
 
     @Override
     public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> type) {
-        return configuration.getSerializable(path,type);
+        return configuration.getSerializable(path, type);
     }
 
     @Override
     public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> type, T fallback) {
-        return configuration.getSerializable(path,type,fallback);
+        return configuration.getSerializable(path, type, fallback);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.github.ponclure.amongus.game;
 
-import com.github.ponclure.amongus.AmongUs;
 import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.arena.Arena;
 import org.bukkit.event.EventHandler;
@@ -20,21 +19,21 @@ public final class GameManager implements Listener {
         MINIMUM_PLAYER_COUNT = 4;
     }
 
-    private final AmongUsPlugin pluginInstance = AmongUs.plugin();
+    private final AmongUsPlugin pluginInstance = AmongUsPlugin.getAmongUs().plugin();
     private final Map<Arena, ArenaHolder> gameMap;
 
     public GameManager() {
-        pluginInstance.getServer().getPluginManager().registerEvents(this,pluginInstance);
+        pluginInstance.getServer().getPluginManager().registerEvents(this, pluginInstance);
         gameMap = new HashMap<>();
     }
 
     public Lobby openLobby(Arena arena,
                            UUID leader) throws IllegalStateException {
         if (gameMap.containsKey(arena)) {
-            throw new IllegalStateException("Arena "+arena.getName()+" is already in use!");
+            throw new IllegalStateException("Arena " + arena.getName() + " is already in use!");
         }
-        Lobby lobby = new Lobby(arena,leader);
-        gameMap.put(arena,lobby);
+        Lobby lobby = new Lobby(arena, leader);
+        gameMap.put(arena, lobby);
         return lobby;
     }
 
@@ -44,14 +43,14 @@ public final class GameManager implements Listener {
 
     public Game startGame(Lobby lobby) throws IllegalStateException {
         if (isArenaCurrentlyUsed(lobby.arena)) {
-            throw new IllegalStateException("Arena "+lobby.arena.getName()+" is already in use!");
+            throw new IllegalStateException("Arena " + lobby.arena.getName() + " is already in use!");
         }
         if (!canStartGame(lobby)) {
             throw new IllegalStateException("Game needs at least 4 players");
         }
         lobby.terminate();
         Game game = new Game(lobby);
-        gameMap.put(game.arena,game);
+        gameMap.put(game.arena, game);
         return game;
     }
 

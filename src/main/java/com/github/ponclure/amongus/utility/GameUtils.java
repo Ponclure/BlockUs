@@ -16,8 +16,9 @@ public final class GameUtils {
         IllegalInstantiation.deploy(GameUtils.class);
     }
 
+    // CONCLURE FIX THIS AHHHHHH
     public static Map<UUID, Participant> chooseImpostors(Set<UUID> pool,
-                                                         int impostorAmount) throws IllegalArgumentException{
+                                                         int impostorAmount) throws IllegalArgumentException {
         if (impostorAmount > pool.size()) {
             throw new IllegalArgumentException("Imposter amount cannot be higher than the pool size");
         }
@@ -41,7 +42,7 @@ public final class GameUtils {
             } else {
                 participant = new Crewmate(array[i]);
             }
-            map.put(array[i],participant);
+            map.put(array[i], participant);
         }
         return map;
     }

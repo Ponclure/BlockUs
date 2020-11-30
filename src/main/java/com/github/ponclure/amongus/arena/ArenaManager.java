@@ -37,7 +37,7 @@ public final class ArenaManager {
                 .setGameSpawn(gameSpawn)
                 .setLobbySpawn(lobbySpawn)
                 .build();
-        arenaMap.put(name,arena);
+        arenaMap.put(name, arena);
         return arena;
     }
 

@@ -4,43 +4,43 @@ import java.util.regex.Pattern;
 
 public final class Namespace {
 
-	private final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]");
-	
-	private final String key;
+    private final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]");
 
-	private Namespace(String key) {
-		if (!PATTERN.matcher(key).matches()) {
-			throw new IllegalArgumentException("Key must follow pattern: " + PATTERN.toString());
-		}
-		this.key = key;
-	}
+    private final String key;
 
-	@Override
-	public int hashCode() {
-		return key.hashCode() * 11;
-	}
+    private Namespace(String key) {
+        if (!PATTERN.matcher(key).matches()) {
+            throw new IllegalArgumentException("Key must follow pattern: " + PATTERN.toString());
+        }
+        this.key = key;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		return ((Namespace) o).key.equals(key);
-	}
+    @Override
+    public int hashCode() {
+        return key.hashCode() * 11;
+    }
 
-	public boolean equalsString(String key) {
-		if (key == null)
-			return false;
-		return key.equals(this.key);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        return ((Namespace) o).key.equals(key);
+    }
 
-	@Override
-	public String toString() {
-		return "{Key:\"" + key + "\"}";
-	}
+    public boolean equalsString(String key) {
+        if (key == null)
+            return false;
+        return key.equals(this.key);
+    }
 
-	public static Namespace of(String key) {
-		return new Namespace(key);
-	}
+    @Override
+    public String toString() {
+        return "{Key:\"" + key + "\"}";
+    }
+
+    public static Namespace of(String key) {
+        return new Namespace(key);
+    }
 }

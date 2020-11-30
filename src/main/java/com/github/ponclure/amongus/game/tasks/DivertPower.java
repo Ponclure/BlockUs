@@ -35,7 +35,7 @@ public class DivertPower extends Task {
             event.setCancelled(true);
             if (event.getSlot() + 9 == index) {
                 gui.setItem(slots.get(index), new GuiItem(ItemBuilder.from(Material.GREEN_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "Perfect").build()));
-                callComplete((Player)event.getWhoClicked(), gui);
+                callComplete((Player) event.getWhoClicked(), gui);
             }
         });
         gui.setItem(Arrays.asList(11, 12, 13, 14, 15), increase);

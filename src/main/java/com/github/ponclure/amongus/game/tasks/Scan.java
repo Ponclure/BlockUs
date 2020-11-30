@@ -29,7 +29,7 @@ public class Scan extends Task implements Listener {
     private ScanState state;
 
     private enum ScanState {
-        NOT_STARTED, STARTED, FINISHED;
+        NOT_STARTED, STARTED, FINISHED
     }
 
     public Scan(Game game, Location loc, Location scanArea, Participant p) {
@@ -112,7 +112,7 @@ public class Scan extends Task implements Listener {
     }
 
     private enum Health {
-        OUTSTANDING, WELL, OKAY, POOR, COVID19;
+        OUTSTANDING, WELL, OKAY, POOR, COVID19
     }
 
     @Deprecated

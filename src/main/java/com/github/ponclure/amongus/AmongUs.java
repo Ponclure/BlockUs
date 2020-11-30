@@ -4,10 +4,9 @@ import com.github.ponclure.amongus.arena.ArenaManager;
 import com.github.ponclure.amongus.config.ConfigFactory;
 import com.github.ponclure.amongus.config.ConfigManager;
 import com.github.ponclure.amongus.game.GameManager;
-
 import com.github.ponclure.securitycams.CameraManager;
+import com.github.ponclure.simplenpcframework.SimpleNPCFramework;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +24,7 @@ public final class AmongUs {
     private final ConfigManager CONFIG_MANAGER;
 
     private CameraManager CAMERA_MANAGER;
+    private final SimpleNPCFramework NPC_FRAMEWORK;
 
     public AmongUs(AmongUsPlugin plugin) {
         this.PLUGIN = plugin;
@@ -41,6 +41,7 @@ public final class AmongUs {
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         }
+        this.NPC_FRAMEWORK = new SimpleNPCFramework(plugin());
     }
 
     public AmongUsPlugin plugin() {
@@ -75,9 +76,17 @@ public final class AmongUs {
         return checkAvailability(CAMERA_MANAGER);
     }
 
-    public boolean getAvailability() { return isAvailable; }
+    public SimpleNPCFramework getNpcFramework() {
+        return checkAvailability(NPC_FRAMEWORK);
+    }
 
-    public void setAvailability(boolean b) { this.isAvailable = b; }
+    public boolean getAvailability() {
+        return isAvailable;
+    }
+
+    public void setAvailability(boolean b) {
+        this.isAvailable = b;
+    }
 
     private <T> T checkAvailability(T t) {
         if (!getAvailability()) throw new IllegalStateException("Among Us hasn't been loaded yet.");

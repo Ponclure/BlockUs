@@ -36,11 +36,11 @@ public class PlayerVentManager implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         Map<UUID, Participant> players = game.getParticipants();
-        if (!players.keySet().contains(player.getUniqueId())) {
+        if (!players.containsKey(player.getUniqueId())) {
             return;
         }
         if (!players.get(event.getPlayer()).isImposter()) {
-           return;
+            return;
         }
         Vent[] vents = game.getArena().getVents();
         for (int i = 0; i < vents.length; i++) {
@@ -55,7 +55,7 @@ public class PlayerVentManager implements Listener {
     public void onShift(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
         Map<UUID, Participant> players = game.getParticipants();
-        if (!players.keySet().contains(player.getUniqueId())) {
+        if (!players.containsKey(player.getUniqueId())) {
             return;
         }
         if (!players.get(event.getPlayer()).isImposter()) {

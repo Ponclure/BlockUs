@@ -24,12 +24,13 @@ public final class ConfigManager {
     private final Config defaultConfig;
 
     public ConfigManager() {
-        defaultConfig = configFactory.supplyConfig(dataFolder,"config",ConfigType.YML);
+        defaultConfig = configFactory.supplyConfig(dataFolder, "config", ConfigType.YML);
     }
 
     public void load() {
         Logger logger = au.logger();
-        defaultConfig.loadAsync(cfg -> {},exc -> logger.info("Couldn't load config: " + exc.toString()));
+        defaultConfig.loadAsync(cfg -> {
+        }, exc -> logger.info("Couldn't load config: " + exc.toString()));
         loadArenas();
     }
 
@@ -44,16 +45,16 @@ public final class ConfigManager {
             }
             Config config;
             String name = PATTERN.matcher(file.getName()).replaceFirst("");
-            config = configFactory.supplyConfig(dataFolder+"/arenas/",name,ConfigType.YML);
+            config = configFactory.supplyConfig(dataFolder + "/arenas/", name, ConfigType.YML);
             config.loadAsync(cfg -> {
                 Namespace namespace = Namespace.of(name);
                 String displayName = cfg.getString("DisplayName");
                 GameSettings defaultSettings = getSettings(cfg);
                 UUID worldUuid = Bukkit.getWorld(cfg.getString("World")).getUID();
                 Vec3 min = getVector(config, "Arena.Min.");
-                Vec3 max = getVector(config,"Arena.Max.");
-                Vec3 lobbySpawn = getVector(config,"Spawn.Game.");
-                Vec3 gameSpawn = getVector(config,"Spawn.Lobby.");
+                Vec3 max = getVector(config, "Arena.Max.");
+                Vec3 lobbySpawn = getVector(config, "Spawn.Game.");
+                Vec3 gameSpawn = getVector(config, "Spawn.Lobby.");
                 manager.loadArena(
                         namespace,
                         displayName,
@@ -67,7 +68,7 @@ public final class ConfigManager {
         }
     }
 
-    private Vec3 getVector(Config config,String basePath) {
+    private Vec3 getVector(Config config, String basePath) {
         try {
             return Vec3.deserialize((byte[]) config.get(basePath));
         } catch (Exception e) {
@@ -78,9 +79,9 @@ public final class ConfigManager {
     private GameSettings getSettings(Config config) {
         String path = "GameSettings.";
         return new GameSettings.Builder()
-                .setCommonTaskCount(config.getInt(path+"CommonTaskCount"))
-                .setConfirmingEjections(config.getBoolean(path+"ConfirmingEjections"))
-                .setCrewmateVision(config.getDouble(path+"CrewmateVision"))
+                .setCommonTaskCount(config.getInt(path + "CommonTaskCount"))
+                .setConfirmingEjections(config.getBoolean(path + "ConfirmingEjections"))
+                .setCrewmateVision(config.getDouble(path + "CrewmateVision"))
                 .build();
     }
 

@@ -1,6 +1,7 @@
 package com.github.ponclure.amongus.player;
 
 import com.github.ponclure.amongus.game.Game;
+import com.github.ponclure.amongus.utility.container.Vec3;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.util.UUIDTypeAdapter;
@@ -20,14 +21,16 @@ public class Participant {
     private final UUID uuid;
     private final String nick;
     private final PlayerColor color;
+    private final Vec3 spawnLocation;
 
     private boolean isDead;
     private boolean isDisconnected;
 
-    public Participant(Game game, UUID player, PlayerColor color) {
+    public Participant(Game game, UUID player, Vec3 spawnLocation, PlayerColor color) {
         this.game = game;
         this.uuid = player;
         this.nick = Bukkit.getPlayer(uuid).getName();
+        this.spawnLocation = spawnLocation;
         this.color = color;
         // GameProfile playerProfile = ((CraftPlayer) Bukkit.getPlayer(player)).getHandle().getProfile();
 
@@ -61,12 +64,16 @@ public class Participant {
         return (this instanceof Imposter);
     }
 
+    public Vec3 getSpawnLocation() {
+        return spawnLocation;
+    }
+
     public PlayerColor getColor() {
         return color;
     }
 
     public enum PlayerColor {
-        RED, BLUE, GREEN, YELLOW, ORANGE, BLACK, WHITE, PURPLE, CYAN, BROWN, LIME;
+        RED, BLUE, GREEN, YELLOW, ORANGE, BLACK, WHITE, PURPLE, CYAN, BROWN, LIME
     }
 
     public static boolean setSkin(GameProfile profile, UUID uuid) {

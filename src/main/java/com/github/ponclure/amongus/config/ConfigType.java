@@ -7,8 +7,8 @@ import java.io.File;
 import java.util.function.Supplier;
 
 public enum ConfigType {
-	
-    YML(".yml",YamlConfiguration::new);
+
+    YML(".yml", YamlConfiguration::new);
 
     private final String suffix;
     private final Supplier<FileConfiguration> supplier;
@@ -25,16 +25,16 @@ public enum ConfigType {
 
     public File supplyFile(File directory,
                            String name) {
-        return new File(directory, name+suffix);
+        return new File(directory, name + suffix);
     }
 
     public File supplyFile(String directory,
                            String name) {
-        return new File(directory, name+suffix);
+        return new File(directory, name + suffix);
     }
 
     public FileConfiguration supplyConfig() {
         return supplier.get();
     }
-    
+
 }

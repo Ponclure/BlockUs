@@ -5,7 +5,11 @@ import com.github.ponclure.amongus.player.Participant;
 import com.github.ponclure.amongus.utility.GameUtils;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -37,9 +41,9 @@ public class Game extends ArenaHolder {
     public boolean contains(UUID uuid) {
         return participants.containsKey(uuid);
     }
-    
+
     public Map<UUID, Participant> getParticipants() {
-    	return participants;
+        return participants;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class Game extends ArenaHolder {
     void onPlayerQuit(PlayerQuitEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
         if (participants.containsKey(uuid)) {
-        	participants.get(uuid).setDisconnected(true);
+            participants.get(uuid).setDisconnected(true);
         }
     }
 
@@ -61,7 +65,7 @@ public class Game extends ArenaHolder {
     }
 
     public Set<Imposter> getImposters() {
-        return participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter)p).collect(Collectors.toSet());
+        return participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter) p).collect(Collectors.toSet());
     }
 
 }

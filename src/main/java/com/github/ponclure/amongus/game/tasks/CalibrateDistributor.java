@@ -37,6 +37,7 @@ public class CalibrateDistributor extends Task {
         click.add(31);
         click.add(34);
         init();
+        setEmpty(gui);
     }
 
     private void init() {
@@ -47,11 +48,12 @@ public class CalibrateDistributor extends Task {
         setUncompleted(1);
         setUncompleted(2);
         GuiItem selected = new GuiItem(ItemBuilder.from(Material.YELLOW_STAINED_GLASS_PANE).setName(ChatColor.GREEN + "Click at Bottom Slot").build(), event -> {
-            handleClick((Player)event.getWhoClicked(), event.getSlot());
+            handleClick((Player) event.getWhoClicked(), event.getSlot());
         });
         GuiItem empty = new GuiItem(ItemBuilder.from(Material.BLUE_STAINED_GLASS_PANE).setName(ChatColor.BLUE + "").build());
         new BukkitRunnable() {
             private int slot;
+
             public void run() {
                 if (gui.getInventory().getViewers().size() == 0) {
                     cancel();

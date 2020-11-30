@@ -1,6 +1,6 @@
 package com.github.ponclure.amongus.game.sabatoge;
 
-import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.arena.components.Door;
 import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Imposter;
@@ -22,8 +22,8 @@ public class SabatogeMenu {
     private final PersistentGui gui;
     private final Imposter imposter;
 
-    private Map<Door, Boolean> canCloseDoor;
-    private boolean canSabatogeMain;
+    private final Map<Door, Boolean> canCloseDoor;
+    private final boolean canSabatogeMain;
 
     public SabatogeMenu(Game game, Imposter imp) {
         this.game = game;
@@ -56,7 +56,7 @@ public class SabatogeMenu {
                     if (canCloseDoor.get(get)) {
                         get.shutDoors();
                         canCloseDoor.put(get, false);
-                        AmongUs.plugin().getServer().getScheduler().scheduleSyncDelayedTask(AmongUs.plugin(), new Runnable() {
+                        AmongUsPlugin.getAmongUs().plugin().getServer().getScheduler().scheduleSyncDelayedTask(AmongUsPlugin.getAmongUs().plugin(), new Runnable() {
                             public void run() {
                                 canCloseDoor.put(get, true);
                             }
@@ -138,7 +138,7 @@ public class SabatogeMenu {
 
         private final String name;
 
-        private SabatogeType(String name) {
+        SabatogeType(String name) {
             this.name = name;
         }
 

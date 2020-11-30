@@ -1,8 +1,9 @@
 package com.github.ponclure.amongus.arena.components;
 
-import com.github.ponclure.amongus.AmongUs;
+import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.utility.Utils;
 import com.github.ponclure.amongus.utility.container.AABB;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 public class Door {
@@ -21,13 +22,15 @@ public class Door {
         return entry;
     }
 
-    public String getDoorName() { return doorName; }
+    public String getDoorName() {
+        return doorName;
+    }
 
     public void shutDoors() {
         for (AABB box : entry) {
             Utils.setBlock(box, Material.IRON_BLOCK);
         }
-        AmongUs.plugin().getServer().getScheduler().scheduleSyncDelayedTask(AmongUs.plugin(), new Runnable() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(AmongUsPlugin.getAmongUs().plugin(), new Runnable() {
             public void run() {
                 for (AABB box : entry) {
                     Utils.setBlock(box, Material.AIR);

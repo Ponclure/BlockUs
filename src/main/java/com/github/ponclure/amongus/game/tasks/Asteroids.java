@@ -4,10 +4,10 @@ import com.github.ponclure.amongus.AmongUsPlugin;
 import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Participant;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -21,13 +21,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class Asteroids extends Task {
 
     private final ItemStack tool;
     private int count;
-    private Set<Location> locations;
+    private final Set<Location> locations;
 
     public Asteroids(Game game, Location loc, Participant p) {
         super(game, "Asteroids", loc, p);
@@ -112,7 +115,7 @@ public class Asteroids extends Task {
                     }
                 });
             }
-        }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 0L, 8L);
+        }.runTaskTimer(AmongUsPlugin.getAmongUs().plugin(), 8L, Long.MAX_VALUE);
 
     }
 
@@ -166,7 +169,7 @@ public class Asteroids extends Task {
 
         private final BoundingBox region;
 
-        private Facement(BoundingBox box) {
+        Facement(BoundingBox box) {
             this.region = box;
         }
 
