@@ -1,5 +1,6 @@
 package com.github.ponclure.amongus.utility;
 
+import com.github.ponclure.amongus.game.Game;
 import com.github.ponclure.amongus.player.Crewmate;
 import com.github.ponclure.amongus.player.Imposter;
 import com.github.ponclure.amongus.player.Participant;
@@ -17,7 +18,7 @@ public final class GameUtils {
     }
 
     // CONCLURE FIX THIS AHHHHHH
-    public static Map<UUID, Participant> chooseImpostors(Set<UUID> pool,
+    public static Map<UUID, Participant> chooseImpostors(Game game, Set<UUID> pool,
                                                          int impostorAmount) throws IllegalArgumentException {
         if (impostorAmount > pool.size()) {
             throw new IllegalArgumentException("Imposter amount cannot be higher than the pool size");

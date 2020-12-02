@@ -6,6 +6,7 @@ import com.github.ponclure.amongus.utility.GameUtils;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Game extends ArenaHolder {
     protected Game(Lobby lobby) {
         super(lobby.arena);
         settings = lobby.settingsBuilder.build();
-        participants = GameUtils.chooseImpostors(lobby.set, settings.getImpostorCount());
+        participants = GameUtils.chooseImpostors(this, lobby.set, settings.getImpostorCount());
         closeHandlerList = new ArrayList<>();
         //bossBar = Bukkit.createBossBar("") - Conclure will continue this
     }
@@ -64,8 +65,8 @@ public class Game extends ArenaHolder {
         return settings;
     }
 
-    public Set<Imposter> getImposters() {
-        return participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter) p).collect(Collectors.toSet());
+    public HashSet<Imposter> getImposters() {
+        return new HashSet<>(participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter) p).collect(Collectors.toSet()));
     }
 
 }
