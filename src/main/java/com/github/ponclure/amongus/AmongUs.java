@@ -4,6 +4,8 @@ import com.github.ponclure.amongus.arena.ArenaManager;
 import com.github.ponclure.amongus.config.ConfigFactory;
 import com.github.ponclure.amongus.config.ConfigManager;
 import com.github.ponclure.amongus.game.GameManager;
+import com.github.ponclure.amongus.implementation.PacketHandlerBase;
+import com.github.ponclure.amongus.implementation.ReflectionHandler;
 import com.github.ponclure.securitycams.CameraManager;
 import com.github.ponclure.simplenpcframework.SimpleNPCFramework;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -22,6 +24,7 @@ public final class AmongUs {
     private final File DATA_FOLDER;
     private final ConfigFactory CONFIG_FACTORY;
     private final ConfigManager CONFIG_MANAGER;
+    private final PacketHandlerBase PACKET_HANDLER;
 
     private CameraManager CAMERA_MANAGER;
     private final SimpleNPCFramework NPC_FRAMEWORK;
@@ -33,6 +36,7 @@ public final class AmongUs {
         this.CONFIG_FACTORY = new ConfigFactory();
         this.ARENA_MANAGER = new ArenaManager();
         this.CONFIG_MANAGER = new ConfigManager();
+        this.PACKET_HANDLER = ReflectionHandler.getNewPacketHandlerInstance();
         this.GAME_MANAGER = new GameManager();
         try {
             this.CAMERA_MANAGER = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
@@ -71,6 +75,8 @@ public final class AmongUs {
     public ConfigManager configManager() {
         return checkAvailability(CONFIG_MANAGER);
     }
+
+    public PacketHandlerBase getPacketHandler() { return checkAvailability(PACKET_HANDLER); }
 
     public CameraManager getCameraManager() {
         return checkAvailability(CAMERA_MANAGER);
