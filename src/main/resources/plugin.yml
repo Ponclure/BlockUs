@@ -1,6 +1,6 @@
-name: AmongUs
-main: com.github.ponclure.amongus.AmongUs
+name: BlockUs
+main: com.github.ponclure.blockus.BlockUs
 version: 1.0.0
-description: Among Us in Minecraft
+description: Advanced Murder Mystery in Minecraft using Spigot
 author: PulseBeat_02, Conclure, Fefo6644
 api-version: 1.16

@@ -7,7 +7,7 @@ plugins {
 
 group = "com.github.ponclure"
 version = "RELEASE 1.0.0"
-description = "Among Us"
+description = "Block Us"
 
 defaultTasks("clean", "build", "shadowJar")
 
@@ -31,7 +31,7 @@ tasks {
     named("shadowJar", ShadowJar::class) {
         archiveFileName.set("${rootProject.name}-${project.version}-shaded.jar")
 
-        relocate("me.mattstudios.mfgui", "com.github.amongus.mfgui")
+        relocate("me.mattstudios.mfgui", "com.github.blockus.mfgui")
     }
 }
 

@@ -1,1 +1,1 @@
-rootProject.name = "among-us"
+rootProject.name = "block-us"

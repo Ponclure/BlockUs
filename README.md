@@ -1,4 +1,4 @@
-# Minecraft Among Us 
+# Block Us - Advanced Murder Mystery 
 [![CircleCI](https://img.shields.io/circleci/build/github/Ponclure/Minecraft-Among-Us/main?style=for-the-badge)](https://circleci.com/gh/Ponclure/Minecraft-Among-Us)
 [![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us)
 [![Repository Size](https://img.shields.io/github/languages/code-size/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us)
@@ -6,7 +6,8 @@
 [![Issues](https://img.shields.io/github/issues/Ponclure/Minecraft-Among-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Among-Us/issues)
 [![Discord](https://img.shields.io/discord/775376080546693120.svg?style=for-the-badge)](https://discord.gg/d7qfcUwhex)
 
-A recreation of Among Us but in Minecraft using the Spigot API. More details coming soon.
+A recreation of Advanced Murder Mystery but in Minecraft.
+More details coming soon.
 
 #### Developers:
 * Conclure
