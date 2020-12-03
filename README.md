@@ -1,9 +1,9 @@
 # Block Us - Advanced Murder Mystery 
-[![CircleCI](https://img.shields.io/circleci/build/github/Ponclure/Minecraft-Block-Us/main?style=for-the-badge)](https://circleci.com/gh/Ponclure/Minecraft-Block-Us)
-[![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/Minecraft-Block-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Block-Us)
-[![Repository Size](https://img.shields.io/github/languages/code-size/Ponclure/Minecraft-Block-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Block-Us)
-[![Lines of Code](https://img.shields.io/tokei/lines/github/Ponclure/Minecraft-Block-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Block-Us)
-[![Issues](https://img.shields.io/github/issues/Ponclure/Minecraft-Block-Us?style=for-the-badge)](https://github.com/Ponclure/Minecraft-Block-Us/issues)
+[![CircleCI](https://img.shields.io/circleci/build/github/Ponclure/BlockUs/main?style=for-the-badge)](https://circleci.com/gh/Ponclure/BlockUs)
+[![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/BlockUs?style=for-the-badge)](https://github.com/Ponclure/BlockUs)
+[![Repository Size](https://img.shields.io/github/languages/code-size/Ponclure/BlockUs?style=for-the-badge)](https://github.com/Ponclure/BlockUs)
+[![Lines of Code](https://img.shields.io/tokei/lines/github/Ponclure/BlockUs?style=for-the-badge)](https://github.com/Ponclure/BlockUs)
+[![Issues](https://img.shields.io/github/issues/Ponclure/BlockUs?style=for-the-badge)](https://github.com/Ponclure/BlockUs/issues)
 [![Discord](https://img.shields.io/discord/775376080546693120.svg?style=for-the-badge)](https://discord.gg/d7qfcUwhex)
 
 A recreation of Advanced Murder Mystery but in Minecraft.
