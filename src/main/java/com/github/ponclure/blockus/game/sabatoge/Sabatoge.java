@@ -27,19 +27,20 @@ public abstract class Sabatoge implements Listener {
 
     public abstract void execute(PlayerArmorStandManipulateEvent e);
 
-    public Sabatoge(Game game, String name, ArmorStand[] fix, int time) {
+    public Sabatoge(Game game, String name, Map<ArmorStand, PersistentGui> fix, int time) {
         this.game = game;
         this.name = name;
         this.time = time;
-        this.fix = new HashMap<>();
+        this.fix = fix;
         Bukkit.getPluginManager().registerEvents(this, BlockUsPlugin.getBlockUs().plugin());
     }
 
     @EventHandler
     public void manipulate(final PlayerArmorStandManipulateEvent e) {
-        if (fix.keySet().stream().anyMatch(armorStand -> armorStand.getUniqueId() == e.getRightClicked().getUniqueId())) {
+        ArmorStand stand = e.getRightClicked();
+        if (fix.keySet().stream().anyMatch(armorStand -> armorStand.getUniqueId() == stand.getUniqueId())) {
             e.setCancelled(true);
-            execute(e);
+            fix.get(stand).open(e.getPlayer());
         }
     }
 
@@ -50,7 +51,7 @@ public abstract class Sabatoge implements Listener {
                 if (!active) {
                     cancel();
                 }
-                for (UUID uuid : game.getParticipants().keySet()) {
+                game.getParticipants().keySet().forEach(uuid -> {
                     Player player = Bukkit.getPlayer(uuid);
                     player.playSound(player.getLocation(), SpecialSoundEffects.SABATOGE.getName(), 1.0F, 1.0F);
                     BlockUsPlugin.getBlockUs().getPacketHandler().sendSabatogePacket(player, 50);
@@ -58,13 +59,19 @@ public abstract class Sabatoge implements Listener {
                         BlockUsPlugin.getBlockUs().getPacketHandler().sendSabatogePacket(player, 0);
                     }, 0L, 20L);
 
-                }
+                });
             }
         }, 0L, 40L);
     }
 
     public void callComplete() {
         active = false;
+        for (UUID uuid : game.getParticipants().keySet()) {
+            Player player = Bukkit.getPlayer(uuid);
+        }
+        game.getParticipants().keySet().forEach(uuid -> {
+            BlockUsPlugin.getBlockUs().getPacketHandler().sendSabatogePacket(Bukkit.getPlayer(uuid), 0);
+        });
     }
 
 }

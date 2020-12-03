@@ -15,16 +15,18 @@ import java.util.stream.Collectors;
 
 public class Game extends ArenaHolder {
 
-    final Map<UUID, Participant> participants;
-    final GameSettings settings;
-    final List<Consumer<Game>> closeHandlerList;
+    private final Map<UUID, Participant> participants;
+    private final GameSettings settings;
+    private final List<Consumer<Game>> closeHandlerList;
+    private final UUID uuid;
     //final BossBar bossBar;
 
-    protected Game(Lobby lobby) {
+    protected Game(Lobby lobby, UUID uuid) {
         super(lobby.arena);
-        settings = lobby.settingsBuilder.build();
-        participants = GameUtils.chooseImpostors(this, lobby.set, settings.getImpostorCount());
-        closeHandlerList = new ArrayList<>();
+        this.settings = lobby.settingsBuilder.build();
+        this.participants = GameUtils.chooseImpostors(this, lobby.set, settings.getImpostorCount());
+        this.closeHandlerList = new ArrayList<>();
+        this.uuid = uuid == null ? UUID.randomUUID() : uuid;
         //bossBar = Bukkit.createBossBar("") - Conclure will continue this
     }
 
