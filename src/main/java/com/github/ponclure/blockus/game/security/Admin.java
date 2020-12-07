@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Admin extends Task {
 
@@ -26,7 +27,7 @@ public class Admin extends Task {
 
         for (Participant p : game.getParticipants().values()) {
             if (!p.isDead()) {
-                Room r = getClosest(game.getArena().getRooms(), Vec3.from(Bukkit.getPlayer(p.getUuid()).getLocation()));
+                Room r = getRoom(p.getUuid());
                 if (counts.containsKey(r)) {
                     counts.put(r, counts.get(r) + 1);
                 } else {
@@ -51,35 +52,23 @@ public class Admin extends Task {
         return counts;
     }
 
-    private Room getClosest(Room[] rooms, Vec3 player) {
-        Room closest = null;
-        double current = 0;
-        for (Room r : rooms) {
-            double dist = r.getMiddle().distance(player);
-            if (dist < current) {
-                current = dist;
-                closest = r;
-            }
-        }
-        return closest;
+    private Room getRoom(UUID p) {
+        return getGame().getPlayerRooms().get(p).getKey();
     }
 
     @Deprecated
-    @SuppressWarnings("unused")
     private boolean matchesX(Location loc, Vec3 btm, Vec3 top) {
         int coord = loc.getBlockX();
         return coord >= btm.getBlockX() && coord <= top.getBlockX();
     }
 
     @Deprecated
-    @SuppressWarnings("unused")
     private boolean matchesY(Location loc, Vec3 btm, Vec3 top) {
         int coord = loc.getBlockY();
         return coord >= btm.getBlockY() && coord <= top.getBlockY();
     }
 
     @Deprecated
-    @SuppressWarnings("unused")
     private boolean matchesZ(Location loc, Vec3 btm, Vec3 top) {
         int coord = loc.getBlockZ();
         return coord >= btm.getBlockZ() && coord <= top.getBlockZ();

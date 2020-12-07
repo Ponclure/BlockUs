@@ -1,11 +1,13 @@
 package com.github.ponclure.blockus.game;
 
+import com.github.ponclure.blockus.arena.components.Room;
 import com.github.ponclure.blockus.player.Imposter;
 import com.github.ponclure.blockus.player.Participant;
 import com.github.ponclure.blockus.utility.GameUtils;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,8 @@ public class Game extends ArenaHolder {
     private final Map<UUID, Participant> participants;
     private final GameSettings settings;
     private final List<Consumer<Game>> closeHandlerList;
-    private final UUID uuid;
+    private Map<UUID, Map.Entry<Room, Integer>> playerRooms;
+    private final UUID uuid; // Game UUID
     //final BossBar bossBar;
 
     protected Game(Lobby lobby, UUID uuid) {
@@ -26,6 +29,7 @@ public class Game extends ArenaHolder {
         this.settings = lobby.settingsBuilder.build();
         this.participants = GameUtils.chooseImpostors(this, lobby.set, settings.getImpostorCount());
         this.closeHandlerList = new ArrayList<>();
+        this.playerRooms = new HashMap<>();
         this.uuid = uuid == null ? UUID.randomUUID() : uuid;
         //bossBar = Bukkit.createBossBar("") - Conclure will continue this
     }
@@ -68,6 +72,14 @@ public class Game extends ArenaHolder {
 
     public HashSet<Imposter> getImposters() {
         return new HashSet<>(participants.values().stream().filter(p -> p.isImposter()).map(p -> (Imposter) p).collect(Collectors.toSet()));
+    }
+
+    public Map<UUID, Map.Entry<Room, Integer>> getPlayerRooms() {
+        return playerRooms;
+    }
+
+    public void setPlayerRooms(Map<UUID, Map.Entry<Room, Integer>> rooms) {
+        playerRooms = rooms;
     }
 
 }
