@@ -3,6 +3,7 @@ package com.github.ponclure.blockus;
 import com.github.ponclure.blockus.arena.ArenaManager;
 import com.github.ponclure.blockus.config.ConfigFactory;
 import com.github.ponclure.blockus.config.ConfigManager;
+import com.github.ponclure.blockus.game.Game;
 import com.github.ponclure.blockus.game.GameManager;
 import com.github.ponclure.blockus.implementation.PacketHandlerBase;
 import com.github.ponclure.blockus.implementation.ReflectionHandler;
@@ -12,11 +13,15 @@ import org.bukkit.configuration.InvalidConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public final class BlockUs {
 
     public boolean isAvailable;
+
     private final BlockUsPlugin PLUGIN;
     private final ArenaManager ARENA_MANAGER;
     private final GameManager GAME_MANAGER;
@@ -25,9 +30,9 @@ public final class BlockUs {
     private final ConfigFactory CONFIG_FACTORY;
     private final ConfigManager CONFIG_MANAGER;
     private final PacketHandlerBase PACKET_HANDLER;
-
-    private CameraManager CAMERA_MANAGER;
+    private final CameraManager CAMERA_MANAGER;
     private final SimpleNPCFramework NPC_FRAMEWORK;
+    private Map<UUID, Game> GAMES = new HashMap<>();
 
     public BlockUs(BlockUsPlugin plugin) {
         this.PLUGIN = plugin;
@@ -38,13 +43,15 @@ public final class BlockUs {
         this.CONFIG_MANAGER = new ConfigManager();
         this.PACKET_HANDLER = ReflectionHandler.getNewPacketHandlerInstance();
         this.GAME_MANAGER = new GameManager();
+        CameraManager CAMERA_MANAGER_FACADE = null;
         try {
-            this.CAMERA_MANAGER = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
+            CAMERA_MANAGER_FACADE = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         }
+        this.CAMERA_MANAGER = CAMERA_MANAGER_FACADE;
         this.NPC_FRAMEWORK = new SimpleNPCFramework(plugin());
     }
 
@@ -98,5 +105,7 @@ public final class BlockUs {
         if (!getAvailability()) throw new IllegalStateException("Block Us hasn't been loaded yet.");
         return t;
     }
+
+    public Map<UUID, Game> getGames() { return GAMES; }
 
 }

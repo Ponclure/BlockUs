@@ -7,12 +7,15 @@ import java.util.UUID;
 
 public class Lobby extends ArenaHolder {
 
-    UUID leader;
-    final GameSettings.Builder settingsBuilder;
+    private UUID leader;
+    private boolean accessible;
+    public final GameSettings.Builder settingsBuilder;
 
     public Lobby(Arena arena,
-                 UUID uuid) {
+                 UUID uuid, boolean accessible) {
         super(arena);
+        this.leader = uuid;
+        this.accessible = accessible;
         settingsBuilder = new GameSettings.Builder();
     }
 
@@ -42,4 +45,9 @@ public class Lobby extends ArenaHolder {
     public void remove(UUID uuid) {
         set.remove(uuid);
     }
+
+    public void setAccessible(boolean mode) { this.accessible = mode; }
+
+    public boolean isAccessible() { return accessible; }
+
 }

@@ -1,9 +1,16 @@
 package com.github.ponclure.blockus.game;
 
+import com.github.ponclure.blockus.BlockUsPlugin;
 import com.github.ponclure.blockus.arena.components.Room;
+import com.github.ponclure.blockus.player.Crewmate;
 import com.github.ponclure.blockus.player.Imposter;
 import com.github.ponclure.blockus.player.Participant;
 import com.github.ponclure.blockus.utility.GameUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -17,12 +24,14 @@ import java.util.stream.Collectors;
 
 public class Game extends ArenaHolder {
 
-    private final Map<UUID, Participant> participants;
     private final GameSettings settings;
+    private final Map<UUID, Participant> participants;
     private final List<Consumer<Game>> closeHandlerList;
+    private final UUID uuid;
+    private final int taskTotal;
+    private final BossBar bossBar;
+    private final Lobby lobby;
     private Map<UUID, Map.Entry<Room, Integer>> playerRooms;
-    private final UUID uuid; // Game UUID
-    //final BossBar bossBar;
 
     protected Game(Lobby lobby, UUID uuid) {
         super(lobby.arena);
@@ -31,12 +40,31 @@ public class Game extends ArenaHolder {
         this.closeHandlerList = new ArrayList<>();
         this.playerRooms = new HashMap<>();
         this.uuid = uuid == null ? UUID.randomUUID() : uuid;
-        //bossBar = Bukkit.createBossBar("") - Conclure will continue this
+        this.taskTotal = getTaskTotal();
+        this.bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Tasks Progress", BarColor.BLUE, BarStyle.SOLID);
+        this.lobby = lobby;
+        BlockUsPlugin.getBlockUs().getGames().put(uuid, this);
+    }
+
+    public int getTaskTotal() {
+        int total = 0;
+        for (Participant p : participants.values()) {
+            if (!p.isImposter()) {
+                total += ((Crewmate)p).getTasks().size();
+            }
+        }
+        return total;
     }
 
     @Override
     protected void asyncTick() {
-
+        int count = 0;
+        for (Participant p : participants.values()) {
+            if (!p.isImposter()) {
+                count += ((Crewmate)p).getTodo().size();
+            }
+        }
+        bossBar.setProgress(count/taskTotal);
     }
 
     public void onClose(Consumer<Game> action) {
@@ -81,5 +109,7 @@ public class Game extends ArenaHolder {
     public void setPlayerRooms(Map<UUID, Map.Entry<Room, Integer>> rooms) {
         playerRooms = rooms;
     }
+
+    public Lobby getLobby() { return lobby; }
 
 }

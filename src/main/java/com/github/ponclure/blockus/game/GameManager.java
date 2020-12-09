@@ -32,7 +32,7 @@ public final class GameManager implements Listener {
         if (gameMap.containsKey(arena)) {
             throw new IllegalStateException("Arena " + arena.getName() + " is already in use!");
         }
-        Lobby lobby = new Lobby(arena, leader);
+        Lobby lobby = new Lobby(arena, leader, true);
         gameMap.put(arena, lobby);
         return lobby;
     }
@@ -49,7 +49,7 @@ public final class GameManager implements Listener {
             throw new IllegalStateException("Game needs at least 4 players");
         }
         lobby.terminate();
-        Game game = new Game(lobby);
+        Game game = new Game(lobby, null);
         gameMap.put(game.arena, game);
         return game;
     }

@@ -1,35 +1,76 @@
 package com.github.ponclure.blockus.gui;
 
-import net.md_5.bungee.api.ChatColor;
+import com.github.ponclure.blockus.BlockUsPlugin;
+import com.github.ponclure.blockus.game.Game;
+import com.github.ponclure.blockus.game.Lobby;
+import com.github.ponclure.blockus.utility.SkullCreation;
+import com.github.ponclure.blockus.utility.Utils;
+import me.mattstudios.mfgui.gui.components.ItemBuilder;
+import me.mattstudios.mfgui.gui.guis.GuiItem;
+import me.mattstudios.mfgui.gui.guis.PaginatedGui;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-public class GameSelection implements CommandExecutor {
+import java.util.UUID;
 
-    Inventory gui;
+public class GameSelection {
+
+    private final PaginatedGui gui;
 
     public GameSelection() {
-        this.gui = Bukkit.createInventory(null, 9, "Example");
-
+        this.gui = new PaginatedGui(6, 45, "Among Us Games");
+        init();
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if (player.hasPermission("blockus.game.join")) {
-
-            } else {
-                sender.sendMessage(ChatColor.RED + "You do not have permission to execute this command");
+    private void init() {
+        gui.setItem(6, 3, ItemBuilder.from(Material.PAPER).setName(ChatColor.GOLD + "Previous").asGuiItem(event -> gui.previous()));
+        gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName(ChatColor.GOLD + "Next").asGuiItem(event -> gui.next()));
+        gui.setItem(6, 5, new GuiItem(Utils.getSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTFkNzIwY2QzOWRmM2JlNzRiMGNhYzc1ZTM5MzdmMDA4NWEzNzgyNDc0M2NhZDYzMzBkYzlmNDY2NmE0NTEwZCJ9fX0=", ChatColor.GOLD + "Reload"), event -> {
+            for (int i = 0; i < 45; i++) {
+                gui.setItem(i, null);
             }
-        } else {
-            sender.sendMessage(ChatColor.RED + "You must be a Player to execute this command");
-        }
-        return true;
+            loadGames();
+        }));
+        loadGames();
     }
+
+    private void loadGames() {
+        for (Game g : BlockUsPlugin.getBlockUs().getGames().values()) {
+            Lobby lobby = g.getLobby();
+            ItemStack head = SkullCreation.itemFromUuid(g.getLobby().getLeader());
+            ItemMeta meta = head.getItemMeta();
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.setDisplayName(ChatColor.GOLD + Bukkit.getPlayer(lobby.getLeader()).getDisplayName() + "'s Game");
+            head.setItemMeta(meta);
+            if (lobby.isAccessible()) {
+                gui.addItem(new GuiItem(head, event -> {
+                    UUID uuid = Bukkit.getPlayer(getOwner(event.getCurrentItem().getItemMeta().getDisplayName())).getUniqueId();
+                    for (Game find : BlockUsPlugin.getBlockUs().getGames().values()) {
+                        if (find.getLobby().getLeader() == uuid) {
+                            find.getLobby().add(event.getWhoClicked().getUniqueId());
+                        }
+                    }
+                }));
+            }
+        }
+    }
+
+    private String getOwner(String str) {
+        int split = 0;
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (str.charAt(i) == '\'') {
+                split = i;
+                break;
+            }
+        }
+        return str.substring(0, split);
+    }
+
 
 }
