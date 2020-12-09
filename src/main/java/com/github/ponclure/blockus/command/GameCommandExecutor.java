@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class GameCommandExecutor implements CommandExecutor  {
+public class GameCommandExecutor implements CommandExecutor {
 
     // Unfinished
     @Override
@@ -16,7 +16,7 @@ public class GameCommandExecutor implements CommandExecutor  {
             sender.sendMessage(ChatColor.RED + "You must be an in game player to execute this command");
             return false;
         }
-        Player player = (Player)sender;
+        Player player = (Player) sender;
         if (args.length == 0) {
             sender.sendMessage(ChatColor.AQUA + "================================");
             sender.sendMessage(ChatColor.GOLD + "         List of Commands       ");

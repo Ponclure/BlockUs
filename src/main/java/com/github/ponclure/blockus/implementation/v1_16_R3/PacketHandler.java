@@ -1,11 +1,8 @@
 package com.github.ponclure.blockus.implementation.v1_16_R3;
 
 import com.github.ponclure.blockus.implementation.PacketHandlerBase;
-import net.minecraft.server.v1_16_R3.DimensionManager;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
-import net.minecraft.server.v1_16_R3.PacketPlayOutRespawn;
 import net.minecraft.server.v1_16_R3.PacketPlayOutWorldBorder;
-import net.minecraft.server.v1_16_R3.PlayerConnection;
 import net.minecraft.server.v1_16_R3.WorldBorder;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;

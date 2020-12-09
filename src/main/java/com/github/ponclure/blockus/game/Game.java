@@ -50,7 +50,7 @@ public class Game extends ArenaHolder {
         int total = 0;
         for (Participant p : participants.values()) {
             if (!p.isImposter()) {
-                total += ((Crewmate)p).getTasks().size();
+                total += ((Crewmate) p).getTasks().size();
             }
         }
         return total;
@@ -61,10 +61,10 @@ public class Game extends ArenaHolder {
         int count = 0;
         for (Participant p : participants.values()) {
             if (!p.isImposter()) {
-                count += ((Crewmate)p).getTodo().size();
+                count += ((Crewmate) p).getTodo().size();
             }
         }
-        bossBar.setProgress(count/taskTotal);
+        bossBar.setProgress(count / taskTotal);
     }
 
     public void onClose(Consumer<Game> action) {
@@ -110,6 +110,8 @@ public class Game extends ArenaHolder {
         playerRooms = rooms;
     }
 
-    public Lobby getLobby() { return lobby; }
+    public Lobby getLobby() {
+        return lobby;
+    }
 
 }

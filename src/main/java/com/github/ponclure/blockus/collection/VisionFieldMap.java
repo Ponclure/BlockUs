@@ -58,7 +58,7 @@ public class VisionFieldMap extends ConcurrentHashMap<UUID, Set<UUID>> {
         entities.forEach(entity -> {
             if (entity instanceof Player) {
                 super.get(uuid).add(entity.getUniqueId());
-                player.showPlayer(BlockUsPlugin.getBlockUs().plugin(), (Player)entity);
+                player.showPlayer(BlockUsPlugin.getBlockUs().plugin(), (Player) entity);
             }
         });
     }

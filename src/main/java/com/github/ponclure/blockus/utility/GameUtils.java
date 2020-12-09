@@ -1,7 +1,6 @@
 package com.github.ponclure.blockus.utility;
 
 import com.github.ponclure.blockus.game.Game;
-import com.github.ponclure.blockus.player.Crewmate;
 import com.github.ponclure.blockus.player.Imposter;
 import com.github.ponclure.blockus.player.Participant;
 import com.github.ponclure.blockus.throwable.IllegalInstantiation;
@@ -29,7 +28,7 @@ public final class GameUtils {
         Map<UUID, Participant> map = new HashMap<>();
         if (impostorAmount == pool.size()) {
             for (UUID uuid : pool) {
-                map.put(uuid, new Imposter(uuid));
+                map.put(uuid, game.getParticipants().get(uuid));
             }
             return map;
         }
@@ -38,10 +37,10 @@ public final class GameUtils {
         for (int i = 0; i < array.length; i++) {
             Participant participant;
             if (h != impostorAmount) {
-                participant = new Imposter(array[i]);
+                participant = game.getParticipants().get(array[i]);
                 h++;
             } else {
-                participant = new Crewmate(array[i]);
+                participant = game.getParticipants().get(array[i]);
             }
             map.put(array[i], participant);
         }

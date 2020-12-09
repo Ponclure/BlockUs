@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.UUID;
+
 public final class Utils {
 
     private Utils() {
@@ -52,6 +54,14 @@ public final class Utils {
             sb.append(text.charAt(index));
             index++;
         }
+    }
+
+    public static ItemStack getSkull(final UUID uuid, final String name) {
+        final ItemStack stack = SkullCreation.itemFromUuid(uuid);
+        final ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName(name);
+        stack.setItemMeta(meta);
+        return stack;
     }
 
     private static class TitleAnimation extends BukkitRunnable {

@@ -3,7 +3,6 @@ package com.github.ponclure.blockus.gui;
 import com.github.ponclure.blockus.BlockUsPlugin;
 import com.github.ponclure.blockus.game.Game;
 import com.github.ponclure.blockus.game.Lobby;
-import com.github.ponclure.blockus.utility.SkullCreation;
 import com.github.ponclure.blockus.utility.Utils;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -18,11 +17,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
-public class GameSelection {
+public class PublicGameSelection {
 
     private final PaginatedGui gui;
 
-    public GameSelection() {
+    public PublicGameSelection() {
         this.gui = new PaginatedGui(6, 45, "Among Us Games");
         init();
     }
@@ -42,11 +41,10 @@ public class GameSelection {
     private void loadGames() {
         for (Game g : BlockUsPlugin.getBlockUs().getGames().values()) {
             Lobby lobby = g.getLobby();
-            ItemStack head = SkullCreation.itemFromUuid(g.getLobby().getLeader());
+            ItemStack head = Utils.getSkull(lobby.getLeader(), ChatColor.GOLD + Bukkit.getPlayer(lobby.getLeader()).getDisplayName() + "'s Game");
             ItemMeta meta = head.getItemMeta();
             meta.addEnchant(Enchantment.DURABILITY, 1, false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            meta.setDisplayName(ChatColor.GOLD + Bukkit.getPlayer(lobby.getLeader()).getDisplayName() + "'s Game");
             head.setItemMeta(meta);
             if (lobby.isAccessible()) {
                 gui.addItem(new GuiItem(head, event -> {

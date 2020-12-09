@@ -18,7 +18,6 @@ public class GameSettings {
     private final double impostorVision;
     private final double crewmateVision;
     private final boolean isConfirmingEjections;
-    private final boolean isTasksVisual;
 
     private GameSettings(Builder builder) {
         impostorCount = builder.impostorCount;
@@ -35,7 +34,6 @@ public class GameSettings {
         impostorVision = builder.impostorVision;
         crewmateVision = builder.crewmateVision;
         isConfirmingEjections = builder.isConfirmingEjections;
-        isTasksVisual = builder.isTasksVisual;
     }
 
     public int getImpostorCount() {
@@ -94,10 +92,6 @@ public class GameSettings {
         return isConfirmingEjections;
     }
 
-    public boolean isTasksVisual() {
-        return isTasksVisual;
-    }
-
     public static final class Builder {
 
         private int impostorCount = 2;
@@ -114,7 +108,6 @@ public class GameSettings {
         private double impostorVision = 1.6;
         private double crewmateVision = 1.2;
         private boolean isConfirmingEjections = false;
-        private boolean isTasksVisual = true;
 
         public Builder setCommonTaskCount(int commonTaskCount) {
             this.commonTaskCount = commonTaskCount;
@@ -183,11 +176,6 @@ public class GameSettings {
             return this;
         }
 
-        public Builder setTasksVisual(boolean tasksVisual) {
-            isTasksVisual = tasksVisual;
-            return this;
-        }
-
         public Builder setImpostorCount(int impostorCount) {
             this.impostorCount = impostorCount;
             return this;
@@ -209,8 +197,68 @@ public class GameSettings {
             builder.impostorVision = settings.impostorVision;
             builder.crewmateVision = settings.crewmateVision;
             builder.isConfirmingEjections = settings.isConfirmingEjections;
-            builder.isTasksVisual = settings.isTasksVisual;
             return builder;
+        }
+
+        public int getImpostorCount() {
+            return impostorCount;
+        }
+
+        public int getCommonTaskCount() {
+            return commonTaskCount;
+        }
+
+        public int getLongTaskCount() {
+            return longTaskCount;
+        }
+
+        public int getShortTaskCount() {
+            return shortTaskCount;
+        }
+
+        public int getEmergencyMeetingCount() {
+            return emergencyMeetingCount;
+        }
+
+        public long getEmergencyMeetingCooldown() {
+            return emergencyMeetingCooldown;
+        }
+
+        public long getKillCooldown() {
+            return killCooldown;
+        }
+
+        public long getDiscussionTime() {
+            return discussionTime;
+        }
+
+        public long getVotingTime() {
+            return votingTime;
+        }
+
+        public double getVelocity() {
+            return velocity;
+        }
+
+        public double getKillDistance() {
+            return killDistance;
+        }
+
+        public Builder setKillDistance(double killDistance) {
+            this.killDistance = killDistance;
+            return this;
+        }
+
+        public double getImpostorVision() {
+            return impostorVision;
+        }
+
+        public double getCrewmateVision() {
+            return crewmateVision;
+        }
+
+        public boolean isConfirmingEjections() {
+            return isConfirmingEjections;
         }
 
         public GameSettings build() {

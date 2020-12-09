@@ -46,8 +46,12 @@ public class Lobby extends ArenaHolder {
         set.remove(uuid);
     }
 
-    public void setAccessible(boolean mode) { this.accessible = mode; }
+    public void setAccessible(boolean mode) {
+        this.accessible = mode;
+    }
 
-    public boolean isAccessible() { return accessible; }
+    public boolean isAccessible() {
+        return accessible;
+    }
 
 }

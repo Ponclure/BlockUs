@@ -14,7 +14,7 @@ import java.util.UUID;
 public class VisionControl implements Listener {
 
     private final Game game;
-    private VisionFieldMap vision;
+    private final VisionFieldMap vision;
 
     public VisionControl(Game game) {
         this.game = game;

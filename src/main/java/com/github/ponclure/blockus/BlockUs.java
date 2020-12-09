@@ -32,7 +32,7 @@ public final class BlockUs {
     private final PacketHandlerBase PACKET_HANDLER;
     private final CameraManager CAMERA_MANAGER;
     private final SimpleNPCFramework NPC_FRAMEWORK;
-    private Map<UUID, Game> GAMES = new HashMap<>();
+    private final Map<UUID, Game> GAMES = new HashMap<>();
 
     public BlockUs(BlockUsPlugin plugin) {
         this.PLUGIN = plugin;
@@ -83,7 +83,9 @@ public final class BlockUs {
         return checkAvailability(CONFIG_MANAGER);
     }
 
-    public PacketHandlerBase getPacketHandler() { return checkAvailability(PACKET_HANDLER); }
+    public PacketHandlerBase getPacketHandler() {
+        return checkAvailability(PACKET_HANDLER);
+    }
 
     public CameraManager getCameraManager() {
         return checkAvailability(CAMERA_MANAGER);
@@ -106,6 +108,8 @@ public final class BlockUs {
         return t;
     }
 
-    public Map<UUID, Game> getGames() { return GAMES; }
+    public Map<UUID, Game> getGames() {
+        return GAMES;
+    }
 
 }

@@ -6,7 +6,6 @@ import com.github.ponclure.blockus.game.tasks.Task;
 import com.github.ponclure.blockus.player.Participant;
 import com.github.ponclure.blockus.utility.container.Vec3;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;

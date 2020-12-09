@@ -4,8 +4,8 @@ import org.bukkit.entity.Player;
 
 public interface PacketHandlerBase {
 
-    public void sendSabatogePacket(Player p, int warningBlocks);
+    void sendSabatogePacket(Player p, int warningBlocks);
 
-    public void sendFogPacket(Player p);
+    void sendFogPacket(Player p);
 
 }
