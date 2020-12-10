@@ -24,18 +24,17 @@ public class GameCommandExecutor implements CommandExecutor {
             sender.sendMessage(formatCommand("/blockus create", "Creates a Fresh Block Us Game"));
             sender.sendMessage(formatCommand("/blockus join [username]", "Joins a game"));
             sender.sendMessage(formatCommand("/blockus leave", "Leaves the game"));
-            sender.sendMessage(formatCommand("/blockus list", "Opens a list of available games to join"));
+            sender.sendMessage(formatCommand("/blockus gui", "Opens a gui of available games to join"));
             sender.sendMessage(formatCommand("/blockus forcestop", "Forces the current game to stop"));
             sender.sendMessage(ChatColor.AQUA + "================================");
         } else if (args.length == 1) {
-            String argument = args[0];
-            if (argument.equalsIgnoreCase("create")) {
+            if (args[0].equalsIgnoreCase("create")) {
 
-            } else if (argument.equalsIgnoreCase("leave")) {
+            } else if (args[0].equalsIgnoreCase("leave")) {
 
-            } else if (argument.equalsIgnoreCase("list")) {
+            } else if (args[0].equalsIgnoreCase("list")) {
 
-            } else if (argument.equalsIgnoreCase("forcestop")) {
+            } else if (args[0].equalsIgnoreCase("forcestop")) {
 
             }
         }

@@ -1,6 +1,7 @@
 package com.github.ponclure.blockus;
 
 import com.github.ponclure.blockus.arena.ArenaManager;
+import com.github.ponclure.blockus.command.PluginCommandTree;
 import com.github.ponclure.blockus.config.ConfigFactory;
 import com.github.ponclure.blockus.config.ConfigManager;
 import com.github.ponclure.blockus.game.Game;
@@ -32,7 +33,8 @@ public final class BlockUs {
     private final PacketHandlerBase PACKET_HANDLER;
     private final CameraManager CAMERA_MANAGER;
     private final SimpleNPCFramework NPC_FRAMEWORK;
-    private final Map<UUID, Game> GAMES = new HashMap<>();
+    private final Map<UUID, Game> GAMES;
+    private final PluginCommandTree COMMAND_TREE;
 
     public BlockUs(BlockUsPlugin plugin) {
         this.PLUGIN = plugin;
@@ -53,6 +55,8 @@ public final class BlockUs {
         }
         this.CAMERA_MANAGER = CAMERA_MANAGER_FACADE;
         this.NPC_FRAMEWORK = new SimpleNPCFramework(plugin());
+        this.GAMES = new HashMap<>();
+        this.COMMAND_TREE = new PluginCommandTree();
     }
 
     public BlockUsPlugin plugin() {
@@ -111,5 +115,7 @@ public final class BlockUs {
     public Map<UUID, Game> getGames() {
         return GAMES;
     }
+
+    public PluginCommandTree getCommandTree() { return COMMAND_TREE; }
 
 }
