@@ -48,9 +48,7 @@ public final class BlockUs {
         CameraManager CAMERA_MANAGER_FACADE = null;
         try {
             CAMERA_MANAGER_FACADE = new CameraManager(plugin(), new File(plugin().getDataFolder(), "cameras"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
         this.CAMERA_MANAGER = CAMERA_MANAGER_FACADE;

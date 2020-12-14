@@ -1,6 +1,6 @@
 package com.github.ponclure.blockus.throwable;
 
-public final class IllegalInstantiation extends Error {
+public final class IllegalInstantiation extends AssertionError {
 
     /**
      *
@@ -29,4 +29,5 @@ public final class IllegalInstantiation extends Error {
     public static void deploy(Class<?> clazz) {
         throw new IllegalInstantiation(clazz);
     }
+
 }

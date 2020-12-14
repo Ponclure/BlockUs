@@ -25,3 +25,5 @@ jars
 **/build
 .gradle
 gradle/wrapper/gradle-wrapper.jar
+executionHistory.lock
+buildOutputCleanup.lock
