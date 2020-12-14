@@ -13,11 +13,14 @@ import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.Stack;
 
+// Don't Use, for Reference Purposes
+
+@Deprecated
 public class WorldManager {
 
     private final BlockUs au = BlockUsPlugin.getBlockUs();
 
-    public void worldIntialization() throws URISyntaxException, IOException {
+    public void worldGeneration() throws URISyntaxException, IOException {
 
         // Block Us world and texture pack by PheonixSC
 

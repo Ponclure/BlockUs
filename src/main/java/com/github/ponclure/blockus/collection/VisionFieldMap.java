@@ -38,13 +38,15 @@ public class VisionFieldMap extends ConcurrentHashMap<UUID, Set<UUID>> {
                 }
                 for (UUID uuid : VisionFieldMap.this.keySet()) {
                     for (UUID visible : VisionFieldMap.this.get(uuid)) {
+                        Player currentPlayer = Bukkit.getPlayer(uuid);
+                        Player visiblePlayer = Bukkit.getPlayer(visible);
                         if (imposters.contains(uuid)) {
-                            if (Bukkit.getPlayer(uuid).getLocation().distanceSquared(Bukkit.getPlayer(visible).getLocation()) > distSquaredImposter) {
-                                Bukkit.getPlayer(uuid).hidePlayer(BlockUsPlugin.getBlockUs().plugin(), Bukkit.getPlayer(visible));
+                            if (currentPlayer.getLocation().distanceSquared(visiblePlayer.getLocation()) > distSquaredImposter) {
+                                currentPlayer.hidePlayer(BlockUsPlugin.getBlockUs().plugin(), visiblePlayer);
                             }
                         } else {
-                            if (Bukkit.getPlayer(uuid).getLocation().distanceSquared(Bukkit.getPlayer(visible).getLocation()) > distSquaredCrewmate) {
-                                Bukkit.getPlayer(uuid).hidePlayer(BlockUsPlugin.getBlockUs().plugin(), Bukkit.getPlayer(visible));
+                            if (currentPlayer.getLocation().distanceSquared(visiblePlayer.getLocation()) > distSquaredCrewmate) {
+                                currentPlayer.hidePlayer(BlockUsPlugin.getBlockUs().plugin(), visiblePlayer);
                             }
                         }
                     }
