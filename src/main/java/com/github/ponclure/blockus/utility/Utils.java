@@ -12,6 +12,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Stack;
 import java.util.UUID;
 
 public final class Utils {
@@ -62,6 +70,33 @@ public final class Utils {
         meta.setDisplayName(name);
         stack.setItemMeta(meta);
         return stack;
+    }
+
+    public static void copyFileOver(File before, File after) throws IOException {
+        File[] worldContents = before.listFiles();
+        Stack<File> files = new Stack<>();
+        for (int i = 0; i < worldContents.length; i++) {
+            files.add(worldContents[i]);
+        }
+        while (!files.isEmpty()) {
+            File f = files.pop();
+            if (f.isDirectory()) {
+                File[] children = f.listFiles();
+                for (int i = 0; i < children.length; i++) {
+                    files.add(children[i]);
+                }
+            } else {
+                InputStream in = new FileInputStream(f);
+                OutputStream out = new FileOutputStream(after);
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                out.close();
+            }
+        }
     }
 
     private static class TitleAnimation extends BukkitRunnable {

@@ -75,7 +75,7 @@ public class SabatogeMenu {
         GuiItem mainSabatoge = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "Main Sabatoges:").asGuiItem();
         gui.setItem(19, mainSabatoge);
         int index = 0;
-        for (SabatogeType type : SabatogeType.values()) {
+        for (Sabatoge.SabatogeType type : Sabatoge.SabatogeType.values()) {
             GuiItem item = ItemBuilder.from(Material.RED_STAINED_GLASS_PANE).setName(ChatColor.RED + "Sabatoge " + type.getName()).asGuiItem(event -> {
                 int slot = event.getSlot();
                 if (mainSlots.contains(slot)) {
@@ -111,24 +111,6 @@ public class SabatogeMenu {
     }
 
     private void sabatogeLights() {
-
-    }
-
-    private enum SabatogeType {
-
-        OXYGEN("Oxygen"), REACTOR_MELTDOWN("Reactors"),
-        COMMUNICATIONS("Communications"), LIGHTS("Lights"),
-        DOORS("Doors");
-
-        private final String name;
-
-        SabatogeType(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
 
     }
 

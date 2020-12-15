@@ -15,7 +15,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Map;
 import java.util.UUID;
 
-// In Progress
 public abstract class Sabatoge implements Listener {
 
     private final Game game;
@@ -71,6 +70,24 @@ public abstract class Sabatoge implements Listener {
         game.getParticipants().keySet().forEach(uuid -> {
             BlockUsPlugin.getBlockUs().getPacketHandler().sendSabatogePacket(Bukkit.getPlayer(uuid), 0);
         });
+    }
+
+    enum SabatogeType {
+
+        OXYGEN("Oxygen"), REACTOR_MELTDOWN("Reactors"),
+        COMMUNICATIONS("Communications"), LIGHTS("Lights"),
+        DOORS("Doors");
+
+        private final String name;
+
+        SabatogeType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
     }
 
 }

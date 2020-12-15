@@ -59,7 +59,7 @@ public class BlockUsWorld {
 
         private final String folderName;
 
-        private WorldType(String file) {
+        WorldType(String file) {
             this.folderName = file;
         }
 
