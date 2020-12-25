@@ -17,12 +17,10 @@ import java.util.Set;
 
 public class ReactorSabatoge extends Sabatoge {
 
-    private final Map<ArmorStand, PersistentGui> fix;
     private Set<Integer> fixed;
 
     public ReactorSabatoge(Game game, Map<ArmorStand, PersistentGui> fix, int time) {
         super(game, "Reactor Sabatoge", fix, time);
-        this.fix = new HashMap<>();
         this.fixed = new HashSet<>();
         init();
     }

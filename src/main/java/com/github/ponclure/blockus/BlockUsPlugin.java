@@ -10,19 +10,14 @@ public final class BlockUsPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         Logger logger = getLogger();
-
         long startTime = System.nanoTime();
-        logger.info("Loading...");
-
+        logger.info("Loading Block Us...");
         init = new BlockUs(this);
         init.setAvailability(true);
         init.configManager().load();
-
         long totalTime = System.nanoTime() - startTime;
         logger.info("Loading complete. Took " + totalTime + " (ns)");
-
     }
 
     @Override

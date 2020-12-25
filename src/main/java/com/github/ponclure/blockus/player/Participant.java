@@ -6,6 +6,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.util.UUIDTypeAdapter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -76,7 +77,11 @@ public class Participant {
         RED, BLUE, GREEN, YELLOW, ORANGE, BLACK, WHITE, PURPLE, CYAN, BROWN, LIME
     }
 
-    public static boolean setSkin(GameProfile profile, UUID uuid) {
+    public Player getPlayer() {
+        return Bukkit.getPlayer(uuid);
+    }
+
+    public boolean setSkin(GameProfile profile, UUID uuid) {
         try {
             HttpsURLConnection connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", UUIDTypeAdapter.fromUUID(uuid))).openConnection();
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {

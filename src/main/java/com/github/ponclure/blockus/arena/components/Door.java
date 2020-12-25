@@ -30,11 +30,9 @@ public class Door {
         for (AABB box : entry) {
             Utils.setBlock(box, Material.IRON_BLOCK);
         }
-        Bukkit.getScheduler().scheduleSyncDelayedTask(BlockUsPlugin.getBlockUs().plugin(), new Runnable() {
-            public void run() {
-                for (AABB box : entry) {
-                    Utils.setBlock(box, Material.AIR);
-                }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(BlockUsPlugin.getBlockUs().plugin(), () -> {
+            for (AABB box : entry) {
+                Utils.setBlock(box, Material.AIR);
             }
         }, 100);
     }

@@ -19,9 +19,9 @@ public abstract class Sabatoge implements Listener {
 
     private final Game game;
     private final String name;
-    private final Map<ArmorStand, PersistentGui> fix;
     private final int time;
     private boolean active;
+    public Map<ArmorStand, PersistentGui> fix;
 
     public abstract void execute(PlayerArmorStandManipulateEvent e);
 
@@ -89,5 +89,7 @@ public abstract class Sabatoge implements Listener {
         }
 
     }
+
+    Game getGame() { return game; };
 
 }
