@@ -1,4 +1,7 @@
 # Block Us - Advanced Murder Mystery 
+
+## The following project will be abandoned due to the lack of time. We may come back to it later...
+
 [![CircleCI](https://img.shields.io/circleci/build/github/Ponclure/BlockUs/main?style=for-the-badge)](https://circleci.com/gh/Ponclure/BlockUs)
 [![Code Grade](https://img.shields.io/codefactor/grade/github/Ponclure/BlockUs/main?style=for-the-badge)](https://github.com/Ponclure/BlockUs)
 [![Libraries.io](https://img.shields.io/librariesio/github/Ponclure/BlockUs?style=for-the-badge)](https://github.com/Ponclure/BlockUs)
